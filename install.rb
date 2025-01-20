@@ -86,7 +86,7 @@ class Installer
 
       gzip = `which gzip`
       gzip.chomp!
-      `#{gzip} -f #{omf}`
+      `#{gzip} -fn #{omf}`
     end
   end
 
