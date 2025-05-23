@@ -14,13 +14,14 @@ jobs:
     name: Platform
     strategy:
       matrix:
-        os: [ windows-2019, ubuntu-20.04, macos-12 ]
+        os: [ windows-2019, ubuntu-22.04, macos-12 ]
+      fail-fast: false
     runs-on: ${{ matrix.os }}
     env:
       BEAKER_debug: true
       FACTER_ROOT: facter
       SHA: latest
-      RELEASE_STREAM: puppet7
+      RELEASE_STREAM: puppet8
 
     steps:
       - name: Checkout current PR
@@ -28,11 +29,11 @@ jobs:
         with:
           path: facter
 
-      - name: Install Ruby 2.7
+      - name: Install Ruby 3.2
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
-          rubygems: '3.3.26'
+          ruby-version: '3.2'
+          bundler-cache: true
 
       - name: Fix common Linux and macOS permissions
         if: runner.os != 'Windows'
@@ -59,8 +60,8 @@ jobs:
           sudo ifconfig $primary_interface inet6 add ::1/64
 
       - name: Run acceptance tests on Linux-like platform
-        if: runner.os != 'Windows'
-        run: sudo -E "PATH=$PATH" ruby $FACTER_ROOT/.github/actions/presuite.rb ${{ matrix.os }}
+        if: runner.os == 'Linux'
+        run: sudo -E "PATH=$PATH" ruby $FACTER_ROOT/.github/actions/presuite.rb centos-9
 
       - name: Run acceptance tests on Windows-like platform
         if: runner.os == 'Windows'
