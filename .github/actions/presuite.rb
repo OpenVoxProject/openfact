@@ -29,6 +29,7 @@ def beaker_platform
     'ubuntu-24.04' => 'ubuntu2404-64a',
     'macos-13' => 'osx13-64a',
     'macos-14' => 'osx14-64a',
+    'macos-15' => 'osx15-64a',
     'windows-2016' => 'windows2016-64a',
     'windows-2019' => 'windows2019-64a',
     'windows-2022' => 'windows2022-64a',
