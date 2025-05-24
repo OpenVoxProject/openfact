@@ -130,7 +130,10 @@ end
 
 def verify_facter_standalone_exits_0
   Dir.chdir(ENV['FACTER_ROOT']) do
-    run('bundle install --without development')
+    # `documentation` group contains ronn and hpricot
+    # both gems are ancient, dead upstream, don't compile on modern rubies
+    # and are only required for building manpages
+    run('bundle install --without development:documentation')
     run('bundle exec facter')
   end
 end
