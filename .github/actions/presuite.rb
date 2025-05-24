@@ -28,7 +28,8 @@ def beaker_platform
     'ubuntu-22.04' => 'ubuntu2204-64a',
     'macos-13' => 'osx13-64a',
     'windows-2016' => 'windows2016-64a',
-    'windows-2019' => 'windows2019-64a'
+    'windows-2019' => 'windows2019-64a',
+    'windows-2022' => 'windows2022-64a',
   }[HOST_PLATFORM]
 end
 
