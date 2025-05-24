@@ -62,8 +62,8 @@ jobs:
           primary_interface=`route -n get default | awk '/interface: */{print $NF}'`
           sudo ifconfig $primary_interface inet6 add ::1/64
 
-      - name: Run acceptance tests on Linux-like platform
-        if: runner.os == 'Linux'
+      - name: Run acceptance tests on Linux and MacOS platform
+        if: runner.os != 'Windows'
         run: sudo -E "PATH=$PATH" ruby $FACTER_ROOT/.github/actions/presuite.rb ${{ matrix.os }}
 
       - name: Run acceptance tests on Windows-like platform
