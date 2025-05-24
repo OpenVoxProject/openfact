@@ -6,9 +6,13 @@ on:
     branches:
       - main
 
+# minimal permissions
+permissions:
+  contents: read
+
 jobs:
   coverage_checks:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     name: coverage
     steps:
       - name: Checkout current PR

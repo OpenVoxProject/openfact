@@ -5,13 +5,7 @@ require 'fileutils'
 
 def if_no_env_vars_set_defaults
   ENV['FACTER_ROOT'] = __dir__.gsub('/.github/actions', '') unless ENV['FACTER_ROOT']
-  ENV['SHA'] = 'latest' unless ENV['SHA']
-  ENV['RELEASE_STREAM'] = 'puppet7' unless ENV['RELEASE_STREAM']
-end
-
-def install_bundler
-  message('INSTALL BUNDLER')
-  run('gem install bundler')
+  ENV['RELEASE_STREAM'] = 'puppet8' unless ENV['RELEASE_STREAM']
 end
 
 def install_facter_acceptance_dependencies
@@ -31,8 +25,8 @@ end
 
 def beaker_platform
   {
-    'ubuntu-20.04' => 'ubuntu2004-64a',
-    'macos-12' => 'osx12-64a',
+    'ubuntu-22.04' => 'ubuntu2204-64a',
+    'macos-13' => 'osx13-64a',
     'windows-2016' => 'windows2016-64a',
     'windows-2019' => 'windows2019-64a'
   }[HOST_PLATFORM]
@@ -143,8 +137,6 @@ ENV['DEBIAN_DISABLE_RUBYGEMS_INTEGRATION'] = 'no_warnings'
 if_no_env_vars_set_defaults
 ACCEPTANCE_PATH = File.join(ENV['FACTER_ROOT'], 'acceptance')
 HOST_PLATFORM = ARGV[0]
-
-install_bundler
 
 verify_facter_standalone_exits_0
 

@@ -6,10 +6,14 @@ AllCops:
   Exclude:
     - acceptance/**/*
     - vendor/**/*
+    - .vendor/**/*
 
 require:
   - rubocop-performance
   - rubocop-rspec
+
+plugins:
+  - rubocop-capybara
 
 Layout/LineLength:
   Enabled: false

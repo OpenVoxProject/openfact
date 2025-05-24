@@ -9,6 +9,10 @@ on:
     branches:
       - main
 
+# minimal permissions
+permissions:
+  contents: read
+
 env:
   CI: true
 
@@ -16,6 +20,7 @@ jobs:
   integration_tests:
     name: integration ${{ matrix.cfg.os }} (ruby ${{ matrix.cfg.ruby }})
     strategy:
+      fail-fast: false
       matrix:
         cfg:
           - {os: ubuntu-latest, ruby: '2.7'}

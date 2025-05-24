@@ -9,9 +9,13 @@ on:
     branches:
       - main
 
+# minimal permissions
+permissions:
+  contents: read
+
 jobs:
   rubocop_checks:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     name: RuboCop
     steps:
       - name: Checkout current PR
@@ -23,4 +27,3 @@ jobs:
           ruby-version: '2.7'
           bundler-cache: true
       - run: bundle exec rubocop --parallel
-
