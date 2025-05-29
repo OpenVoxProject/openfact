@@ -1,0 +1,49 @@
+---
+name: Gem Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    name: Release gem
+    runs-on: ubuntu-24.04
+    # Optional but recommended to use a specific environment
+    environment: release
+    # Prevent releases from forked repositories
+    if: github.repository_owner == 'OpenVoxProject'
+
+    permissions:
+      id-token: write
+      contents: write
+      packages: write
+
+    steps:
+      # we cannot publish to rubygems.org until we rename the project
+      # https://rubygems.org/gems/vanagon owned by Perforce
+      # - uses: voxpupuli/ruby-release@v0
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+        env:
+          BUNDLE_WITHOUT: integration:documentation:development:test
+      - name: Build gem
+        run: gem build --strict --verbose *.gemspec
+      - name: Setup GitHub packages access
+        run: |
+          mkdir -p ~/.gem
+          echo ":github: Bearer ${{ secrets.GITHUB_TOKEN }}" >> ~/.gem/credentials
+          chmod 0600 ~/.gem/credentials
+      - name: Publish gem to GitHub packages
+        run: gem push --key github --host https://rubygems.pkg.github.com/openvoxproject *.gem
+      - name: Create Release Page
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create ${{ github.ref_name }} --generate-notes
