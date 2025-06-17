@@ -25,15 +25,22 @@ module Facter
           def check_version_10_11(consumerrel, kernel_version)
             build_number = kernel_version[/([^.]*)$/].to_i
 
-            return '11' if build_number >= 22_000
-            return '10' if consumerrel
-
-            if build_number >= 20_348
-              '2022'
-            elsif build_number >= 17_623
-              '2019'
+            if consumerrel
+              if build_number >= 22_000
+                '11'
+              else
+                '10'
+              end
             else
-              '2016'
+              if build_number >= 26_100
+                '2025'
+              elsif build_number >= 20_348
+                '2022'
+              elsif build_number >= 17_623
+                '2019'
+              else
+                '2016'
+              end
             end
           end
 
