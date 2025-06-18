@@ -31,16 +31,14 @@ module Facter
               else
                 '10'
               end
+            elsif build_number >= 26_100
+              '2025'
+            elsif build_number >= 20_348
+              '2022'
+            elsif build_number >= 17_623
+              '2019'
             else
-              if build_number >= 26_100
-                '2025'
-              elsif build_number >= 20_348
-                '2022'
-              elsif build_number >= 17_623
-                '2019'
-              else
-                '2016'
-              end
+              '2016'
             end
           end
 
