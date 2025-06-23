@@ -4,13 +4,13 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = 'facter'
+  spec.name          = 'openfact'
   spec.version       = '4.11.0'
-  spec.authors       = ['Puppet']
-  spec.email         = ['team-nw@puppet.com']
-  spec.homepage      = 'https://github.com/puppetlabs/facter'
+  spec.authors       = ['OpenVox Project']
+  spec.email         = ['openvox@voxpupuli.org']
+  spec.homepage      = 'https://github.com/OpenVoxProject/openfact/'
 
-  spec.summary       = 'Facter, a system inventory tool'
+  spec.summary       = 'OpenFact, a system inventory tool'
   spec.description   = 'You can prove anything with facts!'
   spec.license       = 'Apache-2.0'
 
