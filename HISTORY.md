@@ -1,4 +1,6 @@
-## Facter release notes are now provided as part of the [official Puppet documentation](https://puppet.com/docs/puppet/7/release_notes_facter.html) and are no longer tracked in this file.
+## 4.10.0
+
+After 4.0.44,  Facter release notes were provided as part of the [official Puppet documentation](https://puppet.com/docs/puppet/7/release_notes_facter.html) and were not tracked in this file.
 
 # Previous versions
 
