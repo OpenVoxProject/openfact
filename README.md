@@ -6,9 +6,6 @@
 [![Modules Status](https://github.com/puppetlabs/facter/workflows/Acceptance%20tests/badge.svg?branch=main)](https://github.com/puppetlabs/facter/actions)
 [![Modules Status](https://github.com/puppetlabs/facter/workflows/Unit%20tests/badge.svg?branch=main)](https://github.com/puppetlabs/facter/actions)
 [![Modules Status](https://github.com/puppetlabs/facter/workflows/Checks/badge.svg?branch=main)](https://github.com/puppetlabs/facter/actions)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/3bd4be86f4b0b49bc0ca/test_coverage)](https://codeclimate.com/github/puppetlabs/facter/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/3bd4be86f4b0b49bc0ca/maintainability)](https://codeclimate.com/github/puppetlabs/facter/maintainability)
-
 
 Facter is a command-line tool that gathers basic facts about nodes (systems)
 such as hardware details, network settings, OS type and version, and more.
