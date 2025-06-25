@@ -25,7 +25,6 @@ jobs:
           - ubuntu-24.04
           - macos-13
           - macos-14
-          - macos-15
       fail-fast: false
     runs-on: ${{ matrix.os }}
     env:
