@@ -59,4 +59,8 @@ The command will output all the facts that openfact detected for the current OS.
 The implementation can be validated locally by running `bundle exec rake check`.
 
 ## Licensing
-See [LICENSE](LICENSE) file. OpenFact is licensed by the OpenVox Project as a community maintained implementation of Facter. The OpenVox Project can be contacted at: openvox@voxpupuli.org. Puppet itself is licensed by Puppet, Inc. under the Apache license. Puppet, Inc. can be contacted at: info@puppet.com.
+See [LICENSE](LICENSE) file.
+OpenFact is licensed by the OpenVox Project as a community maintained implementation of Facter.
+The OpenVox Project can be contacted at: openvox@voxpupuli.org.
+Puppet itself is licensed by Puppet, Inc. under the Apache license.
+Puppet, Inc. can be contacted at: info@puppet.com.
