@@ -5,7 +5,6 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 gemspec
 
 group(:release, optional: true) do
-  gem 'octokit', '~> 4.18.0'
   gem 'github_changelog_generator'
 end
 

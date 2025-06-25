@@ -11,7 +11,7 @@ task default: :spec
 
 begin
   require "github_changelog_generator/task"
-  require_relative "lib/puppet/version"
+  require_relative "lib/facter/version"
 
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     config.header = <<~HEADER.chomp
@@ -20,18 +20,15 @@ begin
     All notable changes to this project will be documented in this file.
     HEADER
     config.user = "openvoxproject"
-    config.project = "puppet"
+    config.project = "openfact"
     config.exclude_labels = %w[dependencies duplicate question invalid wontfix wont-fix modulesync skip-changelog]
-    config.since_tag = "8.18.1"
-    config.future_release = Puppet::PUPPETVERSION
-    config.exclude_tags_regex = /\A7\./
+    config.future_release = Facter::VERSION
   end
 rescue LoadError
   task :changelog do
     abort("Run `bundle install --with release` to install the `github_changelog_generator` gem.")
   end
 end
-
 
 namespace :pl_ci do
   desc 'build the gem and place it at the directory root'
