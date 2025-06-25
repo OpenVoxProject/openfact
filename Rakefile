@@ -10,23 +10,23 @@ Dir.glob(File.join('tasks/**/*.rake')).each { |file| load file }
 task default: :spec
 
 begin
-  require "github_changelog_generator/task"
-  require_relative "lib/facter/version"
+  require 'github_changelog_generator/task'
+  require_relative 'lib/facter/version'
 
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     config.header = <<~HEADER.chomp
-    # Changelog
+      # Changelog
 
-    All notable changes to this project will be documented in this file.
+      All notable changes to this project will be documented in this file.
     HEADER
-    config.user = "openvoxproject"
-    config.project = "openfact"
+    config.user = 'openvoxproject'
+    config.project = 'openfact'
     config.exclude_labels = %w[dependencies duplicate question invalid wontfix wont-fix modulesync skip-changelog]
     config.future_release = Facter::VERSION
   end
 rescue LoadError
   task :changelog do
-    abort("Run `bundle install --with release` to install the `github_changelog_generator` gem.")
+    abort('Run `bundle install --with release` to install the `github_changelog_generator` gem.')
   end
 end
 

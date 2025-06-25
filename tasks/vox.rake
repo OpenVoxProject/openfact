@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :vox do
   desc 'Update the version in preparation for a release'
   task 'version:bump:full', [:version] do |_, args|
