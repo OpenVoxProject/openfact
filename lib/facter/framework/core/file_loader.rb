@@ -501,6 +501,11 @@ os_hierarchy.each do |os|
     require_relative '../../facts/linux/timezone'
     require_relative '../../facts/linux/virtual'
     require_relative '../../facts/linux/xen'
+    require_relative '../../facts/linux/zfs_featurenumbers'
+    require_relative '../../facts/linux/zfs_version'
+    require_relative '../../facts/linux/zpool_featureflags'
+    require_relative '../../facts/linux/zpool_featurenumbers'
+    require_relative '../../facts/linux/zpool_version'
 
     require_relative '../../resolvers/linux/containers'
     require_relative '../../resolvers/linux/disks'
