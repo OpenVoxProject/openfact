@@ -74,3 +74,6 @@ if Rake.application.top_level_tasks.grep(/^(pl:|package:)/).any?
     puts "Error loading packaging rake tasks: #{e}"
   end
 end
+
+desc 'Prepare for a release'
+task 'release:prepare' => [:changelog]
