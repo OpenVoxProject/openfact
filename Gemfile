@@ -2,10 +2,10 @@
 
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
-gemspec name: 'facter'
+gemspec
 
 group(:release, optional: true) do
-  gem 'octokit', '~> 4.18.0'
+  gem 'github_changelog_generator'
 end
 
 gem 'packaging', require: false

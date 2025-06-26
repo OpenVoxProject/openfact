@@ -9,9 +9,25 @@ Dir.glob(File.join('tasks/**/*.rake')).each { |file| load file }
 
 task default: :spec
 
-desc 'Generate changelog'
-task :changelog, [:version] do |_t, args|
-  sh "./scripts/generate_changelog.rb #{args[:version]}"
+begin
+  require 'github_changelog_generator/task'
+  require_relative 'lib/facter/version'
+
+  GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+    config.header = <<~HEADER.chomp
+      # Changelog
+
+      All notable changes to this project will be documented in this file.
+    HEADER
+    config.user = 'openvoxproject'
+    config.project = 'openfact'
+    config.exclude_labels = %w[dependencies duplicate question invalid wontfix wont-fix modulesync skip-changelog]
+    config.future_release = Facter::VERSION
+  end
+rescue LoadError
+  task :changelog do
+    abort('Run `bundle install --with release` to install the `github_changelog_generator` gem.')
+  end
 end
 
 namespace :pl_ci do
@@ -58,3 +74,6 @@ if Rake.application.top_level_tasks.grep(/^(pl:|package:)/).any?
     puts "Error loading packaging rake tasks: #{e}"
   end
 end
+
+desc 'Prepare for a release'
+task 'release:prepare' => [:changelog]
