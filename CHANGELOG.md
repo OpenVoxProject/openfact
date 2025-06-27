@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.0.0.rc0](https://github.com/openvoxproject/openfact/tree/5.0.0.rc0) (2025-06-26)
+## [5.0.0.rc1](https://github.com/openvoxproject/openfact/tree/5.0.0.rc1) (2025-06-27)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.0.0.rc0...5.0.0.rc1)
+
+**Fixed bugs:**
+
+- CI: Fix Release workflow [\#29](https://github.com/OpenVoxProject/openfact/pull/29) ([bastelfreak](https://github.com/bastelfreak))
+
+## [5.0.0.rc0](https://github.com/openvoxproject/openfact/tree/5.0.0.rc0) (2025-06-27)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/4.10.0...5.0.0.rc0)
 
