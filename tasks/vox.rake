@@ -11,14 +11,14 @@ namespace :vox do
     puts "Setting version to #{version}"
 
     data = File.read('lib/facter/version.rb')
-    new_data = data.sub(/VERSION = '\d+\.\d+\.\d+'/, "VERSION = '#{version}'")
-    raise 'Failed to update version in lib/facter/version.rb' if data == new_data
+    new_data = data.sub(/VERSION = '\d+\.\d+\.\d+(\.rc\d+)?'/, "VERSION = '#{version}'")
+    warn 'Failed to update version in lib/facter/version.rb' if data == new_data
 
     File.write('lib/facter/version.rb', new_data)
 
     data = File.read('openfact.gemspec')
-    new_data = data.sub(/(spec.version *=) '\d+\.\d+\.\d+'/, "\\1 '#{version}'")
-    raise 'Failed to update version in openfact.gemspec' if data == new_data
+    new_data = data.sub(/(spec.version *=) '\d+\.\d+\.\d+(\.rc\d+)?'/, "\\1 '#{version}'")
+    warn 'Failed to update version in openfact.gemspec' if data == new_data
 
     File.write('openfact.gemspec', new_data)
   end
