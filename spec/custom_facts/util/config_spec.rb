@@ -57,8 +57,8 @@ describe LegacyFacter::Util::Config do
       expect(LegacyFacter::Util::Config.external_facts_dirs)
         .to eq [
           '/etc/puppetlabs/facter/facts.d',
-          '/etc/facter/facts.d/',
-          '/usr/local/etc/facter/facts.d/',
+          '/etc/facter/facts.d',
+          '/usr/local/etc/facter/facts.d',
           '/opt/puppetlabs/facter/facts.d'
         ]
     end
