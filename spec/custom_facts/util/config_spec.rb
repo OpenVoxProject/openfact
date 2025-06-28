@@ -58,6 +58,7 @@ describe LegacyFacter::Util::Config do
         .to eq [
           '/etc/puppetlabs/facter/facts.d',
           '/etc/facter/facts.d/',
+          '/usr/local/etc/facter/facts.d/',
           '/opt/puppetlabs/facter/facts.d'
         ]
     end

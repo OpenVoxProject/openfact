@@ -45,6 +45,7 @@ module LegacyFacter
                                                      [
                                                        '/etc/puppetlabs/facter/facts.d',
                                                        '/etc/facter/facts.d/',
+                                                       '/usr/local/etc/facter/facts.d/',
                                                        '/opt/puppetlabs/facter/facts.d'
                                                      ]
                                                    end
