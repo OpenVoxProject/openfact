@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.1.0](https://github.com/openvoxproject/openfact/tree/5.1.0) (2025-07-10)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.0.0...5.1.0)
+
+**Implemented enhancements:**
+
+- Add Ruby 3.4 support [\#36](https://github.com/OpenVoxProject/openfact/pull/36) ([bastelfreak](https://github.com/bastelfreak))
+- Add FreeBSD custom\_facts directory [\#35](https://github.com/OpenVoxProject/openfact/pull/35) ([smortex](https://github.com/smortex))
+- Allow latest version of thor [\#34](https://github.com/OpenVoxProject/openfact/pull/34) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- pin rubocop to \< 1.79 [\#40](https://github.com/OpenVoxProject/openfact/pull/40) ([bastelfreak](https://github.com/bastelfreak))
+
+## [5.0.0](https://github.com/openvoxproject/openfact/tree/5.0.0) (2025-06-27)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.0.0.rc1...5.0.0)
+
 ## [5.0.0.rc1](https://github.com/openvoxproject/openfact/tree/5.0.0.rc1) (2025-06-27)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.0.0.rc0...5.0.0.rc1)

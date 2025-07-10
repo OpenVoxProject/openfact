@@ -23,6 +23,9 @@ begin
     config.project = 'openfact'
     config.exclude_labels = %w[dependencies duplicate question invalid wontfix wont-fix modulesync skip-changelog]
     config.future_release = Facter::VERSION
+    # we limit the changelog to all new openvox releases, to skip perforce onces
+    # otherwise the changelog generate takes a lot amount of time
+    config.since_tag = '4.10.0'
   end
 rescue LoadError
   task :changelog do
