@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Ps = Struct.new(:PhysicalAddress, :PhysicalAddressLength)
+Ps = Struct.new(:PhysicalAddress, :PhysicalAddressLength) # rubocop:disable Naming/MethodName
 
 describe NetworkUtils do
   describe '#address_to_string' do
