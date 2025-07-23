@@ -53,7 +53,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'hocon', '~> 1.3'
   spec.add_dependency 'logger', '~> 1.5'
   spec.add_dependency 'ostruct', '< 0.7'
-  spec.add_dependency 'thor', ['>= 1.0.1', '< 2']
+  spec.add_dependency 'thor', '~> 1.5'
   spec.add_dependency 'tsort', '< 0.3'
   # we have the same for openvox
   if Gem.win_platform?
