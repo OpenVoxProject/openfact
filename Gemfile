@@ -18,7 +18,3 @@ group(:integration, optional: true) do
   # 1.16.0 - 1.16.2 are broken on Windows
   gem 'ffi', '>= 1.15.5', '< 1.17.0', '!= 1.16.0', '!= 1.16.1', '!= 1.16.2', require: false
 end
-
-group(:documentation) do
-  gem 'ronn', '~> 0.7.3', require: false, platforms: [:ruby]
-end

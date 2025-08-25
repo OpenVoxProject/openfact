@@ -1,5 +1,4 @@
-<%# encoding: UTF-8 -%>
-.Dd <%= Time.now.strftime("%b %d, %Y") %>
+.Dd Aug 22, 2025
 .Dt FACTER 1
 .Os
 .Sh NAME
@@ -9,10 +8,14 @@
 .Nm
 .Op Ar options
 .Op Ar query ...
-<% Facter::Cli.commands.select { |_k, command_class| command_class.instance_of?(Thor::Command) }.each do |name, command| -%>
 .Nm
-.Fl Fl <%= name.to_s.gsub('_','-') %>
-<% end -%>
+.Fl Fl version
+.Nm
+.Fl Fl list-block-groups
+.Nm
+.Fl Fl list-cache-groups
+.Nm
+.Fl Fl help
 .Sh DESCRIPTION
 .Nm
 is a command-line tool that gathers basic facts about nodes (systems) such as hardware details, network settings, OS type and version, and more.
@@ -23,10 +26,52 @@ If no queries are given, then all facts will be returned.
 Many of the command line options can also be set via the HOCON config file. This file can also be used to block or cache certain fact groups.
 .Sh OPTIONS
 .Bl -tag
-<% Facter::Cli.class_options.each do |name, option| -%><% next if option.hide-%>
-.It <% if option.aliases.any? %>Fl <%= option.aliases[0].sub(/^-/, '') %> , <% end %>Fl Fl <%= 'no-' if negate_options.include?(name.to_s)%><%= name.to_s.gsub('_','-') %><% if option.type == :string %>= Ns Ar value<% end %>
-<%= option.description %>
-<% end -%>
+.It Fl Fl color
+Enable color output.
+.It Fl Fl no-color
+Disable color output.
+.It Fl c , Fl Fl config= Ns Ar value
+The location of the config file.
+.It Fl Fl custom-dir= Ns Ar value
+A directory to use for custom facts.
+.It Fl d , Fl Fl debug
+Enable debug output.
+.It Fl Fl external-dir= Ns Ar value
+A directory to use for external facts.
+.It Fl Fl hocon
+Output in Hocon format.
+.It Fl j , Fl Fl json
+Output in JSON format.
+.It Fl l , Fl Fl log-level= Ns Ar value
+Set logging level. Supported levels are: none, trace, debug, info, warn, error, and fatal.
+.It Fl Fl no-block
+Disable fact blocking.
+.It Fl Fl no-cache
+Disable loading and refreshing facts from the cache
+.It Fl Fl no-custom-facts
+Disable custom facts.
+.It Fl Fl no-external-facts
+Disable external facts.
+.It Fl Fl no-ruby
+Disable loading Ruby, facts requiring Ruby, and custom facts.
+.It Fl Fl trace
+Enable backtraces for custom facts.
+.It Fl Fl verbose
+Enable verbose (info) output.
+.It Fl Fl show-legacy
+Show legacy facts when querying all facts.
+.It Fl y , Fl Fl yaml
+Output in YAML format.
+.It Fl Fl strict
+Enable more aggressive error reporting.
+.It Fl t , Fl Fl timing
+Show how much time it took to resolve each fact
+.It Fl Fl sequential
+Resolve facts sequentially
+.It Fl Fl http-debug
+Whether to write HTTP request and responses to stderr. This should never be used in production.
+.It Fl p , Fl Fl puppet
+Load the Puppet libraries, thus allowing Facter to load Puppet-specific facts.
 .El
 .Sh FILES
 .Bl -tag
