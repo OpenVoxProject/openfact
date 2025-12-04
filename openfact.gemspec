@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'openfact'
-  spec.version       = '5.1.0'
+  spec.version       = '5.2.0'
   spec.authors       = ['OpenVox Project']
   spec.email         = ['openvox@voxpupuli.org']
   spec.homepage      = 'https://github.com/OpenVoxProject/openfact/'
