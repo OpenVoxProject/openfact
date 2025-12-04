@@ -6,7 +6,11 @@ gemspec
 
 group(:release, optional: true) do
   gem 'faraday-retry', '~> 2.1', require: false
-  gem 'github_changelog_generator', require: false, git: 'https://github.com/voxpupuli/github-changelog-generator', branch: 'avoid-processing-a-single-commit-multiple-time'
+  if RUBY_VERSION >= '3.0' || !Gem.win_platform?
+    gem 'github_changelog_generator', require: false, git: 'https://github.com/voxpupuli/github-changelog-generator', branch: 'avoid-processing-a-single-commit-multiple-time'
+  else
+    gem 'github_changelog_generator', require: false
+  end
 end
 
 gem 'packaging', require: false
