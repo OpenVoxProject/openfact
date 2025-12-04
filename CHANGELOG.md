@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.2.0](https://github.com/openvoxproject/openfact/tree/5.2.0) (2025-12-04)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.1.0...5.2.0)
+
+**Implemented enhancements:**
+
+- Add os.support.end fact using os-release [\#33](https://github.com/OpenVoxProject/openfact/pull/33) ([ekohl](https://github.com/ekohl))
+
+**Merged pull requests:**
+
+- Use modified version of github\_changelog\_generator [\#50](https://github.com/OpenVoxProject/openfact/pull/50) ([nmburgan](https://github.com/nmburgan))
+- Update release automation [\#48](https://github.com/OpenVoxProject/openfact/pull/48) ([nmburgan](https://github.com/nmburgan))
+- Rework facter man page [\#45](https://github.com/OpenVoxProject/openfact/pull/45) ([smortex](https://github.com/smortex))
+
 ## [5.1.0](https://github.com/openvoxproject/openfact/tree/5.1.0) (2025-07-10)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.0.0...5.1.0)
