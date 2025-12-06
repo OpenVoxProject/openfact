@@ -49,5 +49,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'base64', '>= 0.1', '< 0.4'
   spec.add_runtime_dependency 'hocon', '~> 1.3'
   spec.add_runtime_dependency 'logger', '~> 1.7'
-  spec.add_runtime_dependency 'thor', ['>= 1.0.1', '< 2']
+  spec.add_runtime_dependency 'thor', '~> 1.4'
 end
