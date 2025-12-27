@@ -10,11 +10,13 @@ module Facter
           # :model
 
           VM_GUEST_SYSCTL_NAMES = {
-            'VMM' => 'vmm',
+            'QEMU'    => 'qemu',
+            'VMM'     => 'vmm',
+            'Yandex'  => 'yandex',
+            'oracle'  => 'virtualbox',
             'vServer' => 'vserver',
-            'oracle' => 'virtualbox',
-            'xen' => 'xenu',
-            'none' => nil
+            'xen'     => 'xenu',
+            'none'    => nil
           }.freeze
 
           private
@@ -24,17 +26,23 @@ module Facter
           end
 
           CTL_HW = 6
+          HW_VENDOR  = 14
           HW_PRODUCT = 15
 
           def read_facts(fact_name)
             require 'facter/resolvers/bsd/ffi/ffi_helper'
 
             vm = Facter::Bsd::FfiHelper.sysctl(:string, [CTL_HW, HW_PRODUCT])
-            vm = if VM_GUEST_SYSCTL_NAMES.key?(vm)
-                   VM_GUEST_SYSCTL_NAMES[vm]
-                 else
-                   'physical'
-                 end
+            if VM_GUEST_SYSCTL_NAMES.key?(vm)
+              vm = VM_GUEST_SYSCTL_NAMES[vm]
+            else
+              vm = Facter::Bsd::FfiHelper.sysctl(:string, [CTL_HW, HW_VENDOR])
+              vm = if VM_GUEST_SYSCTL_NAMES.key?(vm)
+                     VM_GUEST_SYSCTL_NAMES[vm]
+                   else
+                     'physical'
+                   end
+            end
             @fact_list[:vm] = vm
             @fact_list[fact_name]
           end
