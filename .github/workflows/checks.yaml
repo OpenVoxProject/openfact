@@ -28,3 +28,15 @@ jobs:
           bundler-cache: true
       - run: bundle exec rake rubocop
       - run: gem build --strict --verbose *.gemspec
+
+  tests:
+    if: always()
+    needs:
+      - rubocop_checks
+    runs-on: ubuntu-24.04
+    name: Test suite
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
