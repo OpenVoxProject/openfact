@@ -30,7 +30,7 @@ jobs:
   linux_unit_tests:
     needs:
       - rubocop_checks
-    name: Ruby version
+    name: Unit tests on Linux with Ruby ${{ matrix.ruby }}
     strategy:
       fail-fast: false
       matrix:
