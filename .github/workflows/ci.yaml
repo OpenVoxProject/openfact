@@ -17,7 +17,7 @@ jobs:
     name: RuboCop
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Rubocop checks
         uses: ruby/setup-ruby@v1
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Rspec checks
         uses: ruby/setup-ruby@v1
@@ -64,7 +64,7 @@ jobs:
     runs-on: windows-2025
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Rspec checks
         uses: ruby/setup-ruby@v1
@@ -90,7 +90,7 @@ jobs:
 
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: facter
 
@@ -149,7 +149,7 @@ jobs:
       BUNDLE_SET: 'with integration'
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Rspec checks
         uses: ruby/setup-ruby@v1
