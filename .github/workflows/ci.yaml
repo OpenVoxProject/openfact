@@ -55,7 +55,7 @@ jobs:
       - run: bundle exec rake spec_random
 
   windows_unit_tests:
-    name: Windows tests with Ruby ${{ matrix.ruby }}
+    name: Unit tests on Windows with Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
         ruby:
