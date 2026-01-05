@@ -26,7 +26,8 @@ module Facter
           def parse_output(output)
             @fact_list[:logical_count] = output.scan(/module/).size
             @fact_list[:physical_count] = output.scan(/chip_id .*/).uniq.size
-            @fact_list[:speed] = output.scan(/current_clock_Hz .*/).first.gsub(/[a-zA-z\s]+/, '').to_i
+            # .scan(//current_clock_Hz\s+(\d+)/) returns [['123']] (or [['123'], ['456']] if there are more matches)
+            @fact_list[:speed] = output.scan(/current_clock_Hz\s+(\d+)/).first&.first&.to_i
             @fact_list[:models] = output.scan(/brand .*/).map { |elem| elem.gsub(/brand(\s+)/, '') }
             calculate_threads_cores(output)
           end
