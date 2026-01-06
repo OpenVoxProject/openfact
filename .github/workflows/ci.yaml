@@ -133,7 +133,7 @@ jobs:
         run: ruby $Env:FACTER_ROOT/.github/actions/presuite.rb ${{ matrix.os }}
 
   integration_tests:
-    name: integration ${{ matrix.cfg.os }} (ruby ${{ matrix.cfg.ruby }})
+    name: Integration on ${{ matrix.cfg.os }} with Ruby ${{ matrix.cfg.ruby }}
     strategy:
       fail-fast: false
       matrix:
