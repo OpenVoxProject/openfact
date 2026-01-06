@@ -1,0 +1,175 @@
+---
+name: CI
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - main
+
+# minimal permissions
+permissions:
+  contents: read
+
+jobs:
+  rubocop_checks:
+    runs-on: ubuntu-24.04
+    name: RuboCop
+    steps:
+      - name: Checkout current PR
+        uses: actions/checkout@v6
+
+      - name: Rubocop checks
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+          bundler-cache: true
+      - run: bundle exec rake rubocop
+      - run: gem build --strict --verbose *.gemspec
+
+  linux_unit_tests:
+    needs:
+      - rubocop_checks
+    name: Unit tests on Linux with Ruby ${{ matrix.ruby }}
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - '2.7'
+          - '3.0'
+          - '3.2'
+          - '3.3'
+          - '3.4'
+          - '4.0'
+          - 'jruby-9.4.8.0'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout current PR
+        uses: actions/checkout@v6
+
+      - name: Rspec checks
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - run: bundle exec rake spec_random
+
+  windows_unit_tests:
+    name: Unit tests on Windows with Ruby ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          - '2.7'
+          - '3.2'
+    runs-on: windows-2025
+    steps:
+      - name: Checkout current PR
+        uses: actions/checkout@v6
+
+      - name: Rspec checks
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - run: bundle exec rake spec_random
+
+  acceptance_tests:
+    name: Platform
+    strategy:
+      matrix:
+        os:
+          - windows-2022
+          - ubuntu-22.04
+          - ubuntu-24.04
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    env:
+      BEAKER_debug: true
+      FACTER_ROOT: facter
+      RELEASE_STREAM: puppet8
+
+    steps:
+      - name: Checkout current PR
+        uses: actions/checkout@v6
+        with:
+          path: facter
+
+      - name: Install Ruby 3.2
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Fix common Linux and macOS permissions
+        if: runner.os != 'Windows'
+        run: sudo chmod a-w /opt
+
+      - name: Fix Linux permissions
+        if: runner.os == 'Linux'
+        run: |
+          sudo chmod a-w /home/runner /usr/share &&
+          sudo chmod -R a-w /home/runner/.config /home/linuxbrew
+
+      - name: Install dhclient for Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt install isc-dhcp-client
+          sudo dhclient
+
+      # IPv6 is missing on the GitHub macOS image and we need it for the networking facts tests
+      # https://github.com/actions/runner-images/issues/668
+      - name: Add IPv6 on macOS
+        if: runner.os == 'macOS'
+        run: |
+          primary_interface=`route -n get default | awk '/interface: */{print $NF}'`
+          sudo ifconfig $primary_interface inet6 add ::1/64
+
+      - name: Run acceptance tests on Linux and MacOS platform
+        if: runner.os != 'Windows'
+        run: sudo -E "PATH=$PATH" ruby $FACTER_ROOT/.github/actions/presuite.rb ${{ matrix.os }}
+
+      - name: Run acceptance tests on Windows-like platform
+        if: runner.os == 'Windows'
+        run: ruby $Env:FACTER_ROOT/.github/actions/presuite.rb ${{ matrix.os }}
+
+  integration_tests:
+    name: Integration on ${{ matrix.cfg.os }} with Ruby ${{ matrix.cfg.ruby }}
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+          - {os: ubuntu-latest, ruby: '2.7'}
+          - {os: ubuntu-22.04, ruby: '3.2'} # with openssl 3
+          - {os: ubuntu-22.04, ruby: 'jruby-9.3.14.0'}
+          - {os: ubuntu-latest, ruby: 'jruby-9.4.8.0'}
+          - {os: windows-2022, ruby: '2.7'}
+          - {os: windows-2022, ruby: '3.2'} # with openssl 3
+    runs-on: ${{ matrix.cfg.os }}
+    env:
+      BUNDLE_WITH: 'integration'
+    steps:
+      - name: Checkout current PR
+        uses: actions/checkout@v6
+
+      - name: Rspec checks
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.cfg.ruby }}
+          bundler-cache: true
+      - run: bundle exec rake spec_integration
+
+  tests:
+    if: always()
+    needs:
+      - rubocop_checks
+      - linux_unit_tests
+      - windows_unit_tests
+      - acceptance_tests
+      - integration_tests
+    runs-on: ubuntu-24.04
+    name: Test suite
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
