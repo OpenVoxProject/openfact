@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.3.0](https://github.com/openvoxproject/openfact/tree/5.3.0) (2026-01-06)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.2.1...5.3.0)
+
+**Implemented enhancements:**
+
+- CI: Add jruby-9.4.12.1 [\#70](https://github.com/OpenVoxProject/openfact/pull/70) ([bastelfreak](https://github.com/bastelfreak))
+- Add Ruby 4.0 support [\#63](https://github.com/OpenVoxProject/openfact/pull/63) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- \[Bug\]: is\_virtual yields true on OpenBSD inside QEMU/Cloud hypervisors [\#61](https://github.com/OpenVoxProject/openfact/issues/61)
+- Fix Solaris processors regex [\#66](https://github.com/OpenVoxProject/openfact/pull/66) ([ekohl](https://github.com/ekohl))
+- Detect QEMU and Yandex hypervisors to yield correct {is\_,}virtual facts [\#62](https://github.com/OpenVoxProject/openfact/pull/62) ([klemensn](https://github.com/klemensn))
+
 ## [5.2.1](https://github.com/openvoxproject/openfact/tree/5.2.1) (2025-12-15)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.2.0...5.2.1)
