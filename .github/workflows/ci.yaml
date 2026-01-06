@@ -146,7 +146,7 @@ jobs:
           - {os: windows-2022, ruby: '3.2'} # with openssl 3
     runs-on: ${{ matrix.cfg.os }}
     env:
-      BUNDLE_SET: 'with integration'
+      BUNDLE_WITH: 'integration'
     steps:
       - name: Checkout current PR
         uses: actions/checkout@v6
