@@ -40,6 +40,7 @@ jobs:
         include:
           - ruby: 'jruby-9.4.12.1'
           - ruby: 'jruby-9.4.8.0'
+          - ruby: 'jruby-10.0.2.0'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout current PR
@@ -141,6 +142,7 @@ jobs:
           - {os: ubuntu-22.04, ruby: 'jruby-9.3.14.0'}
           - {os: ubuntu-latest, ruby: 'jruby-9.4.8.0'}
           - {os: ubuntu-latest, ruby: 'jruby-9.4.12.1'}
+          - {os: ubuntu-latest, ruby: 'jruby-10.0.2.0'}
           - {os: windows-2022, ruby: '2.7'}
           - {os: windows-2022, ruby: '3.2'} # with openssl 3
     runs-on: ${{ matrix.cfg.os }}
