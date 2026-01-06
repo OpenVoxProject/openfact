@@ -56,7 +56,7 @@ describe Facter::Util::Resolvers::Networking do
       it 'returns scope6' do
         # openvoxserver 8.12 ships jruby 9.4.12. older versions used 9.4.8, puppetserver 8 used 9.4.7.
         # The jruby bug is fixed in 9.4.12
-        pending('JRuby 9.4.7.0 does not properly parse mixed IPv6 addresses https://github.com/jruby/jruby/issues/8248') if defined?(JRUBY_VERSION) && JRUBY_VERSION == '9.4.8.0'
+        pending('JRuby 9.4.7 and 9.4.8 do not properly parse mixed IPv6 addresses https://github.com/jruby/jruby/issues/8248') if defined?(JRUBY_VERSION) && JRUBY_VERSION == '9.4.8.0'
         expect(networking_helper.get_scope(address)).to eql('global')
       end
     end
