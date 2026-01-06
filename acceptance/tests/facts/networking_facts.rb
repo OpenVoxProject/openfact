@@ -14,7 +14,7 @@ test_name 'C59029: networking facts should be fully populated' do
       %w[networking dhcp] => agent['platform'] =~ /fedora-|el-8-|el-9-/ ? '' : @ip_regex, # https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/issues/426
       %w[networking ip] => @ip_regex,
       %w[networking ip6] => /[a-f0-9]+:+/,
-      %w[networking mac] => /[a-f0-9]{2}:/,
+      %w[networking mac] => /[A-Fa-f0-9]{2}:/,
       %w[networking mtu] => /\d+/,
       %w[networking netmask] => @netmask_regex,
       %w[networking netmask6] => /[a-f0-9]+:/,
