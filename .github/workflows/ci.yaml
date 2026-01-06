@@ -12,37 +12,34 @@ permissions:
   contents: read
 
 jobs:
-  rubocop_checks:
+  rubocop_and_matrix:
     runs-on: ubuntu-24.04
-    name: RuboCop
+    outputs:
+      ruby: ${{ steps.ruby.outputs.versions }}
     steps:
-      - name: Checkout current PR
-        uses: actions/checkout@v6
-
-      - name: Rubocop checks
+      - uses: actions/checkout@v6
+      - name: Install Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: "3.4"
           bundler-cache: true
-      - run: bundle exec rake rubocop
+      - name: Run Rubocop
+        run: bundle exec rake rubocop
       - run: gem build --strict --verbose *.gemspec
+      - id: ruby
+        uses: voxpupuli/ruby-version@v2
 
   linux_unit_tests:
     needs:
-      - rubocop_checks
+      - rubocop_and_matrix
     name: Unit tests on Linux with Ruby ${{ matrix.ruby }}
     strategy:
       fail-fast: false
       matrix:
-        ruby:
-          - '2.7'
-          - '3.0'
-          - '3.2'
-          - '3.3'
-          - '3.4'
-          - '4.0'
-          - 'jruby-9.4.12.1'
-          - 'jruby-9.4.8.0'
+        ruby: ${{ fromJSON(needs.rubocop_and_matrix.outputs.ruby) }}
+        include:
+          - ruby: 'jruby-9.4.12.1'
+          - ruby: 'jruby-9.4.8.0'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout current PR
@@ -163,7 +160,7 @@ jobs:
   tests:
     if: always()
     needs:
-      - rubocop_checks
+      - rubocop_and_matrix
       - linux_unit_tests
       - windows_unit_tests
       - acceptance_tests
