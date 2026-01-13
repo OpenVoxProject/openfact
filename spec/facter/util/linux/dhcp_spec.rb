@@ -68,6 +68,12 @@ describe Facter::Util::Linux::Dhcp do
         allow(File).to receive(:readable?).with('/var/lib/NetworkManager/').and_return(false)
         allow(File).to receive(:readable?).with('/var/db/').and_return(false)
 
+        allow(Dir).to receive(:glob).with('{/run,/var/run}/dhcpcd{,*,/}*.pid').and_return(['/run/dhcpcd.pid'])
+        allow(File).to receive(:file?).with('/run/dhcpcd.pid').and_return(true)
+        allow(Facter::Util::FileHelper).to receive(:safe_read).with('/run/dhcpcd.pid', '').and_return('1234')
+        allow(Process).to receive(:kill).with(0, 1234).and_return(true)
+        allow(Facter::Util::FileHelper).to receive(:safe_read).with('/proc/1234/comm', nil).and_return('dhcpcd')
+
         allow(Facter::Core::Execution).to receive(:which)
           .with('dhcpcd').and_return('/usr/bin/dhcpcd')
         allow(Facter::Core::Execution).to receive(:execute)
@@ -92,6 +98,26 @@ describe Facter::Util::Linux::Dhcp do
 
         allow(Facter::Core::Execution).to receive(:which)
           .with('dhcpcd').and_return(nil)
+
+        dhcp_search.instance_eval { @dhcpcd_command = nil }
+      end
+
+      it 'returns nil' do
+        expect(dhcp_search.dhcp('ens160', 1, log_spy)).to eq(nil)
+      end
+    end
+
+    context 'when the dhcpcd command is available, but not running' do
+      before do
+        allow(Facter::Util::FileHelper).to receive(:safe_read).with('/run/systemd/netif/leases/1', nil).and_return(nil)
+        allow(File).to receive(:readable?).with('/var/lib/dhclient/').and_return(false)
+        allow(File).to receive(:readable?).with('/var/lib/dhcp/').and_return(false)
+        allow(File).to receive(:readable?).with('/var/lib/dhcp3/').and_return(false)
+        allow(File).to receive(:readable?).with('/var/lib/NetworkManager/').and_return(false)
+        allow(File).to receive(:readable?).with('/var/db/').and_return(false)
+
+        allow(Facter::Core::Execution).to receive(:which)
+          .with('dhcpcd').and_return('/usr/bin/dhcpcd')
 
         dhcp_search.instance_eval { @dhcpcd_command = nil }
       end
