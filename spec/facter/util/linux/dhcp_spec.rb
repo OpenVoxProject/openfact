@@ -115,6 +115,8 @@ describe Facter::Util::Linux::Dhcp do
         allow(File).to receive(:readable?).with('/var/lib/dhcp3/').and_return(false)
         allow(File).to receive(:readable?).with('/var/lib/NetworkManager/').and_return(false)
         allow(File).to receive(:readable?).with('/var/db/').and_return(false)
+        allow(Dir).to receive(:glob).with('{/run,/var/run}/dhcpcd{,*,/}*.pid').and_return([])
+        allow(Dir).to receive(:glob).with('/proc/[0-9]*/comm').and_return([])
 
         allow(Facter::Core::Execution).to receive(:which)
           .with('dhcpcd').and_return('/usr/bin/dhcpcd')
