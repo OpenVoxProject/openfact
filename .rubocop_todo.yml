@@ -6,16 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 2
-# Configuration parameters: EnforcedStyle, AllowedPatterns, ForbiddenIdentifiers, ForbiddenPatterns.
-# SupportedStyles: snake_case, camelCase
-# ForbiddenIdentifiers: __id__, __send__
-Naming/MethodName:
-  Exclude:
-    - 'spec/mocks/win32ole.rb'
-    - 'spec/mocks/ffi.rb'
-    - 'spec/facter/util/windows/network_utils_spec.rb'
-
 # Offense count: 3
 # This cop supports safe autocorrection (--autocorrect).
 Performance/RegexpMatch:
@@ -35,7 +25,7 @@ Style/ClassVars:
     - 'spec/custom_facts/puppetlabs_spec/files.rb'
     - 'spec/framework/logging/logger_spec.rb'
 
-# Offense count: 981
+# Offense count: 982
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Enabled: false
@@ -46,3 +36,16 @@ Style/Documentation:
 Style/OptionalBooleanParameter:
   Exclude:
     - 'lib/facter/util/resolvers/http.rb'
+
+# Offense count: 13
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/SlicingWithRange:
+  Exclude:
+    - 'install.rb'
+    - 'lib/facter/facts/solaris/ldom.rb'
+    - 'lib/facter/framework/cli/cli.rb'
+    - 'lib/facter/resolvers/aix/serialnumber.rb'
+    - 'lib/facter/resolvers/freebsd/swap_memory.rb'
+    - 'lib/facter/resolvers/networking.rb'
+    - 'lib/facter/resolvers/partitions.rb'
+    - 'lib/facter/util/api_debugger.rb'
