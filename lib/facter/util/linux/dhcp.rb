@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'facter/util/linux'
+
 module Facter
   module Util
     module Linux
@@ -73,10 +75,17 @@ module Facter
           end
 
           def search_with_dhcpcd_command(interface_name)
-            @log.debug("Attempt to get DHCP for interface #{interface_name}, from dhcpcd command")
+            return if interface_name == 'lo'
 
             @dhcpcd_command ||= Facter::Core::Execution.which('dhcpcd')
             return unless @dhcpcd_command
+
+            unless Facter::Util::Linux.process_running?('dhcpcd')
+              @log.debug('Skipping dhcpcd -U because dhcpcd daemon is not running')
+              return
+            end
+
+            @log.debug("Attempt to get DHCP for interface #{interface_name}, from dhcpcd command")
 
             output = Facter::Core::Execution.execute("#{@dhcpcd_command} -U #{interface_name}", logger: @log)
             dhcp = output.match(/dhcp_server_identifier='(.*)'/)
