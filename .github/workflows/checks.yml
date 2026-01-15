@@ -1,0 +1,30 @@
+---
+name: Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# minimal permissions
+permissions:
+  contents: read
+
+jobs:
+  rubocop_checks:
+    runs-on: ubuntu-24.04
+    name: RuboCop
+    steps:
+      - name: Checkout current PR
+        uses: actions/checkout@v4
+
+      - name: Rubocop checks
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+          bundler-cache: true
+      - run: bundle exec rake rubocop
+      - run: gem build --strict --verbose *.gemspec
