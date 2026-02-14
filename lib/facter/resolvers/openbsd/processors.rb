@@ -1,0 +1,52 @@
+# frozen_string_literal: true
+
+require_relative '../../../facter/resolvers/bsd/processors'
+
+module Facter
+  module Resolvers
+    module Openbsd
+      class Processors < BaseResolver
+        init_resolver
+
+        class << self
+          private
+
+          def post_resolve(fact_name, _options)
+            @fact_list.fetch(fact_name) { collect_processors_info(fact_name) }
+          end
+
+          def collect_processors_info(fact_name)
+            require_relative '../../../facter/resolvers/bsd/ffi/ffi_helper'
+
+            count = online_count
+            model = processor_model
+            speed = processor_speed
+
+            @fact_list[:online_count] = count
+            @fact_list[:model] = Array.new(count, model) if online_count && model
+            @fact_list[:speed] = speed * 1000 * 1000 if speed
+
+            @fact_list[fact_name]
+          end
+
+          CTL_HW = 6
+          HW_MODEL = 2
+          HW_NCPUONLINE = 25
+          HW_CPUSPEED = 12
+
+          def processor_model
+            Facter::Bsd::FfiHelper.sysctl(:string, [CTL_HW, HW_MODEL])
+          end
+
+          def online_count
+            Facter::Bsd::FfiHelper.sysctl(:uint32_t, [CTL_HW, HW_NCPUONLINE])
+          end
+
+          def processor_speed
+            Facter::Bsd::FfiHelper.sysctl(:uint32_t, [CTL_HW, HW_CPUSPEED])
+          end
+        end
+      end
+    end
+  end
+end
