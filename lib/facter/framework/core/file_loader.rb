@@ -709,6 +709,7 @@ os_hierarchy.each do |os|
     require_relative '../../facts/openbsd/os/hardware'
     require_relative '../../facts/openbsd/os/name'
     require_relative '../../facts/openbsd/os/release'
+    require_relative '../../facts/openbsd/processors/count'
     require_relative '../../facts/openbsd/processors/isa'
     require_relative '../../facts/openbsd/ruby/platform'
     require_relative '../../facts/openbsd/ruby/sitedir'
@@ -721,6 +722,7 @@ os_hierarchy.each do |os|
     require_relative '../../resolvers/openbsd/dhcp'
     require_relative '../../resolvers/openbsd/dmi'
     require_relative '../../resolvers/openbsd/mountpoints'
+    require_relative '../../resolvers/openbsd/processors'
     require_relative '../../resolvers/openbsd/virtual'
 
   when 'openwrt'
