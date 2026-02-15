@@ -103,7 +103,7 @@ describe Facter::Util::Linux::Dhcp do
       end
 
       it 'returns nil' do
-        expect(dhcp_search.dhcp('ens160', 1, log_spy)).to eq(nil)
+        expect(dhcp_search.dhcp('ens160', 1, log_spy)).to be_nil
       end
     end
 
@@ -125,7 +125,7 @@ describe Facter::Util::Linux::Dhcp do
       end
 
       it 'returns nil' do
-        expect(dhcp_search.dhcp('ens160', 1, log_spy)).to eq(nil)
+        expect(dhcp_search.dhcp('ens160', 1, log_spy)).to be_nil
       end
     end
   end

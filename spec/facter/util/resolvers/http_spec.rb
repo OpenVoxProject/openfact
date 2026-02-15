@@ -103,7 +103,7 @@ describe Facter::Util::Resolvers::Http do
   RSpec.shared_examples 'an http request on windows' do
     it_behaves_like 'an http request'
 
-    context 'when host is unreachable ' do
+    context 'when host is unreachable' do
       before do
         allow(Socket).to receive(:tcp)
           .with('169.254.169.254', 80, { connect_timeout: 0.6 })

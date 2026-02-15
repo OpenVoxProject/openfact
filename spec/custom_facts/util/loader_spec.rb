@@ -72,7 +72,7 @@ describe LegacyFacter::Util::Loader do
       allow(File).to receive(:directory?).with('/two').and_return false
 
       paths = loader.search_path
-      expect(paths).to match_array(['/one'])
+      expect(paths).to contain_exactly('/one')
     end
 
     describe 'and the FACTERLIB environment variable is set' do

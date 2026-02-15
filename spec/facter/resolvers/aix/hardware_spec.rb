@@ -27,7 +27,7 @@ describe Facter::Resolvers::Hardware do
       let(:result) { 'test = hardware' }
 
       it 'detects hardware as nil' do
-        expect(Facter::Resolvers::Hardware.resolve(:hardware)).to be(nil)
+        expect(Facter::Resolvers::Hardware.resolve(:hardware)).to be_nil
       end
     end
 
@@ -35,7 +35,7 @@ describe Facter::Resolvers::Hardware do
       let(:result) { nil }
 
       it 'detects hardware as nil' do
-        expect(Facter::Resolvers::Hardware.resolve(:hardware)).to be(nil)
+        expect(Facter::Resolvers::Hardware.resolve(:hardware)).to be_nil
       end
     end
   end

@@ -46,15 +46,15 @@ describe Facter::Resolvers::Solaris::DmiSparc do
     end
 
     it 'does not return manufacturer' do
-      expect(resolver.resolve(:manufacturer)).to eq(nil)
+      expect(resolver.resolve(:manufacturer)).to be_nil
     end
 
     it 'does not return product_name' do
-      expect(resolver.resolve(:product_name)).to eq(nil)
+      expect(resolver.resolve(:product_name)).to be_nil
     end
 
     it 'does not return serial_number' do
-      expect(resolver.resolve(:serial_number)).to eq(nil)
+      expect(resolver.resolve(:serial_number)).to be_nil
     end
   end
 end

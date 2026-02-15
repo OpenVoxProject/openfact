@@ -22,7 +22,7 @@ describe Facter::Util::Linux::Proc do
 
       it 'returns nil' do
         result = Facter::Util::Linux::Proc.getenv_for_pid(1, 'butter')
-        expect(result).to eq(nil)
+        expect(result).to be_nil
       end
     end
 

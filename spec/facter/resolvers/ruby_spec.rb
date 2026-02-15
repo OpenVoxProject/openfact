@@ -12,7 +12,7 @@ describe Facter::Resolvers::Ruby do
 
     it 'does not resolve the sitedir fact if sitedir does not exist' do
       allow(RbConfig::CONFIG).to receive(:[]).with('sitedir').and_return(nil)
-      expect(Facter::Resolvers::Ruby.resolve(:sitedir)).to be(nil)
+      expect(Facter::Resolvers::Ruby.resolve(:sitedir)).to be_nil
     end
 
     it 'detects ruby platform' do

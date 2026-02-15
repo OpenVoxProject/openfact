@@ -19,7 +19,7 @@ describe Facter::Resolvers::BaseResolver do
     end
 
     it 'returns the same log instance each time' do
-      expect(resolver.log).to be_equal(resolver.log)
+      expect(resolver.log).to equal(resolver.log)
     end
   end
 
@@ -77,7 +77,7 @@ describe Facter::Resolvers::BaseResolver do
       end
 
       it 'sets the fact to nil' do
-        expect(resolver.resolve(fact)).to eq(nil)
+        expect(resolver.resolve(fact)).to be_nil
       end
     end
   end

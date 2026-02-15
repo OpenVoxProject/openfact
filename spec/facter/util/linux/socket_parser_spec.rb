@@ -160,7 +160,7 @@ describe Facter::Util::Linux::SocketParser do
       end
 
       it 'resolves the mac and ipv6 binding for lo' do
-        expect(socket_parser.retrieve_interfaces(log_spy)['lo'].keys).to match_array([:bindings6])
+        expect(socket_parser.retrieve_interfaces(log_spy)['lo'].keys).to contain_exactly(:bindings6)
       end
     end
 

@@ -50,7 +50,7 @@ describe Facter::HoconFactFormatter do
   it 'formats to hocon for empty resolved fact array' do
     formatted_output = Facter::HoconFactFormatter.new.format([])
 
-    expect(formatted_output).to eq(nil)
+    expect(formatted_output).to be_nil
   end
 
   it 'returns empty string when the fact value is nil' do

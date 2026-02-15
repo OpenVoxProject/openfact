@@ -9,7 +9,7 @@ describe Facter::Util::Facts::UnitConverter do
     end
 
     it 'returns nil if value is nil' do
-      expect(converter.bytes_to_mb(nil)).to be(nil)
+      expect(converter.bytes_to_mb(nil)).to be_nil
     end
 
     it 'converts bytes if value is string' do
@@ -61,7 +61,7 @@ describe Facter::Util::Facts::UnitConverter do
 
   describe '#bytes_to_human_readable' do
     it 'returns nil if bytes variable is nil' do
-      expect(converter.bytes_to_human_readable(nil)).to be(nil)
+      expect(converter.bytes_to_human_readable(nil)).to be_nil
     end
 
     it 'returns next unit if result is 1024 after conversion' do

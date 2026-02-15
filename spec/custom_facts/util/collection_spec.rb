@@ -144,7 +144,7 @@ describe LegacyFacter::Util::Collection do
 
     it 'returns nil if it cannot find or load the fact' do
       allow(collection.internal_loader).to receive(:load).with(:testing)
-      expect(collection.fact('testing')).to be nil
+      expect(collection.fact('testing')).to be_nil
     end
   end
 
@@ -268,7 +268,7 @@ describe LegacyFacter::Util::Collection do
     it 'does not include facts that did not return a value' do
       collection.add(:two, value: nil)
 
-      expect(collection.to_hash).not_to be_include(:two)
+      expect(collection.to_hash).not_to include(:two)
     end
   end
 
@@ -299,7 +299,7 @@ describe LegacyFacter::Util::Collection do
         facts[fact] = value
       end
 
-      expect(facts).not_to be_include('nil_fact')
+      expect(facts).not_to include('nil_fact')
     end
   end
 

@@ -66,7 +66,7 @@ describe Facter::Resolvers::Linux::DmiBios do
       let(:file) { 'board_asset_tag' }
 
       it 'returns board_manufacturer' do
-        expect(resolver.resolve(:board_asset_tag)).to be(nil)
+        expect(resolver.resolve(:board_asset_tag)).to be_nil
       end
     end
 
@@ -110,7 +110,7 @@ describe Facter::Resolvers::Linux::DmiBios do
       let(:file_content) { 'VMware, Inc.' }
       let(:file) { 'sys_vendor' }
 
-      it ' returns sys_vendor' do
+      it 'returns sys_vendor' do
         expect(resolver.resolve(:sys_vendor)).to eq(file_content)
       end
     end
@@ -156,7 +156,7 @@ describe Facter::Resolvers::Linux::DmiBios do
       let(:file) { 'product_serial' }
 
       it 'returns nil' do
-        expect(resolver.resolve(:product_serial)).to be(nil)
+        expect(resolver.resolve(:product_serial)).to be_nil
       end
     end
 
@@ -165,7 +165,7 @@ describe Facter::Resolvers::Linux::DmiBios do
       let(:file) { 'product_uuid' }
 
       it 'returns nil' do
-        expect(resolver.resolve(:product_uuid)).to be(nil)
+        expect(resolver.resolve(:product_uuid)).to be_nil
       end
     end
 

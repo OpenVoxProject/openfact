@@ -31,7 +31,7 @@ describe Facter::Util::Resolution do
   describe 'when setting the code' do
     it 'creates a block when given a command' do
       resolution.setcode 'foo'
-      expect(resolution.code).to be_a_kind_of Proc
+      expect(resolution.code).to be_a Proc
     end
 
     it 'stores the provided block when given a block' do
@@ -59,7 +59,7 @@ describe Facter::Util::Resolution do
 
     it 'returns a value that is equal to false' do
       resolution.value = false
-      expect(resolution.value).to eq false
+      expect(resolution.value).to be false
     end
 
     describe 'and setcode has not been called' do

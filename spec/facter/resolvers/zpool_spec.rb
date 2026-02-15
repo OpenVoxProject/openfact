@@ -49,11 +49,11 @@ describe Facter::Resolvers::Zpool do
     let(:output) { 'zpool command not found' }
 
     it 'returns nil for zpool version fact' do
-      expect(zpool_resolver.resolve(:zpool_version)).to eq(nil)
+      expect(zpool_resolver.resolve(:zpool_version)).to be_nil
     end
 
     it 'returns nil for zpool featureversion fact' do
-      expect(zpool_resolver.resolve(:zpool_featurenumbers)).to eq(nil)
+      expect(zpool_resolver.resolve(:zpool_featurenumbers)).to be_nil
     end
   end
 end

@@ -201,11 +201,11 @@ module Facter
         Cli.commands.values
            .select { |command_class| command_class.instance_of?(Thor::Command) }
            .each do |command|
-          help_command_options << build_option(
-            command['name'],
-            [command['usage'].split(',')[1]],
-            command['description']
-          )
+             help_command_options << build_option(
+               command['name'],
+               [command['usage'].split(',')[1]],
+               command['description']
+             )
         end
 
         help_command_options

@@ -26,7 +26,7 @@ describe Facter::Resolvers::DebianVersion do
     it 'returns nil' do
       result = Facter::Resolvers::DebianVersion.resolve(:version)
 
-      expect(result).to be(nil)
+      expect(result).to be_nil
     end
   end
 end

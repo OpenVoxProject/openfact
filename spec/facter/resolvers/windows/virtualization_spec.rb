@@ -217,18 +217,18 @@ describe Facter::Resolvers::Windows::Virtualization do
     end
   end
 
-  describe '#resolve  when WMI query returns nil' do
+  describe '#resolve when WMI query returns nil' do
     let(:query_result) { nil }
 
     it 'logs that query failed and virtual nil' do
       allow(Facter::Resolvers::Windows::Virtualization.log).to receive(:debug)
         .with('WMI query returned no results'\
                                       ' for Win32_ComputerSystem with values Manufacturer, Model and OEMStringArray.')
-      expect(Facter::Resolvers::Windows::Virtualization.resolve(:virtual)).to be(nil)
+      expect(Facter::Resolvers::Windows::Virtualization.resolve(:virtual)).to be_nil
     end
 
     it 'detects that is_virtual nil' do
-      expect(Facter::Resolvers::Windows::Virtualization.resolve(:is_virtual)).to be(nil)
+      expect(Facter::Resolvers::Windows::Virtualization.resolve(:is_virtual)).to be_nil
     end
   end
 

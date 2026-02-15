@@ -44,7 +44,7 @@ describe Facter::Core::Execution::Windows do
       end
 
       it 'disallows other builtin windows commands' do
-        expect(executor.which('dir')).to eq nil
+        expect(executor.which('dir')).to be_nil
       end
     end
 
@@ -64,13 +64,13 @@ describe Facter::Core::Execution::Windows do
       it 'returns nil if the binary path is not executable' do
         allow(File).to receive(:executable?).with('C:\Tools\foo.exe').and_return false
 
-        expect(executor.which('C:\Tools\foo.exe')).to be nil
+        expect(executor.which('C:\Tools\foo.exe')).to be_nil
       end
 
       it 'returns nil if the binary is not executable' do
         allow(File).to receive(:executable?).with('\\\\remote\dir\foo.exe').and_return false
 
-        expect(executor.which('\\\\remote\dir\foo.exe')).to be nil
+        expect(executor.which('\\\\remote\dir\foo.exe')).to be_nil
       end
     end
 
@@ -108,7 +108,7 @@ describe Facter::Core::Execution::Windows do
         allow(File).to receive(:executable?).with('C:\Windows\foo.exe').and_return false
         allow(File).to receive(:executable?).with('C:\Windows\System32\Wbem\foo.exe').and_return false
 
-        expect(executor.which('foo.exe')).to be nil
+        expect(executor.which('foo.exe')).to be_nil
       end
     end
   end
@@ -129,7 +129,7 @@ describe Facter::Core::Execution::Windows do
 
     it 'does not expand single quoted binary' do
       allow(executor).to receive(:which).with('\'C:\My').and_return nil
-      expect(executor.expand_command('\'C:\My Tools\foo.exe\' /a /b')).to be nil
+      expect(executor.expand_command('\'C:\My Tools\foo.exe\' /a /b')).to be_nil
     end
 
     it 'quotes expanded binary if found in path with spaces' do
@@ -146,7 +146,7 @@ describe Facter::Core::Execution::Windows do
 
     it 'returns nil if command not found' do
       allow(executor).to receive(:which).with('foo').and_return nil
-      expect(executor.expand_command('foo /a | stuff >> NUL')).to be nil
+      expect(executor.expand_command('foo /a | stuff >> NUL')).to be_nil
     end
   end
 

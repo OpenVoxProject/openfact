@@ -59,7 +59,7 @@ describe Facter::Resolvers::ProductRelease do
       end
 
       it 'detects installation type as nil' do
-        expect(Facter::Resolvers::ProductRelease.resolve(:installation_type)).to be(nil)
+        expect(Facter::Resolvers::ProductRelease.resolve(:installation_type)).to be_nil
       end
 
       it 'detects product name' do
@@ -91,7 +91,7 @@ describe Facter::Resolvers::ProductRelease do
       end
 
       it 'detects display version' do
-        expect(Facter::Resolvers::ProductRelease.resolve(:display_version)).to be(nil)
+        expect(Facter::Resolvers::ProductRelease.resolve(:display_version)).to be_nil
       end
     end
   end

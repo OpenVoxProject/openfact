@@ -291,7 +291,7 @@ describe Facter::Util::Facts::Posix::VirtualDetector do
       end
     end
 
-    context 'when all resolvers return nil ' do
+    context 'when all resolvers return nil' do
       let(:vm) { 'physical' }
 
       before do
