@@ -41,7 +41,7 @@ describe Facter::Resolvers::Solaris::OsRelease do
     let(:output) { '' }
 
     it 'returns result nil if file is empty' do
-      expect(solaris_release.resolve(:full)).to be(nil)
+      expect(solaris_release.resolve(:full)).to be_nil
     end
   end
 
@@ -49,7 +49,7 @@ describe Facter::Resolvers::Solaris::OsRelease do
     let(:output) { 'test test' }
 
     it 'returns nil in case the file returns invalid data' do
-      expect(solaris_release.resolve(:full)).to be(nil)
+      expect(solaris_release.resolve(:full)).to be_nil
     end
   end
 end
