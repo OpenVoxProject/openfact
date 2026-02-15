@@ -90,7 +90,7 @@ describe Facter::Resolvers::Windows::Ssh do
         let(:ed25519_content) { '' }
 
         it 'returns nil' do
-          expect(Facter::Resolvers::Windows::Ssh.resolve(:ssh)).to eq(nil)
+          expect(Facter::Resolvers::Windows::Ssh.resolve(:ssh)).to be(nil)
         end
       end
     end
@@ -100,7 +100,7 @@ describe Facter::Resolvers::Windows::Ssh do
       let(:dir_exists) { false }
 
       it 'returns nil' do
-        expect(Facter::Resolvers::Windows::Ssh.resolve(:ssh)).to eq(nil)
+        expect(Facter::Resolvers::Windows::Ssh.resolve(:ssh)).to be(nil)
       end
     end
   end

@@ -89,7 +89,7 @@ describe Facter::Resolvers::LsbRelease do
     it 'returns distro Distributor ID as nil' do
       result = Facter::Resolvers::LsbRelease.resolve(:distributor_id)
 
-      expect(result).to eq(nil)
+      expect(result).to be(nil)
     end
 
     it 'returns that lsb_release is not installed' do

@@ -59,7 +59,7 @@ describe Facter::Util::Resolution do
 
     it 'returns a value that is equal to false' do
       resolution.value = false
-      expect(resolution.value).to eq false
+      expect(resolution.value).to be false
     end
 
     describe 'and setcode has not been called' do

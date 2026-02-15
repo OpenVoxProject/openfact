@@ -75,7 +75,7 @@ describe Facter::Util::FileHelper do
       end
 
       it 'returns nil' do
-        expect(file_helper.safe_read(path, nil)).to eq(nil)
+        expect(file_helper.safe_read(path, nil)).to be(nil)
       end
 
       it 'File.readable? is called with the correct path' do
@@ -154,7 +154,7 @@ describe Facter::Util::FileHelper do
       end
 
       it 'returns nil' do
-        expect(file_helper.safe_readlines(path, nil)).to eq(nil)
+        expect(file_helper.safe_readlines(path, nil)).to be(nil)
       end
 
       it 'File.readable? is called with the correct path' do

@@ -229,7 +229,7 @@ describe Facter::LegacyFactFormatter do
 
   context 'when there is an empty resolved fact array' do
     it 'returns nil' do
-      expect(legacy_formatter.format([])).to eq(nil)
+      expect(legacy_formatter.format([])).to be(nil)
     end
   end
 

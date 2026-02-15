@@ -17,7 +17,7 @@ describe Facter::Util::Windows::Win32Ole do
     it 'returns nil' do
       win = Facter::Util::Windows::Win32Ole.new
       output = win.return_first(query)
-      expect(output).to eq(nil)
+      expect(output).to be(nil)
     end
   end
 
