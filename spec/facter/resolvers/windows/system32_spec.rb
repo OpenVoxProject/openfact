@@ -42,7 +42,7 @@ describe Facter::Resolvers::System32 do
     it 'detects system32 dir is nil and prints debug message' do
       allow(Facter::Resolvers::System32.log).to receive(:debug)
         .with('Unable to find correct value for SystemRoot enviroment variable')
-      expect(Facter::Resolvers::System32.resolve(:system32)).to be(nil)
+      expect(Facter::Resolvers::System32.resolve(:system32)).to be_nil
     end
   end
 
@@ -54,7 +54,7 @@ describe Facter::Resolvers::System32 do
     it 'detects system32 dir is nil and prints debug message' do
       allow(Facter::Resolvers::System32.log).to receive(:debug).with('Unable to find correct value for SystemRoot'\
                                                                                             ' enviroment variable')
-      expect(Facter::Resolvers::System32.resolve(:system32)).to be(nil)
+      expect(Facter::Resolvers::System32.resolve(:system32)).to be_nil
     end
   end
 
@@ -65,7 +65,7 @@ describe Facter::Resolvers::System32 do
 
     it 'detects system32 dir is nil and prints debug message' do
       allow(Facter::Resolvers::System32.log).to receive(:debug).with('IsWow64Process failed')
-      expect(Facter::Resolvers::System32.resolve(:system32)).to be(nil)
+      expect(Facter::Resolvers::System32.resolve(:system32)).to be_nil
     end
   end
 end

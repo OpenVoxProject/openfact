@@ -129,7 +129,7 @@ describe Facter::Util::Fact do
 
   describe 'when returning a value' do
     it 'returns nil if there are no resolutions' do
-      expect(Facter::Util::Fact.new('yay').value).to be nil
+      expect(Facter::Util::Fact.new('yay').value).to be_nil
     end
 
     it 'prefers the highest weight resolution' do

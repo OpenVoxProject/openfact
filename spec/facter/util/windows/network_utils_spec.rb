@@ -26,7 +26,7 @@ describe NetworkUtils do
       let(:error) { 0 }
 
       it 'returns nil' do
-        expect(NetworkUtils.address_to_string(addr)).to be(nil)
+        expect(NetworkUtils.address_to_string(addr)).to be_nil
       end
     end
 
@@ -45,7 +45,7 @@ describe NetworkUtils do
 
       it 'returns nil and logs debug message' do
         allow(logger).to receive(:debug).with('address to string translation failed!')
-        expect(NetworkUtils.address_to_string(addr)).to be(nil)
+        expect(NetworkUtils.address_to_string(addr)).to be_nil
       end
     end
   end

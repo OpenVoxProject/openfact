@@ -41,7 +41,7 @@ describe Facter::Resolvers::Windows::Networking do
       end
 
       it 'returns interfaces fact as nil' do
-        expect(resolver.resolve(:interfaces)).to be(nil)
+        expect(resolver.resolve(:interfaces)).to be_nil
       end
 
       it 'logs debug message' do
@@ -51,7 +51,7 @@ describe Facter::Resolvers::Windows::Networking do
       end
 
       it 'returns nil for domain' do
-        expect(resolver.resolve(:domain)).to be(nil)
+        expect(resolver.resolve(:domain)).to be_nil
       end
     end
 
@@ -70,7 +70,7 @@ describe Facter::Resolvers::Windows::Networking do
       end
 
       it 'returns nil' do
-        expect(resolver.resolve(:interfaces)).to be(nil)
+        expect(resolver.resolve(:interfaces)).to be_nil
       end
     end
 
@@ -88,7 +88,7 @@ describe Facter::Resolvers::Windows::Networking do
       end
 
       it 'returns nil' do
-        expect(resolver.resolve(:interfaces)).to be(nil)
+        expect(resolver.resolve(:interfaces)).to be_nil
       end
     end
 
@@ -130,15 +130,15 @@ describe Facter::Resolvers::Windows::Networking do
       end
 
       it 'returns nil for mtu fact as primary interface is nil' do
-        expect(resolver.resolve(:mtu)).to be(nil)
+        expect(resolver.resolve(:mtu)).to be_nil
       end
 
       it 'returns nil for dhcp fact as primary interface is nil' do
-        expect(resolver.resolve(:dhcp)).to be(nil)
+        expect(resolver.resolve(:dhcp)).to be_nil
       end
 
       it 'returns nil for mac fact as primary interface is nil' do
-        expect(resolver.resolve(:mac)).to be(nil)
+        expect(resolver.resolve(:mac)).to be_nil
       end
     end
 

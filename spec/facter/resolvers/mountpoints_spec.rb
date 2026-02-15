@@ -121,7 +121,7 @@ describe Facter::Resolvers::Mountpoints do
       it 'returns device as nil' do
         result = Facter::Resolvers::Mountpoints.resolve(:mountpoints)
 
-        expect(result.first[:device]).to be(nil)
+        expect(result.first[:device]).to be_nil
       end
     end
 

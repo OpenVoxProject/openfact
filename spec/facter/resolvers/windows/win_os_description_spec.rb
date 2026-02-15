@@ -21,7 +21,7 @@ describe Facter::Resolvers::WinOsDescription do
         .with('WMI query returned no results for Win32_OperatingSystem'\
                    'with values ProductType and OtherTypeDescription.')
 
-      expect(Facter::Resolvers::WinOsDescription.resolve(:full)).to be(nil)
+      expect(Facter::Resolvers::WinOsDescription.resolve(:full)).to be_nil
     end
   end
 
@@ -35,7 +35,7 @@ describe Facter::Resolvers::WinOsDescription do
     end
 
     it 'returns description as nil' do
-      expect(Facter::Resolvers::WinOsDescription.resolve(:description)).to be(nil)
+      expect(Facter::Resolvers::WinOsDescription.resolve(:description)).to be_nil
     end
   end
 

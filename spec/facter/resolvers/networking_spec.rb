@@ -152,7 +152,7 @@ describe Facter::Resolvers::Networking do
       let(:dhcp) { 'invalid output' }
 
       it 'returns dhcp server ip as nil' do
-        expect(networking.resolve(:dhcp)).to be(nil)
+        expect(networking.resolve(:dhcp)).to be_nil
       end
     end
 
@@ -160,7 +160,7 @@ describe Facter::Resolvers::Networking do
       let(:interfaces) { +'invalid output' }
 
       it 'returns interfaces as nil' do
-        expect(networking.resolve(:interfaces)).to be(nil)
+        expect(networking.resolve(:interfaces)).to be_nil
       end
     end
   end

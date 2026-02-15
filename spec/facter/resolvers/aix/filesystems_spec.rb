@@ -31,7 +31,7 @@ describe Facter::Resolvers::Aix::Filesystems do
     it 'returns nil' do
       result = Facter::Resolvers::Aix::Filesystems.resolve(:file_systems)
 
-      expect(result).to be(nil)
+      expect(result).to be_nil
     end
   end
 end

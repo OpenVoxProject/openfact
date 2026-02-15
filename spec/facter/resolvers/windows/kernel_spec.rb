@@ -47,15 +47,15 @@ describe Facter::Resolvers::Kernel do
 
     it 'logs debug message and kernel version nil' do
       allow(Facter::Resolvers::Kernel.log).to receive(:debug).with('Calling Windows RtlGetVersion failed')
-      expect(Facter::Resolvers::Kernel.resolve(:kernelversion)).to be(nil)
+      expect(Facter::Resolvers::Kernel.resolve(:kernelversion)).to be_nil
     end
 
     it 'detects that kernel major version is nil' do
-      expect(Facter::Resolvers::Kernel.resolve(:kernelmajorversion)).to be(nil)
+      expect(Facter::Resolvers::Kernel.resolve(:kernelmajorversion)).to be_nil
     end
 
     it 'detects that kernel name is nil' do
-      expect(Facter::Resolvers::Kernel.resolve(:kernel)).to be(nil)
+      expect(Facter::Resolvers::Kernel.resolve(:kernel)).to be_nil
     end
   end
 end

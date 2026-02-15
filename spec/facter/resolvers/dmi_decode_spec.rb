@@ -47,11 +47,11 @@ describe Facter::Resolvers::DmiDecode do
       let(:command_output) { 'command not found: dmidecode' }
 
       it 'detects virtualbox version as nil' do
-        expect(dmidecode.resolve(:virtualbox_version)).to be(nil)
+        expect(dmidecode.resolve(:virtualbox_version)).to be_nil
       end
 
       it 'detects virtualbox revision as nil' do
-        expect(dmidecode.resolve(:virtualbox_revision)).to be(nil)
+        expect(dmidecode.resolve(:virtualbox_revision)).to be_nil
       end
     end
   end

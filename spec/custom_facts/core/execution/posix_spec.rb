@@ -24,13 +24,13 @@ describe Facter::Core::Execution::Posix, unless: LegacyFacter::Util::Config.wind
 
       it 'returns nil if the binary is not executable' do
         allow(File).to receive(:executable?).with('/opt/foo').and_return(false)
-        expect(posix_executor.which('/opt/foo')).to be nil
+        expect(posix_executor.which('/opt/foo')).to be_nil
       end
 
       it 'returns nil if the binary is not a file' do
         allow(File).to receive(:executable?).with('/opt/foo').and_return(true)
         allow(FileTest).to receive(:file?).with('/opt/foo').and_return false
-        expect(posix_executor.which('/opt/foo')).to be nil
+        expect(posix_executor.which('/opt/foo')).to be_nil
       end
     end
 
@@ -46,7 +46,7 @@ describe Facter::Core::Execution::Posix, unless: LegacyFacter::Util::Config.wind
         allow(File).to receive(:executable?).with('/bin/foo').and_return false
         allow(File).to receive(:executable?).with('/sbin/foo').and_return false
         allow(File).to receive(:executable?).with('/usr/sbin/foo').and_return false
-        expect(posix_executor.which('foo')).to be nil
+        expect(posix_executor.which('foo')).to be_nil
       end
     end
   end
@@ -88,7 +88,7 @@ describe Facter::Core::Execution::Posix, unless: LegacyFacter::Util::Config.wind
 
     it 'returns nil if not found' do
       allow(posix_executor).to receive(:which).with('foo').and_return nil
-      expect(posix_executor.expand_command('foo -a | stuff >> /dev/null')).to be nil
+      expect(posix_executor.expand_command('foo -a | stuff >> /dev/null')).to be_nil
     end
   end
 

@@ -213,7 +213,7 @@ describe Facter do
     it 'returns nil' do
       stub_no_fact
 
-      expect(Facter.value('os.name')).to be nil
+      expect(Facter.value('os.name')).to be_nil
     end
 
     context 'when fact value is false' do
@@ -314,7 +314,7 @@ describe Facter do
     it 'searches os core fact and returns nil' do
       allow(Facter::FactManager.instance).to receive(:resolve_core).with(['os.name']).and_return([])
 
-      expect(Facter.core_value('os.name')).to be nil
+      expect(Facter.core_value('os.name')).to be_nil
     end
   end
 
@@ -488,7 +488,7 @@ describe Facter do
       it 'logs a debug message' do
         allow(logger).to receive(:debug).with('test')
 
-        expect(Facter.debug(message)).to be(nil)
+        expect(Facter.debug(message)).to be_nil
       end
     end
 

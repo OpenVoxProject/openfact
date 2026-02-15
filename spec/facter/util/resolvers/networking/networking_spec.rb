@@ -21,7 +21,7 @@ describe Facter::Util::Resolvers::Networking do
 
     context "when mask's length is nil" do
       it 'returns nil' do
-        expect(networking_helper.build_binding(ipv4, nil)).to be(nil)
+        expect(networking_helper.build_binding(ipv4, nil)).to be_nil
       end
     end
 
