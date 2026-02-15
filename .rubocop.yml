@@ -10,10 +10,8 @@ AllCops:
 
 require:
   - rubocop-performance
+  - rubocop-rake
   - rubocop-rspec
-
-plugins:
-  - rubocop-capybara
 
 Layout/LineLength:
   Enabled: false
