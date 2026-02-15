@@ -17,7 +17,7 @@ describe Facts::Linux::Kernelversion do
   end
 
   describe '#call_the_resolver' do
-    context 'when full version includes ' do
+    context 'when full version includes' do
       let(:resolver_value) { '4.11.5-19-generic' }
       let(:fact_value) { '4.11.5' }
 

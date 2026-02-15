@@ -6,14 +6,9 @@ describe Facts::Debian::Os::Release do
 
     shared_examples 'returns os release fact' do
       it 'returns os release fact' do
-        expect(fact.call_the_resolver).to match_array \
-          [
-            having_attributes(name: 'os.release', value: fact_value),
-            having_attributes(name: 'operatingsystemmajrelease', value: fact_value['major'],
-                              type: :legacy),
-            having_attributes(name: 'operatingsystemrelease', value: fact_value['full'],
-                              type: :legacy)
-          ]
+        expect(fact.call_the_resolver).to contain_exactly(having_attributes(name: 'os.release', value: fact_value), having_attributes(name: 'operatingsystemmajrelease', value: fact_value['major'],
+                                                                                                                                      type: :legacy), having_attributes(name: 'operatingsystemrelease', value: fact_value['full'],
+                                                                                                                                                                        type: :legacy))
       end
     end
 

@@ -94,17 +94,17 @@ describe Facter::Util::Fact do
 
     it 'creates a simple resolution when the type is nil' do
       fact.define_resolution('named')
-      expect(fact.resolution('named')).to be_a_kind_of Facter::Util::Resolution
+      expect(fact.resolution('named')).to be_a Facter::Util::Resolution
     end
 
     it 'creates a simple resolution when the type is :simple' do
       fact.define_resolution('named', type: :simple)
-      expect(fact.resolution('named')).to be_a_kind_of Facter::Util::Resolution
+      expect(fact.resolution('named')).to be_a Facter::Util::Resolution
     end
 
     it 'creates an aggregate resolution when the type is :aggregate' do
       fact.define_resolution('named', type: :aggregate)
-      expect(fact.resolution('named')).to be_a_kind_of Facter::Core::Aggregate
+      expect(fact.resolution('named')).to be_a Facter::Core::Aggregate
     end
 
     it 'raises an error if there is an existing resolution with a different type' do

@@ -86,7 +86,7 @@ describe Facter::FactGroups do
   describe '#get_fact_group' do
     before do
       stub_const('Facter::Config::FACT_GROUPS', 'operating system' => %w[os os.name])
-      allow(config_reader).to receive(:ttls).and_return(['operating system' => '30 minutes'])
+      allow(config_reader).to receive(:ttls).and_return([{ 'operating system' => '30 minutes' }])
     end
 
     it 'returns group' do
@@ -99,7 +99,7 @@ describe Facter::FactGroups do
   end
 
   describe '#get_group_ttls' do
-    let(:ttls) { ['operating system' => '30 minutes'] }
+    let(:ttls) { [{ 'operating system' => '30 minutes' }] }
 
     before do
       stub_const('Facter::Config::FACT_GROUPS', 'operating system' => %w[os os.name])
@@ -115,7 +115,7 @@ describe Facter::FactGroups do
     end
 
     context 'when ttls has short names for units' do
-      let(:ttls) { ['operating system' => '10000000000000 ns', 'memory' => '10000', 'hostname' => '30 h'] }
+      let(:ttls) { [{ 'operating system' => '10000000000000 ns', 'memory' => '10000', 'hostname' => '30 h' }] }
 
       it 'returns os ttl in seconds' do
         expect(fg.get_group_ttls('operating system')).to eq(10_000)
@@ -131,7 +131,7 @@ describe Facter::FactGroups do
     end
 
     context 'when ttls has singular hour instead of plural hours' do
-      let(:ttls) { ['operating system' => '1 hour', 'memory' => '1 day'] }
+      let(:ttls) { [{ 'operating system' => '1 hour', 'memory' => '1 day' }] }
 
       it 'returns os ttl in seconds' do
         expect(fg.get_group_ttls('operating system')).to eq(3600)
@@ -143,7 +143,7 @@ describe Facter::FactGroups do
     end
 
     context 'when ttls are invalid' do
-      let(:ttls) { ['hostname' => '30 invalid_unit'] }
+      let(:ttls) { [{ 'hostname' => '30 invalid_unit' }] }
 
       let(:logger) { Facter::Log.class_variable_get(:@@logger) }
 

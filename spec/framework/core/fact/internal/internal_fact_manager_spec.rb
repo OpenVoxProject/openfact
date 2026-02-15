@@ -95,7 +95,7 @@ describe Facter::InternalFactManager do
       it 'does not store the fact value' do
         resolved_facts = internal_fact_manager.resolve_facts([searched_fact])
 
-        expect(resolved_facts).to match_array []
+        expect(resolved_facts).to be_empty
       end
 
       it 'logs backtrace as error with --trace option' do

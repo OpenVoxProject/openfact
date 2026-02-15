@@ -55,7 +55,7 @@ describe Facter::Resolvers::Openbsd::DmiBios do
     end
 
     context 'when sys_vendor is available' do
-      it ' returns sys_vendor' do
+      it 'returns sys_vendor' do
         expect(resolver.resolve(:sys_vendor)).to eq(sys_vendor)
       end
     end
