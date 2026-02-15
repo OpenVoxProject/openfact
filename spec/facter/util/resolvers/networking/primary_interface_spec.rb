@@ -40,7 +40,7 @@ describe Facter::Util::Resolvers::Networking::PrimaryInterface do
       let(:output) { load_fixture('proc_net_route_empty').read }
 
       it 'parses output /proc/net/route file' do
-        expect(primary_interface.read_from_proc_route).to eq(nil)
+        expect(primary_interface.read_from_proc_route).to be(nil)
       end
     end
 
@@ -48,7 +48,7 @@ describe Facter::Util::Resolvers::Networking::PrimaryInterface do
       let(:output) { load_fixture('proc_net_route_blackhole').read }
 
       it 'parses output /proc/net/route file' do
-        expect(primary_interface.read_from_proc_route).to eq(nil)
+        expect(primary_interface.read_from_proc_route).to be(nil)
       end
     end
   end

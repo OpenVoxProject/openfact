@@ -113,7 +113,7 @@ describe LegacyFacter::Util::Config do
     it 'returns nil for windows' do
       allow(LegacyFacter::Util::Config).to receive(:windows?).and_return(true)
       LegacyFacter::Util::Config.setup_default_override_binary_dir
-      expect(LegacyFacter::Util::Config.override_binary_dir).to eq nil
+      expect(LegacyFacter::Util::Config.override_binary_dir).to be nil
     end
 
     it 'outputs new values when explicitly set' do

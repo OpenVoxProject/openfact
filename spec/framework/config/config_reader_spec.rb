@@ -80,7 +80,7 @@ describe Facter::ConfigReader do
       it 'returns nil' do
         config_reader.init
 
-        expect(config_reader.block_list).to eq(nil)
+        expect(config_reader.block_list).to be(nil)
       end
     end
 
@@ -108,7 +108,7 @@ describe Facter::ConfigReader do
       it 'returns nil' do
         config_reader.init
 
-        expect(config_reader.ttls).to eq(nil)
+        expect(config_reader.ttls).to be(nil)
       end
     end
 
@@ -137,7 +137,7 @@ describe Facter::ConfigReader do
       it 'returns nil' do
         config_reader.init
 
-        expect(config_reader.global).to eq(nil)
+        expect(config_reader.global).to be(nil)
       end
     end
 
@@ -182,7 +182,7 @@ describe Facter::ConfigReader do
       it 'returns nil' do
         config_reader.init
 
-        expect(config_reader.cli).to eq(nil)
+        expect(config_reader.cli).to be(nil)
       end
     end
 
@@ -211,7 +211,7 @@ describe Facter::ConfigReader do
       it 'returns nil' do
         config_reader.init
 
-        expect(config_reader.fact_groups).to eq(nil)
+        expect(config_reader.fact_groups).to be(nil)
       end
     end
 

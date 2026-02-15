@@ -97,8 +97,8 @@ describe Facter::Resolvers::Linux::Containers do
     let(:environ_output) { ['container=zone'] }
 
     it 'return nil' do
-      expect(containers_resolver.resolve(:vm)).to eq(nil)
-      expect(containers_resolver.resolve(:hypervisor)).to eq(nil)
+      expect(containers_resolver.resolve(:vm)).to be(nil)
+      expect(containers_resolver.resolve(:hypervisor)).to be(nil)
     end
   end
 
@@ -108,7 +108,7 @@ describe Facter::Resolvers::Linux::Containers do
     let(:result) { nil }
 
     it 'return lxc for vm' do
-      expect(containers_resolver.resolve(:vm)).to eq(nil)
+      expect(containers_resolver.resolve(:vm)).to be(nil)
     end
 
     it 'return lxc info for hypervisor' do

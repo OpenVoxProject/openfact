@@ -44,7 +44,7 @@ describe Facter::Core::Execution::Windows do
       end
 
       it 'disallows other builtin windows commands' do
-        expect(executor.which('dir')).to eq nil
+        expect(executor.which('dir')).to be nil
       end
     end
 

@@ -75,19 +75,19 @@ describe Facter::Resolvers::Linux::Memory do
       end
 
       it 'returns swap total as nil' do
-        expect(resolver.resolve(:swap_total)).to eq(nil)
+        expect(resolver.resolve(:swap_total)).to be(nil)
       end
 
       it 'returns swap available as nil' do
-        expect(resolver.resolve(:swap_free)).to eq(nil)
+        expect(resolver.resolve(:swap_free)).to be(nil)
       end
 
       it 'returns swap capacity as nil' do
-        expect(resolver.resolve(:swap_capacity)).to eq(nil)
+        expect(resolver.resolve(:swap_capacity)).to be(nil)
       end
 
       it 'returns swap usage as nil' do
-        expect(resolver.resolve(:swap_used_bytes)).to eq(nil)
+        expect(resolver.resolve(:swap_used_bytes)).to be(nil)
       end
 
       it 'returns system capacity' do

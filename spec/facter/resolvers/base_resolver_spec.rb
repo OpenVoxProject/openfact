@@ -77,7 +77,7 @@ describe Facter::Resolvers::BaseResolver do
       end
 
       it 'sets the fact to nil' do
-        expect(resolver.resolve(fact)).to eq(nil)
+        expect(resolver.resolve(fact)).to be(nil)
       end
     end
   end

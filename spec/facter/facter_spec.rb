@@ -230,7 +230,7 @@ describe Facter do
       it 'returns the custom fact' do
         stub_one_fact(Facter::ResolvedFact.new('nil_fact', nil, :custom, ''))
 
-        expect(Facter.value('nil_fact')).to eq(nil)
+        expect(Facter.value('nil_fact')).to be(nil)
       end
     end
   end
