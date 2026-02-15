@@ -217,7 +217,7 @@ describe Facter::Resolvers::Windows::Virtualization do
     end
   end
 
-  describe '#resolve  when WMI query returns nil' do
+  describe '#resolve when WMI query returns nil' do
     let(:query_result) { nil }
 
     it 'logs that query failed and virtual nil' do

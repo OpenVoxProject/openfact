@@ -7,11 +7,11 @@ describe Facter::Core::Aggregate do
   let(:logger) { Facter::Log.class_variable_get(:@@logger) }
 
   it 'can be resolved' do
-    expect(aggregate_res).to be_a_kind_of LegacyFacter::Core::Resolvable
+    expect(aggregate_res).to be_a LegacyFacter::Core::Resolvable
   end
 
   it 'can be confined and weighted' do
-    expect(aggregate_res).to be_a_kind_of LegacyFacter::Core::Suitable
+    expect(aggregate_res).to be_a LegacyFacter::Core::Suitable
   end
 
   it 'can be compared' do
@@ -92,7 +92,7 @@ describe Facter::Core::Aggregate do
       end
 
       output = aggregate_res.value
-      expect(output).to match_array(['foo', 'foo bar'])
+      expect(output).to contain_exactly('foo', 'foo bar')
     end
 
     it 'clones and freezes chunk results' do

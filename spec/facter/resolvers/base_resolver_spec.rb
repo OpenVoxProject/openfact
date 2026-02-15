@@ -19,7 +19,7 @@ describe Facter::Resolvers::BaseResolver do
     end
 
     it 'returns the same log instance each time' do
-      expect(resolver.log).to be_equal(resolver.log)
+      expect(resolver.log).to equal(resolver.log)
     end
   end
 

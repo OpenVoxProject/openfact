@@ -21,13 +21,13 @@ describe 'Facter' do
     context 'with core facts' do
       context 'when facts are structured' do
         it 'does not return wrong values when the query is wrong' do
-          expect(Facter.value('os.name.something')).to be(nil)
+          expect(Facter.value('os.name.something')).to be_nil
         end
       end
 
       context 'when facts have hash values' do
         it 'does not return wrong values when the query is wrong' do
-          expect(Facter.value('mountpoints./.available.something')).to be(nil)
+          expect(Facter.value('mountpoints./.available.something')).to be_nil
         end
       end
 
@@ -145,7 +145,7 @@ describe 'Facter' do
 
         it 'shows errors in the logs when trying to read in the facts with bad values' do
           allow(Facter).to receive(:log_exception) do |exception, message|
-            expect(exception).to be_a_kind_of(LegacyFacter::Util::Normalization::NormalizationError)
+            expect(exception).to be_a(LegacyFacter::Util::Normalization::NormalizationError)
             expect(message).to match(/contains a null byte reference/)
           end
           expect(Facter.value('valid_key')).to be_nil
@@ -221,7 +221,7 @@ describe 'Facter' do
           end
 
           it 'does not override the whole root fact' do
-            expect(Facter.value('os')['family']).not_to be(nil)
+            expect(Facter.value('os')['family']).not_to be_nil
           end
         end
 
@@ -249,15 +249,15 @@ describe 'Facter' do
           end
 
           it 'does not work with extra token in fact name' do
-            expect(Facter.value('a.b.c.d')).to be(nil)
+            expect(Facter.value('a.b.c.d')).to be_nil
           end
 
           it 'does not work with partial fact name' do
-            expect(Facter.value('a.b')).to be(nil)
+            expect(Facter.value('a.b')).to be_nil
           end
 
           it 'does not work with first fact segment' do
-            expect(Facter.value('a')).to be(nil)
+            expect(Facter.value('a')).to be_nil
           end
         end
       end
@@ -279,7 +279,7 @@ describe 'Facter' do
           end
 
           it 'does not override the whole root fact' do
-            expect(Facter.value('os')['family']).not_to be(nil)
+            expect(Facter.value('os')['family']).not_to be_nil
           end
         end
 
@@ -307,15 +307,15 @@ describe 'Facter' do
           end
 
           it 'does not work with extra token in fact name' do
-            expect(Facter.value('a.b.c.d')).to be(nil)
+            expect(Facter.value('a.b.c.d')).to be_nil
           end
 
           it 'does not work with partial fact name' do
-            expect(Facter.value('a.b')).to be(nil)
+            expect(Facter.value('a.b')).to be_nil
           end
 
           it 'does not work with first fact segment' do
-            expect(Facter.value('a')).to be(nil)
+            expect(Facter.value('a')).to be_nil
           end
         end
       end
@@ -347,7 +347,7 @@ describe 'Facter' do
           end
 
           it 'does not override the whole root fact' do
-            expect(Facter.value('os')['family']).not_to be(nil)
+            expect(Facter.value('os')['family']).not_to be_nil
           end
         end
 
@@ -377,7 +377,7 @@ describe 'Facter' do
           end
 
           it 'does not work with extra token in fact name' do
-            expect(Facter.value('a.b.c.d')).to be(nil)
+            expect(Facter.value('a.b.c.d')).to be_nil
           end
 
           it 'works with partial fact name' do
@@ -407,7 +407,7 @@ describe 'Facter' do
           end
 
           it 'does not override the whole root fact' do
-            expect(Facter.value('os')['family']).not_to be(nil)
+            expect(Facter.value('os')['family']).not_to be_nil
           end
         end
 
@@ -435,7 +435,7 @@ describe 'Facter' do
           end
 
           it 'does not work with extra token in fact name' do
-            expect(Facter.value('a.b.c.d')).to be(nil)
+            expect(Facter.value('a.b.c.d')).to be_nil
           end
 
           it 'works with partial fact name' do
@@ -529,7 +529,7 @@ describe 'Facter' do
           it 'does not override the whole fact' do
             result = JSON.parse(Facter.to_user_output({ json: true }, 'os')[0])
 
-            expect(result['os']['family']).not_to be(nil)
+            expect(result['os']['family']).not_to be_nil
           end
         end
 
@@ -593,7 +593,7 @@ describe 'Facter' do
           it 'does not override the whole fact' do
             result = JSON.parse(Facter.to_user_output({ json: true }, 'os')[0])
 
-            expect(result['os']['family']).not_to be(nil)
+            expect(result['os']['family']).not_to be_nil
           end
         end
 
@@ -665,7 +665,7 @@ describe 'Facter' do
           it 'does not override the whole fact' do
             result = JSON.parse(Facter.to_user_output({ json: true }, 'os')[0])
 
-            expect(result['os']['family']).not_to be(nil)
+            expect(result['os']['family']).not_to be_nil
           end
         end
 
@@ -729,7 +729,7 @@ describe 'Facter' do
           it 'does not override the whole fact' do
             result = JSON.parse(Facter.to_user_output({ json: true }, 'os')[0])
 
-            expect(result['os']['family']).not_to be(nil)
+            expect(result['os']['family']).not_to be_nil
           end
         end
 

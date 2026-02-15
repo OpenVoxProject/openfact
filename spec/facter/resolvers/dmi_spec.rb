@@ -110,7 +110,7 @@ describe Facter::Resolvers::Linux::DmiBios do
       let(:file_content) { 'VMware, Inc.' }
       let(:file) { 'sys_vendor' }
 
-      it ' returns sys_vendor' do
+      it 'returns sys_vendor' do
         expect(resolver.resolve(:sys_vendor)).to eq(file_content)
       end
     end

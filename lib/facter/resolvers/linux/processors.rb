@@ -70,7 +70,7 @@ module Facter
                .select { |dir| dir =~ /cpu[0-9]+$/ }
                .select { |dir| File.exist?("/sys/devices/system/cpu/#{dir}/topology/physical_package_id") }
                .map do |dir|
-              Facter::Util::FileHelper.safe_read("/sys/devices/system/cpu/#{dir}/topology/physical_package_id").strip
+                 Facter::Util::FileHelper.safe_read("/sys/devices/system/cpu/#{dir}/topology/physical_package_id").strip
             end
                .uniq.count
           end
