@@ -158,7 +158,7 @@ describe Facter::Resolvers::Gce do
     it 'returns nil' do
       result = Facter::Resolvers::Gce.resolve(:metadata)
 
-      expect(result).to be(nil)
+      expect(result).to be_nil
     end
   end
 

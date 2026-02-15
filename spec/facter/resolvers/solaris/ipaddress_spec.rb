@@ -33,7 +33,7 @@ describe Facter::Resolvers::Solaris::Ipaddress do
       let(:route) { 'invalid output' }
 
       it 'detects that ip is nil' do
-        expect(ipaddress.resolve(:ip)).to be(nil)
+        expect(ipaddress.resolve(:ip)).to be_nil
       end
     end
   end

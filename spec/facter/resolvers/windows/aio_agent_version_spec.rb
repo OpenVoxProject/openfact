@@ -49,7 +49,7 @@ describe Facter::Resolvers::Windows::AioAgentVersion do
         end
 
         it 'calls file helper with empty path' do
-          expect(aio_agent_resolver.resolve(:aio_agent_version)).to be(nil)
+          expect(aio_agent_resolver.resolve(:aio_agent_version)).to be_nil
         end
       end
 

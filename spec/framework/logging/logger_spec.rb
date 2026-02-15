@@ -330,7 +330,7 @@ describe Logger do
 
     it 'is disabled when the given value is nil' do
       Facter::Log.timing(nil)
-      expect(Facter::Log.timing?).to be nil
+      expect(Facter::Log.timing?).to be_nil
     end
   end
 end

@@ -21,7 +21,7 @@ describe Facter::Resolvers::SELinux do
     end
 
     it 'returns nil for config_mode' do
-      expect(selinux_resolver.resolve(:config_mode)).to be(nil)
+      expect(selinux_resolver.resolve(:config_mode)).to be_nil
     end
   end
 
@@ -38,7 +38,7 @@ describe Facter::Resolvers::SELinux do
       end
 
       it 'returns nil for config_mode' do
-        expect(selinux_resolver.resolve(:config_mode)).to be(nil)
+        expect(selinux_resolver.resolve(:config_mode)).to be_nil
       end
     end
 
@@ -90,7 +90,7 @@ describe Facter::Resolvers::SELinux do
         end
 
         it 'returns no policy_version' do
-          expect(selinux_resolver.resolve(:policy_version)).to be(nil)
+          expect(selinux_resolver.resolve(:policy_version)).to be_nil
         end
 
         it 'returns enforced false' do

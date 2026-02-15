@@ -58,7 +58,7 @@ describe Facter::Resolvers::Identity do
     end
 
     it 'could not determine if user is admin' do
-      expect(Facter::Resolvers::Identity.resolve(:privileged)).to be(nil)
+      expect(Facter::Resolvers::Identity.resolve(:privileged)).to be_nil
     end
   end
 
@@ -71,13 +71,13 @@ describe Facter::Resolvers::Identity do
     it 'logs debug message when trying to resolve user' do
       allow(Facter::Resolvers::Identity.log).to receive(:debug)
         .with("failure resolving identity facts: #{error_number}")
-      expect(Facter::Resolvers::Identity.resolve(:user)).to be(nil)
+      expect(Facter::Resolvers::Identity.resolve(:user)).to be_nil
     end
 
     it 'logs debug message when trying to find if user is privileged' do
       allow(Facter::Resolvers::Identity.log).to receive(:debug)
         .with("failure resolving identity facts: #{error_number}")
-      expect(Facter::Resolvers::Identity.resolve(:privileged)).to be(nil)
+      expect(Facter::Resolvers::Identity.resolve(:privileged)).to be_nil
     end
   end
 
@@ -90,13 +90,13 @@ describe Facter::Resolvers::Identity do
     it 'logs debug message when trying to resolve user' do
       allow(Facter::Resolvers::Identity.log).to receive(:debug)
         .with("failure resolving identity facts: #{error_number}")
-      expect(Facter::Resolvers::Identity.resolve(:user)).to be(nil)
+      expect(Facter::Resolvers::Identity.resolve(:user)).to be_nil
     end
 
     it 'logs debug message when trying to find if user is privileged' do
       allow(Facter::Resolvers::Identity.log).to receive(:debug)
         .with("failure resolving identity facts: #{error_number}")
-      expect(Facter::Resolvers::Identity.resolve(:privileged)).to be(nil)
+      expect(Facter::Resolvers::Identity.resolve(:privileged)).to be_nil
     end
   end
 end

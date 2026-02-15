@@ -61,7 +61,7 @@ describe Facter::Resolvers::Hostname do
       let(:host) { nil }
 
       it 'detects that hostname is nil' do
-        expect(hostname_resolver.resolve(:hostname)).to be(nil)
+        expect(hostname_resolver.resolve(:hostname)).to be_nil
       end
     end
 
@@ -75,7 +75,7 @@ describe Facter::Resolvers::Hostname do
       end
 
       it 'detects that domain is nil' do
-        expect(hostname_resolver.resolve(:domain)).to be(nil)
+        expect(hostname_resolver.resolve(:domain)).to be_nil
       end
     end
 

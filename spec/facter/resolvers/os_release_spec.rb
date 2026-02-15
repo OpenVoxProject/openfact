@@ -52,7 +52,7 @@ describe Facter::Resolvers::OsRelease do
     it 'returns nil' do
       result = Facter::Resolvers::OsRelease.resolve(:version_codename)
 
-      expect(result).to be(nil)
+      expect(result).to be_nil
     end
   end
 

@@ -45,7 +45,7 @@ describe Facter::Resolvers::AioAgentVersion do
       end
 
       it 'resolves to nil' do
-        expect(Facter::Resolvers::AioAgentVersion.resolve(:aio_agent_version)).to be(nil)
+        expect(Facter::Resolvers::AioAgentVersion.resolve(:aio_agent_version)).to be_nil
       end
     end
   end

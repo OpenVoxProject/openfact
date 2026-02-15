@@ -27,7 +27,7 @@ describe Facter::Resolvers::Aix::Serialnumber do
       let(:result) { 'test = IBM,0221684EW' }
 
       it 'detects serialnumber as nil' do
-        expect(Facter::Resolvers::Aix::Serialnumber.resolve(:serialnumber)).to be(nil)
+        expect(Facter::Resolvers::Aix::Serialnumber.resolve(:serialnumber)).to be_nil
       end
     end
 
@@ -35,7 +35,7 @@ describe Facter::Resolvers::Aix::Serialnumber do
       let(:result) { '' }
 
       it 'detects serialnumber as nil' do
-        expect(Facter::Resolvers::Aix::Serialnumber.resolve(:serialnumber)).to be(nil)
+        expect(Facter::Resolvers::Aix::Serialnumber.resolve(:serialnumber)).to be_nil
       end
     end
   end

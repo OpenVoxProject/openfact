@@ -107,7 +107,7 @@ describe Facter::Resolvers::Processors do
     it 'logs that is unknown architecture' do
       allow(resolver.log).to receive(:debug)
         .with('Unable to determine processor type: unknown architecture')
-      expect(resolver.resolve(:isa)).to be(nil)
+      expect(resolver.resolve(:isa)).to be_nil
     end
   end
 
@@ -118,27 +118,27 @@ describe Facter::Resolvers::Processors do
       allow(resolver.log).to receive(:debug)
         .with('WMI query returned no results'\
         'for Win32_Processor with values Name, Architecture and NumberOfLogicalProcessors.')
-      expect(resolver.resolve(:isa)).to be(nil)
+      expect(resolver.resolve(:isa)).to be_nil
     end
 
     it 'detects that models fact is nil' do
-      expect(resolver.resolve(:models)).to be(nil)
+      expect(resolver.resolve(:models)).to be_nil
     end
 
     it 'detects that count fact is nil' do
-      expect(resolver.resolve(:count)).to be(nil)
+      expect(resolver.resolve(:count)).to be_nil
     end
 
     it 'detects that physicalcount fact is nil' do
-      expect(resolver.resolve(:physicalcount)).to be(nil)
+      expect(resolver.resolve(:physicalcount)).to be_nil
     end
 
     it 'counts number of cores per socket' do
-      expect(resolver.resolve(:cores_per_socket)).to be(nil)
+      expect(resolver.resolve(:cores_per_socket)).to be_nil
     end
 
     it 'counts number of threads per core' do
-      expect(resolver.resolve(:threads_per_core)).to be(nil)
+      expect(resolver.resolve(:threads_per_core)).to be_nil
     end
   end
 
@@ -158,7 +158,7 @@ describe Facter::Resolvers::Processors do
     it 'detects that isa is nil' do
       allow(resolver.log).to receive(:debug)
         .with('Unable to determine processor type: unknown architecture')
-      expect(resolver.resolve(:isa)).to be(nil)
+      expect(resolver.resolve(:isa)).to be_nil
     end
 
     it 'detects that models is an array' do

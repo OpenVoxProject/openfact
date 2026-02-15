@@ -165,7 +165,7 @@ describe Facter::Resolvers::Linux::Disks do
       end
 
       it 'returns disks fact as nil' do
-        expect(resolver.resolve(:disks)).to be(nil)
+        expect(resolver.resolve(:disks)).to be_nil
       end
     end
   end

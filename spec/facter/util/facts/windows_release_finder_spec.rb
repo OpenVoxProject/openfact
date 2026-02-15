@@ -10,7 +10,7 @@ describe Facter::Util::Facts::WindowsReleaseFinder do
     let(:version) { nil }
 
     it 'returns nil' do
-      expect(Facter::Util::Facts::WindowsReleaseFinder.find_release(input)).to be(nil)
+      expect(Facter::Util::Facts::WindowsReleaseFinder.find_release(input)).to be_nil
     end
   end
 

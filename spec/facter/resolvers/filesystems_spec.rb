@@ -30,7 +30,7 @@ describe Facter::Resolvers::Linux::Filesystems do
     it 'returns nil' do
       result = Facter::Resolvers::Linux::Filesystems.resolve(:systems)
 
-      expect(result).to be(nil)
+      expect(result).to be_nil
     end
   end
 end

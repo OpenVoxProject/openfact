@@ -147,7 +147,7 @@ describe LegacyFacter::Util::Parser do
     def expects_parser_to_return_nil_for_directory(path)
       allow(FileTest).to receive(:file?).with(path).and_return(false)
 
-      expect(LegacyFacter::Util::Parser.parser_for(path).results).to be nil
+      expect(LegacyFacter::Util::Parser.parser_for(path).results).to be_nil
     end
 
     it 'returns a hash of whatever is returned by the executable' do
@@ -310,7 +310,7 @@ describe LegacyFacter::Util::Parser do
 
   describe 'nothing parser' do
     it 'uses the nothing parser when there is no other parser' do
-      expect(LegacyFacter::Util::Parser.parser_for('this.is.not.valid').results).to be nil
+      expect(LegacyFacter::Util::Parser.parser_for('this.is.not.valid').results).to be_nil
     end
   end
 

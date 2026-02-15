@@ -30,11 +30,11 @@ describe Facter::Resolvers::DMIComputerSystem do
     it 'logs debug message and name is nil' do
       allow(Facter::Resolvers::DMIComputerSystem.log).to receive(:debug)
         .with('WMI query returned no results for Win32_ComputerSystemProduct with values Name and UUID.')
-      expect(Facter::Resolvers::DMIComputerSystem.resolve(:name)).to be(nil)
+      expect(Facter::Resolvers::DMIComputerSystem.resolve(:name)).to be_nil
     end
 
     it 'detects uuid as nil' do
-      expect(Facter::Resolvers::DMIComputerSystem.resolve(:uuid)).to be(nil)
+      expect(Facter::Resolvers::DMIComputerSystem.resolve(:uuid)).to be_nil
     end
   end
 
@@ -42,11 +42,11 @@ describe Facter::Resolvers::DMIComputerSystem do
     let(:comp) { double('WIN32OLE', Name: nil, UUID: nil) }
 
     it 'detects name as nil' do
-      expect(Facter::Resolvers::DMIComputerSystem.resolve(:name)).to be(nil)
+      expect(Facter::Resolvers::DMIComputerSystem.resolve(:name)).to be_nil
     end
 
     it 'detects uuid as nil' do
-      expect(Facter::Resolvers::DMIComputerSystem.resolve(:uuid)).to be(nil)
+      expect(Facter::Resolvers::DMIComputerSystem.resolve(:uuid)).to be_nil
     end
   end
 end

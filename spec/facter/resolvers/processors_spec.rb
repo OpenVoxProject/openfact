@@ -123,7 +123,7 @@ describe Facter::Resolvers::Linux::Processors do
       it 'returns nil' do
         result = Facter::Resolvers::Linux::Processors.resolve(:physical_count)
 
-        expect(result).to be(nil)
+        expect(result).to be_nil
       end
     end
   end

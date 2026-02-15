@@ -205,11 +205,11 @@ describe Facter::Resolvers::Linux::Memory do
     end
 
     it 'returns swap available as nil' do
-      expect(resolver.resolve(:swap_free)).to be(nil)
+      expect(resolver.resolve(:swap_free)).to be_nil
     end
 
     it 'returns system usage as nil' do
-      expect(resolver.resolve(:used_bytes)).to be(nil)
+      expect(resolver.resolve(:used_bytes)).to be_nil
     end
   end
 end

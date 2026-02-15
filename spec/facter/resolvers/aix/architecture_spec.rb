@@ -32,7 +32,7 @@ describe Facter::Resolvers::Architecture do
       let(:result) { 'test = x86' }
 
       it 'detects architecture as nil' do
-        expect(Facter::Resolvers::Architecture.resolve(:architecture)).to be(nil)
+        expect(Facter::Resolvers::Architecture.resolve(:architecture)).to be_nil
       end
     end
 
@@ -40,7 +40,7 @@ describe Facter::Resolvers::Architecture do
       let(:result) { nil }
 
       it 'detects architecture as nil' do
-        expect(Facter::Resolvers::Architecture.resolve(:architecture)).to be(nil)
+        expect(Facter::Resolvers::Architecture.resolve(:architecture)).to be_nil
       end
     end
   end

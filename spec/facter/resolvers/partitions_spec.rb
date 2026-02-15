@@ -16,7 +16,7 @@ describe Facter::Resolvers::Partitions do
     end
 
     it 'returns empty hash' do
-      expect(resolver.resolve(:partitions)).to be(nil)
+      expect(resolver.resolve(:partitions)).to be_nil
     end
   end
 
@@ -27,7 +27,7 @@ describe Facter::Resolvers::Partitions do
     end
 
     it 'returns empty hash' do
-      expect(resolver.resolve(:partitions)).to be(nil)
+      expect(resolver.resolve(:partitions)).to be_nil
     end
   end
 

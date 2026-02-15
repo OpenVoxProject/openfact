@@ -144,7 +144,7 @@ describe LegacyFacter::Util::Collection do
 
     it 'returns nil if it cannot find or load the fact' do
       allow(collection.internal_loader).to receive(:load).with(:testing)
-      expect(collection.fact('testing')).to be nil
+      expect(collection.fact('testing')).to be_nil
     end
   end
 
