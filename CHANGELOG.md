@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.3.1](https://github.com/openvoxproject/openfact/tree/5.3.1) (2026-02-15)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.3.0...5.3.1)
+
+**Implemented enhancements:**
+
+- Add JRuby-10 support [\#73](https://github.com/OpenVoxProject/openfact/pull/73) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Report SMT aware processors count on OpenBSD [\#77](https://github.com/OpenVoxProject/openfact/pull/77) ([klemensn](https://github.com/klemensn))
+
+**Merged pull requests:**
+
+- Don't run dhcpcd command when it isn't running [\#74](https://github.com/OpenVoxProject/openfact/pull/74) ([nmburgan](https://github.com/nmburgan))
+
 ## [5.3.0](https://github.com/openvoxproject/openfact/tree/5.3.0) (2026-01-06)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.2.1...5.3.0)
