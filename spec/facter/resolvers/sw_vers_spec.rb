@@ -51,7 +51,7 @@ describe Facter::Resolvers::SwVers do
     end
 
     it 'does not return os ProductVersionExtra' do
-      expect(sw_vers.resolve(:productversionextra)).to be(nil)
+      expect(sw_vers.resolve(:productversionextra)).to be_nil
     end
   end
 end

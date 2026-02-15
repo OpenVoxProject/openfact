@@ -29,11 +29,11 @@ describe Facter::Resolvers::ZFS do
     let(:output) { '' }
 
     it 'returns nil for zfs version fact' do
-      expect(zfs_resolver.resolve(:zfs_version)).to be(nil)
+      expect(zfs_resolver.resolve(:zfs_version)).to be_nil
     end
 
     it 'returns nil for zfs featurenumbers fact' do
-      expect(zfs_resolver.resolve(:zfs_featurenumbers)).to be(nil)
+      expect(zfs_resolver.resolve(:zfs_featurenumbers)).to be_nil
     end
   end
 end
