@@ -27,9 +27,9 @@ module Facter
           end
 
           def add_mount_points_fact(line)
-            elem = line.split("\s")
-            options = elem.drop(5)
-            options.each { |option| option.tr!('(),', '') }
+            (elem, _, options) = line.partition("\s(")
+            elem = elem.split("\s")
+            options = options.chop!.split(",\s")
             @fact_list[:mountpoints][elem[2]] = { device: elem[0], filesystem: elem[4],
                                                   options: options }
           end
