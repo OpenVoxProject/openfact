@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.5.0](https://github.com/openvoxproject/openfact/tree/5.5.0) (2026-02-20)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.4.0...5.5.0)
+
+**Implemented enhancements:**
+
+- Add tsort dependency [\#85](https://github.com/OpenVoxProject/openfact/pull/85) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Parse mount point options with spaces correctly on OpenBSD [\#84](https://github.com/OpenVoxProject/openfact/pull/84) ([klemensn](https://github.com/klemensn))
+
 ## [5.4.0](https://github.com/openvoxproject/openfact/tree/5.4.0) (2026-02-15)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.3.0...5.4.0)
