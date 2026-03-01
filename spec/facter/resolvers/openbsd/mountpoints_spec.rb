@@ -16,7 +16,7 @@ describe Facter::Resolvers::Openbsd::Mountpoints do
 
   before do
     allow(Facter::Core::Execution).to receive(:execute)
-      .with('mount', logger: an_instance_of(Facter::Log))
+      .with('mount -v', logger: an_instance_of(Facter::Log))
       .and_return(load_fixture('openbsd_filesystems').read)
     allow(Facter::Core::Execution).to receive(:execute)
       .with('df -P', logger: an_instance_of(Facter::Log))

@@ -17,7 +17,7 @@ module Facter
 
           def read_mount(fact_name)
             @fact_list[:mountpoints] = {}
-            output = Facter::Core::Execution.execute('mount', logger: log)
+            output = Facter::Core::Execution.execute('mount -v', logger: log)
             output.split("\n").map do |line|
               add_mount_points_fact(line)
             end
@@ -27,11 +27,21 @@ module Facter
           end
 
           def add_mount_points_fact(line)
-            (elem, _, options) = line.partition("\s(")
-            elem = elem.split("\s")
-            options = options.chop!.split(",\s")
-            @fact_list[:mountpoints][elem[2]] = { device: elem[0], filesystem: elem[4],
-                                                  options: options }
+            (*tokens, options) = line.split(/\s*\(|\)\s*/, 0)
+
+            if tokens.length == 3
+              (device, duid, tokens) = tokens
+            else
+              (device, tokens) = tokens[0].split("\s", 2)
+            end
+            (_on, path, _type, filesystem) = tokens.split("\s")
+
+            @fact_list[:mountpoints][path] = {
+              device: device,
+              duid: duid,
+              filesystem: filesystem,
+              options: options.split(",\s")
+            }.compact
           end
 
           def retrieve_sizes_for_mounts
