@@ -49,8 +49,12 @@ module Facter
           interfaces_data.each do |interface_name, raw_data|
             parsed_interface_data = {}
 
+            extract_flags(raw_data, parsed_interface_data)
+            extract_rdomain(raw_data, parsed_interface_data)
             extract_mtu(raw_data, parsed_interface_data)
             extract_mac(raw_data, parsed_interface_data)
+            extract_description(raw_data, parsed_interface_data)
+            extract_groups(raw_data, parsed_interface_data)
             extract_dhcp(interface_name, raw_data, parsed_interface_data)
             extract_ip_data(raw_data, parsed_interface_data)
 
@@ -59,9 +63,29 @@ module Facter
           @fact_list[:interfaces] = parsed_interfaces_data unless parsed_interfaces_data.empty?
         end
 
+        def extract_flags(raw_data, parsed_interface_data)
+          flags = raw_data.match(/flags=\d+<(.+)>/)&.captures&.first
+          parsed_interface_data[:flags] = flags.split(',') unless flags.nil?
+        end
+
+        def extract_rdomain(raw_data, parsed_interface_data)
+          rdomain = raw_data.match(/rdomain\s+(\d+)/)&.captures&.first&.to_i
+          parsed_interface_data[:rdomain] = rdomain unless rdomain.nil?
+        end
+
         def extract_mtu(raw_data, parsed_interface_data)
           mtu = raw_data.match(/mtu\s+(\d+)/)&.captures&.first&.to_i
           parsed_interface_data[:mtu] = mtu unless mtu.nil?
+        end
+
+        def extract_description(raw_data, parsed_interface_data)
+          description = raw_data.match(/description:\s+(.+)/)&.captures&.first
+          parsed_interface_data[:description] = description unless description.nil?
+        end
+
+        def extract_groups(raw_data, parsed_interface_data)
+          groups = raw_data.match(/groups:\s+(.+)/)&.captures&.first
+          parsed_interface_data[:groups] = groups.split("\s") unless groups.nil?
         end
 
         def extract_mac(raw_data, parsed_interface_data)

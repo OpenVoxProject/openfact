@@ -18,13 +18,15 @@ describe Facter::Resolvers::Networking do
         .to receive(:execute).with('ipconfig getoption llw0 server_identifier', logger: an_instance_of(Facter::Log)).and_return('')
       allow(Facter::Core::Execution)
         .to receive(:execute).with('ipconfig getoption awdl0 server_identifier', logger: an_instance_of(Facter::Log)).and_return(dhcp)
+      allow(Facter::Core::Execution)
+        .to receive(:execute).with('ipconfig getoption pair2 server_identifier', logger: an_instance_of(Facter::Log)).and_return('')
     end
 
     after do
       networking.invalidate_cache
     end
 
-    let(:interfaces) { load_fixture('ifconfig_mac').read }
+    let(:interfaces) { load_fixture('ifconfig').read }
     let(:dhcp) { '192.168.143.1' }
     let(:primary) { 'en0' }
 
@@ -37,12 +39,12 @@ describe Facter::Resolvers::Networking do
     end
 
     it 'detects all interfaces' do
-      expected = %w[lo0 gif0 stf0 en0 en0.1 en1 en2 bridge0 p2p0 awdl0 llw0 utun0 utun1 utun2 utun3 ib0 ib1]
+      expected = %w[lo0 gif0 stf0 en0 en0.1 en1 en2 bridge0 p2p0 awdl0 llw0 utun0 utun1 utun2 utun3 ib0 ib1 pair2]
       expect(networking.resolve(:interfaces).keys).to match_array(expected)
     end
 
     it 'checks that interface lo0 has the expected keys' do
-      expected = %i[mtu bindings6 bindings ip ip6 netmask netmask6 network network6 scope6]
+      expected = %i[flags mtu bindings6 bindings ip ip6 netmask netmask6 network network6 scope6]
       expect(networking.resolve(:interfaces)['lo0'].keys).to match_array(expected)
     end
 
@@ -68,17 +70,17 @@ describe Facter::Resolvers::Networking do
     end
 
     it 'detects interface en1' do
-      expected = { mtu: 1500, mac: '82:17:0e:93:9d:00' }
+      expected = { flags: %w[UP BROADCAST SMART RUNNING PROMISC SIMPLEX MULTICAST], mtu: 1500, mac: '82:17:0e:93:9d:00' }
       expect(networking.resolve(:interfaces)['en1']).to eq(expected)
     end
 
     it 'detects interface gif0' do
-      expected = { mtu: 1280 }
+      expected = { flags: %w[POINTOPOINT MULTICAST], mtu: 1280 }
       expect(networking.resolve(:interfaces)['gif0']).to eq(expected)
     end
 
     it 'checks that interface en0 has the expected keys' do
-      expected = %i[mtu mac bindings ip netmask network dhcp]
+      expected = %i[flags mtu mac bindings ip netmask network dhcp]
       expect(networking.resolve(:interfaces)['en0'].keys).to match_array(expected)
     end
 
@@ -113,7 +115,7 @@ describe Facter::Resolvers::Networking do
     end
 
     it 'checks that interface awdl0 has the expected keys' do
-      expected = %i[mtu mac bindings6 ip6 netmask6 network6 scope6 dhcp]
+      expected = %i[flags mtu mac bindings6 ip6 netmask6 network6 scope6 dhcp]
       expect(networking.resolve(:interfaces)['awdl0'].keys).to match_array(expected)
     end
 
@@ -133,6 +135,11 @@ describe Facter::Resolvers::Networking do
           network: '2001:db8:cafe::132:213', scope6: 'global' }
       ] }
       expect(networking.resolve(:interfaces)['utun3']).to include(expected)
+    end
+
+    it 'checks that interface pair2 has description, rdomain and groups' do
+      expected = { rdomain: 46, description: 'gelatod CLAT 464XLAT', groups: %w[pair] }
+      expect(networking.resolve(:interfaces)['pair2']).to include(expected)
     end
 
     it 'checks interface ib0 has the expected mac' do
