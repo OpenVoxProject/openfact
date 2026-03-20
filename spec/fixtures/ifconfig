@@ -88,3 +88,12 @@ ib1: flags=4099<UP,BROADCAST,MULTICAST>  mtu 4092
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
+pair2: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> rdomain 46 mtu 1500
+	lladdr fe:e1:ba:d1:c3:a7
+	description: gelatod CLAT 464XLAT
+	index 6 priority 0 llprio 3
+	patch: pair1
+	groups: pair
+	media: Ethernet autoselect
+	status: active
+	inet 192.0.0.1 netmask 0xfffffff8 broadcast 192.0.0.7
