@@ -35,7 +35,7 @@ module Facter
           end
 
           def read_processors(cpuinfo_output)
-            @fact_list[:extensions] = Set[Facter::Resolvers::Uname.resolve(:processor)]
+            @fact_list[:extensions] = Set[Facter::Resolvers::Uname.resolve(:machine)]
             @fact_list[:processors] = 0
             @fact_list[:models] = []
             @fact_list[:physical_processors] = []
