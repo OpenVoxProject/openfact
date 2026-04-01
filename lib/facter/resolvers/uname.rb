@@ -36,7 +36,7 @@ module Facter
             @fact_list[:kernelname],
             @fact_list[:kernelversion] = uname_results.map(&:strip)
             # uutils/coreutils uname does not implement -p and returns "unknown".
-            # Fall back to -m (machine), which is the procedure suggested by the 
+            # Fall back to -m (machine), which is the procedure suggested by the
             # uutils/coreutils developers.
             @fact_list[:processor] = @fact_list[:machine] if @fact_list[:processor] == 'unknown'
           else
