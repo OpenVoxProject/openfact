@@ -92,6 +92,20 @@ describe Facter::Resolvers::Linux::Containers do
     end
   end
 
+  context 'when hypervisor is oci and it is discovered by environ' do
+    let(:cgroup_output) { load_fixture('cgroup_file').read }
+    let(:environ_output) { ['container=oci'] }
+    let(:result) { { oci: {} } }
+
+    it 'return oci for vm' do
+      expect(containers_resolver.resolve(:vm)).to eq('oci')
+    end
+
+    it 'return oci info for hypervisor' do
+      expect(containers_resolver.resolve(:hypervisor)).to eq(result)
+    end
+  end
+
   context 'when hypervisor is illumos' do
     let(:cgroup_output) { nil }
     let(:environ_output) { ['container=zone'] }

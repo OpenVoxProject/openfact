@@ -52,6 +52,8 @@ module Facter
               vm = 'podman'
             when 'crio'
               vm = 'crio'
+            when 'oci'
+              vm = 'oci'
             when 'zone'
               return nil
             when 'systemd-nspawn'
