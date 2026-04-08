@@ -189,4 +189,32 @@ describe Facter::Resolvers::OsRelease do
       expect(result).to eq('VirtuozzoLinux')
     end
   end
+
+  context 'when on Gentoo with single-quoted values' do
+    let(:os_release_content) { load_fixture('os_release_gentoo').readlines }
+
+    it 'returns os NAME' do
+      result = Facter::Resolvers::OsRelease.resolve(:name)
+
+      expect(result).to eq('Gentoo')
+    end
+
+    it 'returns os PRETTY_NAME' do
+      result = Facter::Resolvers::OsRelease.resolve(:pretty_name)
+
+      expect(result).to eq('Gentoo Linux')
+    end
+
+    it 'returns os VERSION_ID' do
+      result = Facter::Resolvers::OsRelease.resolve(:version_id)
+
+      expect(result).to eq('2.15')
+    end
+
+    it 'returns os id' do
+      result = Facter::Resolvers::OsRelease.resolve(:id)
+
+      expect(result).to eq('gentoo')
+    end
+  end
 end
