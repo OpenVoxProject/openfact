@@ -10,6 +10,3 @@ group(:release, optional: true) do
 end
 
 gem 'packaging', require: false
-
-local_gemfile = File.expand_path('Gemfile.local', __dir__)
-eval_gemfile(local_gemfile) if File.exist?(local_gemfile)
