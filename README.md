@@ -1,6 +1,7 @@
 # openfact
 
 [![Gem Version](https://badge.fury.io/rb/openfact.svg)](https://badge.fury.io/rb/openfact)
+[![License](https://img.shields.io/github/license/OpenVoxProject/openfact.svg)](https://github.com/OpenVoxProject/openfact/blob/main/LICENSE)
 
 OpenFact is a community implementation of [Facter](https://github.com/puppetlabs/facter/), a command-line tool that gathers basic facts about nodes (systems)
 such as hardware details, network settings, OS type and version, and more.
