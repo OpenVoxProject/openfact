@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.6.0](https://github.com/openvoxproject/openfact/tree/5.6.0) (2026-04-08)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.5.0...5.6.0)
+
+**Implemented enhancements:**
+
+- Add oci as supported container runtime [\#99](https://github.com/OpenVoxProject/openfact/pull/99) ([slauger](https://github.com/slauger))
+- networking.interfaces: Provide ifconfig\(8\) flags, rdomain, description and groups [\#94](https://github.com/OpenVoxProject/openfact/pull/94) ([klemensn](https://github.com/klemensn))
+- mountpoints: OpenBSD: mount\(8\) -v for more options and disklabel\(8\) UID [\#92](https://github.com/OpenVoxProject/openfact/pull/92) ([klemensn](https://github.com/klemensn))
+
+**Fixed bugs:**
+
+- \[Bug\]: processors.extensions fact 'unknown' on Ubuntu 26.04 / need to use uname -m on machines with uutils/coreutils version of uname [\#95](https://github.com/OpenVoxProject/openfact/issues/95)
+
+**Merged pull requests:**
+
+- CI: Update actions/checkout v4-\>v6 [\#101](https://github.com/OpenVoxProject/openfact/pull/101) ([bastelfreak](https://github.com/bastelfreak))
+- Fix OS detection for Gentoo now that they changed to single-quotes in /etc/os-release [\#100](https://github.com/OpenVoxProject/openfact/pull/100) ([anthonyryan1](https://github.com/anthonyryan1))
+- Fallback to using uname machine for hosts using uutils/coreutils [\#98](https://github.com/OpenVoxProject/openfact/pull/98) ([alavaliant](https://github.com/alavaliant))
+
 ## [5.5.0](https://github.com/openvoxproject/openfact/tree/5.5.0) (2026-02-20)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.4.0...5.5.0)
