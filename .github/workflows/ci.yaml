@@ -77,6 +77,7 @@ jobs:
       matrix:
         os:
           - windows-2022
+          - windows-2025
           - ubuntu-22.04
           - ubuntu-24.04
       fail-fast: false
@@ -143,6 +144,7 @@ jobs:
           - {os: ubuntu-latest, ruby: 'jruby-10.0.2.0'}
           - {os: windows-2022, ruby: '2.7'}
           - {os: windows-2022, ruby: '3.2'} # with openssl 3
+          - {os: windows-2025, ruby: '3.2'} # with openssl 3
     runs-on: ${{ matrix.cfg.os }}
     env:
       BUNDLE_WITH: 'integration'
