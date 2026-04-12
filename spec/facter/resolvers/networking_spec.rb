@@ -20,6 +20,8 @@ describe Facter::Resolvers::Networking do
         .to receive(:execute).with('ipconfig getoption awdl0 server_identifier', logger: an_instance_of(Facter::Log)).and_return(dhcp)
       allow(Facter::Core::Execution)
         .to receive(:execute).with('ipconfig getoption pair2 server_identifier', logger: an_instance_of(Facter::Log)).and_return('')
+      allow(Facter::Core::Execution)
+        .to receive(:execute).with('ipconfig getoption vlan42 server_identifier', logger: an_instance_of(Facter::Log)).and_return('')
     end
 
     after do
@@ -39,7 +41,7 @@ describe Facter::Resolvers::Networking do
     end
 
     it 'detects all interfaces' do
-      expected = %w[lo0 gif0 stf0 en0 en0.1 en1 en2 bridge0 p2p0 awdl0 llw0 utun0 utun1 utun2 utun3 ib0 ib1 pair2]
+      expected = %w[lo0 gif0 stf0 en0 en0.1 en1 en2 bridge0 p2p0 awdl0 llw0 utun0 utun1 utun2 utun3 ib0 ib1 pair2 vlan42]
       expect(networking.resolve(:interfaces).keys).to match_array(expected)
     end
 
@@ -140,6 +142,10 @@ describe Facter::Resolvers::Networking do
     it 'checks that interface pair2 has description, rdomain and groups' do
       expected = { rdomain: 46, description: 'gelatod CLAT 464XLAT', groups: %w[pair] }
       expect(networking.resolve(:interfaces)['pair2']).to include(expected)
+    end
+
+    it 'checks that interface vlan42 has hexadecimal flags value' do
+      expect(networking.resolve(:interfaces)['vlan42'][:flags]).to be_an_instance_of(Array)
     end
 
     it 'checks interface ib0 has the expected mac' do
