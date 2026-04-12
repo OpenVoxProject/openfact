@@ -64,7 +64,7 @@ module Facter
         end
 
         def extract_flags(raw_data, parsed_interface_data)
-          flags = raw_data.match(/flags=\d+<(.+)>/)&.captures&.first
+          flags = raw_data.match(/flags=\h+<(.+)>/)&.captures&.first
           parsed_interface_data[:flags] = flags.split(',') unless flags.nil?
         end
 
