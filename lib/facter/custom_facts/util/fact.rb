@@ -17,10 +17,6 @@ module Facter
       # @return [String]
       attr_reader :name
 
-      # @return [String]
-      # @deprecated
-      attr_accessor :ldapname
-
       # Fact options e.g. fact_type
       attr_accessor :options
 
@@ -31,16 +27,12 @@ module Facter
       # for the public API for creating facts.
       # @param name [String] the fact name
       # @param options [Hash] optional parameters
-      # @option options [String] :ldapname set the ldapname property on the fact
       #
       # @api private
       def initialize(name, options = {})
         @name = LegacyFacter::Util::Normalization.normalize(name.to_s.downcase).intern
 
         @options = options.dup
-        extract_ldapname_option!(options)
-
-        @ldapname ||= @name.to_s
 
         @resolves = []
         @searching = false
@@ -140,15 +132,6 @@ module Facter
         end
 
         @value
-      end
-
-      # @api private
-      # @deprecated
-      def extract_ldapname_option!(options)
-        return unless options[:ldapname]
-
-        log.warnonce('ldapname is deprecated and will be removed in a future version')
-        self.ldapname = options.delete(:ldapname)
       end
 
       private

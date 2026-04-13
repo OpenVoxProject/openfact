@@ -50,11 +50,6 @@ describe Facter::Util::Fact do
     expect(Facter::Util::Fact.new('YayNess').name).to eq :yayness
   end
 
-  it 'issues a deprecation warning for use of ldapname' do
-    expect(logger).to receive(:warnonce).with('ldapname is deprecated and will be removed in a future version')
-    Facter::Util::Fact.new('YayNess', ldapname: 'fooness')
-  end
-
   describe 'when adding resolution mechanisms using #add' do
     it 'delegates to #define_resolution with an anonymous resolution' do
       expect(fact).to receive(:define_resolution).with(nil, {})
