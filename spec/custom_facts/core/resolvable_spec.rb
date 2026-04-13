@@ -19,8 +19,19 @@ end
 describe LegacyFacter::Core::Resolvable do
   subject(:resolvable) { FacterSpec::ResolvableClass.new('resolvable') }
 
+  let(:log) { instance_spy(Facter::Log) }
+
+  before do
+    allow(Facter::Log).to receive(:new).and_return(log)
+  end
+
   it 'has a default timeout of 0 seconds' do
     expect(resolvable.limit).to eq 0
+  end
+
+  it 'emits a deprecation warning when limit is called' do
+    expect(log).to receive(:warnonce).with('limit is deprecated and will be removed in a future version, use timeout instead')
+    resolvable.limit
   end
 
   it 'can specify a custom timeout' do
@@ -61,9 +72,8 @@ describe LegacyFacter::Core::Resolvable do
   end
 
   describe 'timing out' do
-    it 'uses #limit instead of #timeout to determine the timeout period' do
-      expect(resolvable).not_to receive(:timeout)
-      allow(resolvable).to receive(:limit).and_return(25)
+    it 'uses @timeout directly to determine the timeout period' do
+      resolvable.timeout = 25
       allow(Timeout).to receive(:timeout).with(25)
 
       resolvable.value

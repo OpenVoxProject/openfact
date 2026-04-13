@@ -20,11 +20,9 @@ module LegacyFacter
       # Return the timeout period for resolving a value.
       # (see #timeout)
       # @return [Numeric]
-      # @comment requiring 'timeout' stdlib class causes Object#timeout to be
-      #   defined which delegates to Timeout.timeout. This method may potentially
-      #   overwrite the #timeout attr_reader on this class, so we define #limit to
-      #   avoid conflicts.
+      # @deprecated Use timeout instead.
       def limit
+        Facter::Log.new(self).warnonce('limit is deprecated and will be removed in a future version, use timeout instead')
         @timeout || 0
       end
 
@@ -74,14 +72,14 @@ module LegacyFacter
         result = nil
 
         with_timing do
-          Timeout.timeout(limit) do
+          Timeout.timeout(@timeout || 0) do
             result = resolve_value
           end
         end
 
         LegacyFacter::Util::Normalization.normalize(result)
       rescue Timeout::Error => e
-        Facter.log_exception(e, "Timed out after #{limit} seconds while resolving #{qualified_name}")
+        Facter.log_exception(e, "Timed out after #{@timeout || 0} seconds while resolving #{qualified_name}")
 
         nil
       rescue LegacyFacter::Util::Normalization::NormalizationError => e
