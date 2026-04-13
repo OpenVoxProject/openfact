@@ -23,15 +23,6 @@ module Facter
       extend Facter::Core::Execution
 
       class << self
-        # Expose command execution methods that were extracted into
-        # Facter::Core::Execution from Facter::Util::Resolution in Facter 2.0.0 for
-        # compatibility.
-        #
-        # @deprecated
-        #
-        # @api public
-        public :which, :exec
-
         # @api private
         public :with_env
       end
