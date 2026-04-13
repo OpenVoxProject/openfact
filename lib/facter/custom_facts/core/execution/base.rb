@@ -8,6 +8,7 @@ module Facter
       class Base
         STDERR_MESSAGE = 'Command %s completed with the following stderr message: %s'
         VALID_OPTIONS = %i[on_fail expand logger timeout].freeze
+        DEPRECATED_TIMEOUT_OPTIONS = %i[time_limit limit].freeze
         DEFAULT_EXECUTION_TIMEOUT = 300
         def initialize
           @log = Log.new(self)
@@ -117,7 +118,11 @@ module Facter
           timeout = (options[:timeout] || options[:time_limit] || options[:limit]).to_i
           timeout = timeout.positive? ? timeout : nil
 
-          extra_keys = options.keys - VALID_OPTIONS
+          (options.keys & DEPRECATED_TIMEOUT_OPTIONS).each do |key|
+            @log.warnonce("#{key} is deprecated and will be removed in a future version, use timeout instead")
+          end
+
+          extra_keys = options.keys - VALID_OPTIONS - DEPRECATED_TIMEOUT_OPTIONS
           unless extra_keys.empty?
             @log.warn("Unexpected key passed to Facter::Core::Execution.execute option: #{extra_keys.join(',')}" \
                       " - valid keys: #{VALID_OPTIONS.join(',')}")
