@@ -38,8 +38,8 @@ jobs:
       matrix:
         ruby: ${{ fromJSON(needs.rubocop_and_matrix.outputs.ruby) }}
         include:
-          - ruby: 'jruby-9.4.12.1'
-          - ruby: 'jruby-10.0.2.0'
+          - ruby: 'jruby-9.4.12.1' # used in OpenVox 8
+          - ruby: 'jruby-10.0.5.0' # latest JRuby for Ruby 3.4 compatibility / OpenVox 9 target version
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout current PR
@@ -140,7 +140,7 @@ jobs:
           - {os: ubuntu-22.04, ruby: '3.2'} # with openssl 3
           - {os: ubuntu-22.04, ruby: 'jruby-9.3.14.0'}
           - {os: ubuntu-latest, ruby: 'jruby-9.4.12.1'}
-          - {os: ubuntu-latest, ruby: 'jruby-10.0.2.0'}
+          - {os: ubuntu-latest, ruby: 'jruby-10.0.5.0'}
           - {os: windows-2022, ruby: '2.7'}
           - {os: windows-2022, ruby: '3.2'} # with openssl 3
     runs-on: ${{ matrix.cfg.os }}
