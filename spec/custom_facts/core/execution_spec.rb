@@ -36,11 +36,6 @@ describe Facter::Core::Execution do
     execution.expand_command('waffles')
   end
 
-  it 'delegates #exec to #execute' do
-    expect(impl).to receive(:execute).with('waffles', { on_fail: nil })
-    execution.exec('waffles')
-  end
-
   it 'delegates #execute to the implementation' do
     expect(impl).to receive(:execute).with('waffles', {})
     execution.execute('waffles')

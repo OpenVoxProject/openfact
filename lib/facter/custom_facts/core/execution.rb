@@ -87,19 +87,6 @@ module Facter
         @@impl.with_env(values, &block)
       end
 
-      # Try to execute a command and return the output.
-      #
-      # @param command [String] Command to run
-      #
-      # @return [String/nil] Output of the program, or nil if the command does
-      #   not exist or could not be executed.
-      #
-      # @deprecated Use #{execute} instead
-      # @api public
-      def exec(command)
-        @@impl.execute(command, on_fail: nil)
-      end
-
       # Execute a command and return the output of that program.
       #
       # @param command [String] Command to run
