@@ -94,9 +94,11 @@ module Facter
       # @return [String/nil] Output of the program, or nil if the command does
       #   not exist or could not be executed.
       #
-      # @deprecated Use #{execute} instead
+      # @deprecated Use {execute} instead
       # @api public
       def exec(command)
+        Facter.warnonce('Facter::Core::Execution.exec is deprecated and will be removed in a future major version. ' \
+                        'Use Facter::Core::Execution.execute instead.')
         @@impl.execute(command, on_fail: nil)
       end
 

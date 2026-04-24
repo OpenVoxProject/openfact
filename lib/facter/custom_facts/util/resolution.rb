@@ -23,14 +23,21 @@ module Facter
       extend Facter::Core::Execution
 
       class << self
-        # Expose command execution methods that were extracted into
-        # Facter::Core::Execution from Facter::Util::Resolution in Facter 2.0.0 for
-        # compatibility.
-        #
-        # @deprecated
-        #
+        # @deprecated Use Facter::Core::Execution.which instead
         # @api public
-        public :which, :exec
+        def which(bin)
+          Facter.warnonce('Facter::Util::Resolution.which is deprecated and will be removed in a future major version. ' \
+                          'Use Facter::Core::Execution.which instead.')
+          Facter::Core::Execution.which(bin)
+        end
+
+        # @deprecated Use Facter::Core::Execution.execute instead
+        # @api public
+        def exec(command)
+          Facter.warnonce('Facter::Util::Resolution.exec is deprecated and will be removed in a future major version. ' \
+                          'Use Facter::Core::Execution.execute instead.')
+          Facter::Core::Execution.execute(command, on_fail: nil)
+        end
 
         # @api private
         public :with_env
