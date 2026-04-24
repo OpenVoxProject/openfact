@@ -25,6 +25,10 @@ describe LegacyFacter::Core::Resolvable do
     allow(Facter::Log).to receive(:new).and_return(log)
   end
 
+  after do
+    Facter.remove_instance_variable(:@logger) if Facter.instance_variable_defined?(:@logger)
+  end
+
   it 'has a default timeout of 0 seconds' do
     expect(resolvable.limit).to eq 0
   end
