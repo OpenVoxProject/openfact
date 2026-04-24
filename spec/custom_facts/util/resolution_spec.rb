@@ -118,6 +118,34 @@ describe Facter::Util::Resolution do
     end
   end
 
+  describe '.which (deprecated)' do
+    it 'emits a deprecation warning' do
+      allow(Facter::Core::Execution).to receive(:which).and_return('/usr/bin/foo')
+      expect(Facter).to receive(:warnonce).with(a_string_including('Facter::Util::Resolution.which is deprecated'))
+      Facter::Util::Resolution.which('foo')
+    end
+
+    it 'delegates to Facter::Core::Execution.which' do
+      allow(Facter).to receive(:warnonce)
+      expect(Facter::Core::Execution).to receive(:which).with('foo').and_return('/usr/bin/foo')
+      expect(Facter::Util::Resolution.which('foo')).to eq('/usr/bin/foo')
+    end
+  end
+
+  describe '.exec (deprecated)' do
+    it 'emits a deprecation warning' do
+      allow(Facter::Core::Execution).to receive(:execute).and_return('output')
+      expect(Facter).to receive(:warnonce).with(a_string_including('Facter::Util::Resolution.exec is deprecated'))
+      Facter::Util::Resolution.exec('foo')
+    end
+
+    it 'delegates to Facter::Core::Execution.execute with on_fail: nil' do
+      allow(Facter).to receive(:warnonce)
+      expect(Facter::Core::Execution).to receive(:execute).with('foo', on_fail: nil).and_return('output')
+      expect(Facter::Util::Resolution.exec('foo')).to eq('output')
+    end
+  end
+
   describe 'evaluating' do
     it 'evaluates the block in the context of the given resolution' do
       expect(resolution).to receive(:setcode).with('code')

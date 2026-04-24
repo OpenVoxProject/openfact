@@ -37,6 +37,7 @@ describe Facter::Core::Execution do
   end
 
   it 'delegates #exec to #execute' do
+    expect(Facter).to receive(:warnonce).with(a_string_including('Facter::Core::Execution.exec is deprecated'))
     expect(impl).to receive(:execute).with('waffles', { on_fail: nil })
     execution.exec('waffles')
   end
