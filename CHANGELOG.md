@@ -2,7 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.6.0](https://github.com/openvoxproject/openfact/tree/5.6.0) (2026-04-08)
+## [5.6.1](https://github.com/openvoxproject/openfact/tree/5.6.1) (2026-05-11)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.6.0...5.6.1)
+
+**Fixed bugs:**
+
+- Fix unclosed .Bl list in FILES section of man.erb [\#119](https://github.com/OpenVoxProject/openfact/pull/119) ([miharp](https://github.com/miharp))
+- interfaces: parse flags radix correctly [\#110](https://github.com/OpenVoxProject/openfact/pull/110) ([klemensn](https://github.com/klemensn))
+
+**Merged pull requests:**
+
+- CI: Drop JRuby 9.3.14 testing  [\#118](https://github.com/OpenVoxProject/openfact/pull/118) ([bastelfreak](https://github.com/bastelfreak))
+- CI: Update jruby-10.0.2.0-\>jruby-10.0.5.0 [\#117](https://github.com/OpenVoxProject/openfact/pull/117) ([bastelfreak](https://github.com/bastelfreak))
+- gemspec: remove upper Ruby version limit [\#107](https://github.com/OpenVoxProject/openfact/pull/107) ([bastelfreak](https://github.com/bastelfreak))
+
+## [5.6.0](https://github.com/openvoxproject/openfact/tree/5.6.0) (2026-04-09)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.5.0...5.6.0)
 
