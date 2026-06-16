@@ -201,7 +201,6 @@ describe Facter::Resolvers::Windows::Virtualization do
     end
   end
 
-
   describe '#resolve Physical Machine' do
     before do
       allow(win32ole).to receive(:Model).and_return(model)
