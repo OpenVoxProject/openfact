@@ -17,7 +17,7 @@ jobs:
     outputs:
       ruby: ${{ steps.ruby.outputs.versions }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
         with:
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       # we explictly force Java 17 because that's the lowest one we support when building packages with ezbake
       - name: Set up Java 17 for JRuby 9
         if: contains(matrix.ruby, 'jruby-9')
@@ -75,7 +75,7 @@ jobs:
     runs-on: windows-2025
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Rspec checks
         uses: ruby/setup-ruby@v1
@@ -101,7 +101,7 @@ jobs:
 
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           path: facter
 
@@ -160,7 +160,7 @@ jobs:
       BUNDLE_WITH: 'integration'
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Rspec checks
         uses: ruby/setup-ruby@v1
