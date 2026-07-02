@@ -49,7 +49,7 @@ module Facter
               'hyperv'
             elsif /^Xen/.match?(manufacturer)
               'xen'
-            elsif /^Amazon EC2/.match?(manufacturer)
+            elsif /^(Amazon EC2|QEMU)/.match?(manufacturer)
               'kvm'
             else
               'physical'
