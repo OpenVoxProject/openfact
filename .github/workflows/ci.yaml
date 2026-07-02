@@ -39,6 +39,7 @@ jobs:
         ruby: ${{ fromJSON(needs.rubocop_and_matrix.outputs.ruby) }}
         include:
           - ruby: 'jruby-9.4.12.1' # used in OpenVox 8
+          - ruby: 'jruby-9.4.15.0' # OpenVox 8 target https://github.com/OpenVoxProject/jruby-deps/pull/21
           - ruby: 'jruby-10.0.5.0' # latest JRuby for Ruby 3.4 compatibility / OpenVox 9 target version
     runs-on: ubuntu-24.04
     steps:
