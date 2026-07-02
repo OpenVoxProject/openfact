@@ -97,3 +97,13 @@ pair2: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> rdomain 46 mtu 1500
 	media: Ethernet autoselect
 	status: active
 	inet 192.0.0.1 netmask 0xfffffff8 broadcast 192.0.0.7
+vlan42: flags=a08843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST,AUTOCONF6,AUTOCONF4> mtu 1500
+	lladdr 00:11:22:33:44:55
+	index 42 priority 0 llprio 3
+	encap: vnetid 42 parent cnmac0 txprio packet rxprio outer
+	groups: vlan egress
+	media: Ethernet autoselect (1000baseT full-duplex,master)
+	status: active
+	inet6 fe80::211:22ff:fe33:4455%vlan3 prefixlen 64 scopeid 0xa
+	inet6 2001:db8::1 prefixlen 64 autoconf pltime 123 vltime 123
+	inet 192.0.2.1 netmask 0xffffff00 broadcast 192.0.2.255

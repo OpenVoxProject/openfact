@@ -17,9 +17,9 @@ jobs:
     outputs:
       ruby: ${{ steps.ruby.outputs.versions }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Install Ruby ${{ matrix.ruby }}
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@0dafeac902942906541bc140009cdbf32665b601 # v1.315.0
         with:
           ruby-version: "3.4"
           bundler-cache: true
@@ -27,7 +27,7 @@ jobs:
         run: bundle exec rake rubocop
       - run: gem build --strict --verbose *.gemspec
       - id: ruby
-        uses: voxpupuli/ruby-version@v2
+        uses: voxpupuli/ruby-version@656370e339050da63b86b1c631f5f88a3f4c0803 # 1.0.1
 
   linux_unit_tests:
     needs:
@@ -38,15 +38,29 @@ jobs:
       matrix:
         ruby: ${{ fromJSON(needs.rubocop_and_matrix.outputs.ruby) }}
         include:
-          - ruby: 'jruby-9.4.12.1'
-          - ruby: 'jruby-10.0.2.0'
+          - ruby: 'jruby-9.4.12.1' # used in OpenVox 8
+          - ruby: 'jruby-9.4.15.0' # OpenVox 8 target https://github.com/OpenVoxProject/jruby-deps/pull/21
+          - ruby: 'jruby-10.0.5.0' # latest JRuby for Ruby 3.4 compatibility / OpenVox 9 target version
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v6
-
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      # we explictly force Java 17 because that's the lowest one we support when building packages with ezbake
+      - name: Set up Java 17 for JRuby 9
+        if: contains(matrix.ruby, 'jruby-9')
+        uses: actions/setup-java@1bcf9fb12cf4aa7d266a90ae39939e61372fe520 # v5.4.0
+        with:
+          distribution: temurin
+          java-version: '17'
+      # JRuby 10.0.5 requires java 21 or 25
+      - name: Set up Java 21 for JRuby 10
+        if: contains(matrix.ruby, 'jruby-10')
+        uses: actions/setup-java@1bcf9fb12cf4aa7d266a90ae39939e61372fe520 # v5.4.0
+        with:
+          distribution: temurin
+          java-version: '21'
       - name: Rspec checks
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@0dafeac902942906541bc140009cdbf32665b601 # v1.315.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
@@ -62,10 +76,10 @@ jobs:
     runs-on: windows-2025
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Rspec checks
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@0dafeac902942906541bc140009cdbf32665b601 # v1.315.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
@@ -88,12 +102,12 @@ jobs:
 
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           path: facter
 
       - name: Install Ruby 3.2
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@0dafeac902942906541bc140009cdbf32665b601 # v1.315.0
         with:
           ruby-version: '3.2'
           bundler-cache: true
@@ -138,9 +152,8 @@ jobs:
         cfg:
           - {os: ubuntu-latest, ruby: '2.7'}
           - {os: ubuntu-22.04, ruby: '3.2'} # with openssl 3
-          - {os: ubuntu-22.04, ruby: 'jruby-9.3.14.0'}
           - {os: ubuntu-latest, ruby: 'jruby-9.4.12.1'}
-          - {os: ubuntu-latest, ruby: 'jruby-10.0.2.0'}
+          - {os: ubuntu-latest, ruby: 'jruby-10.0.5.0'}
           - {os: windows-2022, ruby: '2.7'}
           - {os: windows-2022, ruby: '3.2'} # with openssl 3
     runs-on: ${{ matrix.cfg.os }}
@@ -148,10 +161,10 @@ jobs:
       BUNDLE_WITH: 'integration'
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Rspec checks
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@0dafeac902942906541bc140009cdbf32665b601 # v1.315.0
         with:
           ruby-version: ${{ matrix.cfg.ruby }}
           bundler-cache: true
