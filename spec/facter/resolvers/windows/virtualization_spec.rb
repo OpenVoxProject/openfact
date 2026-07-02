@@ -181,6 +181,26 @@ describe Facter::Resolvers::Windows::Virtualization do
     end
   end
 
+  describe '#resolve Proxmox/QEMU VM' do
+    before do
+      allow(win32ole).to receive(:Model).and_return(model)
+      allow(win32ole).to receive(:Manufacturer).and_return(manufacturer)
+      allow(win32ole).to receive(:OEMStringArray).and_return('')
+    end
+
+    let(:query_result) { [win32ole] }
+    let(:model) { 'Standard PC (i440FX + PIIX, 1996)' }
+    let(:manufacturer) { 'QEMU' }
+
+    it 'detects virtual machine model' do
+      expect(Facter::Resolvers::Windows::Virtualization.resolve(:virtual)).to eql('kvm')
+    end
+
+    it 'detects that is virtual' do
+      expect(Facter::Resolvers::Windows::Virtualization.resolve(:is_virtual)).to be(true)
+    end
+  end
+
   describe '#resolve Physical Machine' do
     before do
       allow(win32ole).to receive(:Model).and_return(model)
