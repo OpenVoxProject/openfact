@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.7.0](https://github.com/openvoxproject/openfact/tree/5.7.0) (2026-07-12)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.6.1...5.7.0)
+
+**Implemented enhancements:**
+
+- \#128 windows virtual fact support for proxmox/qemu [\#129](https://github.com/OpenVoxProject/openfact/pull/129) ([Hedius](https://github.com/Hedius))
+
+**Fixed bugs:**
+
+- \[Bug\]: virtual fact not working on Windows on Proxmox non Amazaon KVM [\#128](https://github.com/OpenVoxProject/openfact/issues/128)
+
 ## [5.6.1](https://github.com/openvoxproject/openfact/tree/5.6.1) (2026-05-11)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.6.0...5.6.1)
@@ -14,7 +26,6 @@ All notable changes to this project will be documented in this file.
 **Merged pull requests:**
 
 - CI: Drop JRuby 9.3.14 testing  [\#118](https://github.com/OpenVoxProject/openfact/pull/118) ([bastelfreak](https://github.com/bastelfreak))
-- CI: Update jruby-10.0.2.0-\>jruby-10.0.5.0 [\#117](https://github.com/OpenVoxProject/openfact/pull/117) ([bastelfreak](https://github.com/bastelfreak))
 - gemspec: remove upper Ruby version limit [\#107](https://github.com/OpenVoxProject/openfact/pull/107) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [5.6.0](https://github.com/openvoxproject/openfact/tree/5.6.0) (2026-04-09)
