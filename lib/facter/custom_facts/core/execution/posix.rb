@@ -4,7 +4,7 @@ module Facter
   module Core
     module Execution
       class Posix < Facter::Core::Execution::Base
-        DEFAULT_SEARCH_PATHS = ['/sbin', '/usr/sbin'].freeze
+        DEFAULT_SEARCH_PATHS = ['/sbin', '/usr/sbin', '/opt/puppetlabs/bin'].freeze
 
         def search_paths
           # Make sure custom_facts is usable even for non-root users. Most commands
