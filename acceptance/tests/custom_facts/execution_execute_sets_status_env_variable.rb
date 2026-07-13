@@ -13,7 +13,7 @@ test_name "(FACT-2934) Facter::Core::Execution sets $?" do
     content = <<-EOM
     Facter.add(:foo) do
       setcode do
-         Facter::Util::Resolution.exec("#{command}")
+         Facter::Core::Execution.execute("#{command}", on_fail: nil)
          "#{command} exited with code: %{status}" % {status: $?.exitstatus}
       end
     end
