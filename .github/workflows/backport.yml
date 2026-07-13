@@ -21,7 +21,7 @@ jobs:
     # For security reasons, we don't want to checkout and run arbitrary code when
     # using the pull_request_target trigger. So restrict this to cases where the
     # backport label is applied to an already merged PR.
-    if: github.event.pull_request.merged && contains(github.event.label.name, 'backport')
+    if: github.event.pull_request.merged && startsWith(github.event.label.name, 'backport ')
     steps:
       - name: Add SSH key
         run: |
