@@ -93,12 +93,6 @@ describe LegacyFacter::Util::Collection do
       expect(collection.define_fact(:newfact)).to equal fact
     end
 
-    it 'passes options to newly generated facts' do
-      allow(logger).to receive(:warnonce)
-      fact = collection.define_fact(:newfact, ldapname: 'NewFact')
-      expect(fact.ldapname).to eq 'NewFact'
-    end
-
     it 'logs an error if the fact name contains the utf-8 null byte' do
       name = "Uncool\0Name"
       normalization_error = LegacyFacter::Util::Normalization::NormalizationError

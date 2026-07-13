@@ -162,8 +162,6 @@ module LegacyFacter
         if fact.nil?
           fact = Facter::Util::Fact.new(name, options)
           @facts[name] = fact
-        else
-          fact.extract_ldapname_option!(options)
         end
 
         fact
