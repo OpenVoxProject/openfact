@@ -68,23 +68,32 @@ describe Facter::Core::Execution do
 
     context 'when passing deprecated arguments' do
       %i[time_limit limit].each do |option|
-        it 'executes the found command with a timeout' do
+        it "executes the found command with a timeout when #{option} is used" do
+          allow(logger).to receive(:warnonce)
           execution.execute('waffles', option => 90)
           expect(impl).to have_received(:execute_command).with('/under/the/honey/are/the/waffles', :raise, nil, 90)
         end
+
+        it "emits a deprecation warning when #{option} is used" do
+          expect(logger).to receive(:warnonce)
+            .with("#{option} is deprecated and will be removed in a future version, use timeout instead")
+          execution.execute('waffles', option => 90)
+        end
       end
 
-      it 'emits a warning to the default logger' do
+      it 'does not include deprecated timeout keys in the unexpected key warning' do
+        allow(logger).to receive(:warnonce)
         expect(logger).to receive(:warn)
-          .with('Unexpected key passed to Facter::Core::Execution.execute option: time_limit,bad_opt' \
+          .with('Unexpected key passed to Facter::Core::Execution.execute option: bad_opt' \
             ' - valid keys: on_fail,expand,logger,timeout')
 
         execution.execute('waffles', time_limit: 90, bad_opt: true)
       end
 
-      it 'ignores the passed in logger when logging the warning' do
+      it 'ignores the passed in logger when logging warnings' do
+        allow(logger).to receive(:warnonce)
         expect(logger).to receive(:warn)
-          .with('Unexpected key passed to Facter::Core::Execution.execute option: time_limit,bad_opt' \
+          .with('Unexpected key passed to Facter::Core::Execution.execute option: bad_opt' \
             ' - valid keys: on_fail,expand,logger,timeout')
 
         execution.execute('waffles', time_limit: 90, bad_opt: true, logger: Facter::Log.new('ignored'))
