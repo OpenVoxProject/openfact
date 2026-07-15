@@ -21,10 +21,25 @@ module Facter
             dhcp ||= search_dhclient_leases(interface_name)
             dhcp ||= search_internal_leases(interface_name)
             dhcp ||= search_with_dhcpcd_command(interface_name)
+            dhcp ||= search_wicked_leases(interface_name)
             dhcp
           end
 
           private
+
+          def search_wicked_leases(interface_name)
+            path_candidate = "/var/lib/wicked/lease-#{interface_name}-dhcp-ipv4.xml"
+
+            return unless File.exist? path_candidate
+
+            @log.debug("Attempt to get DHCP for interface #{interface_name}, from #{path_candidate}")
+
+            require 'rexml/document'
+
+            xmlstring = File.open(path_candidate).read.gsub('ipv4:dhcp', 'ipv4_dhcp')
+            rex = REXML::Document.new xmlstring
+            rex.root.elements['/lease/ipv4_dhcp/server-id/'].text
+          end
 
           def search_systemd_netif_leases(index, interface_name)
             return if index.nil?
