@@ -85,3 +85,16 @@ Style/Documentation:
 Style/OptionalBooleanParameter:
   Exclude:
     - 'lib/facter/util/resolvers/http.rb'
+
+# Offense count: 13
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/SlicingWithRange:
+  Exclude:
+    - 'install.rb'
+    - 'lib/facter/facts/solaris/ldom.rb'
+    - 'lib/facter/framework/cli/cli.rb'
+    - 'lib/facter/resolvers/aix/serialnumber.rb'
+    - 'lib/facter/resolvers/freebsd/swap_memory.rb'
+    - 'lib/facter/resolvers/networking.rb'
+    - 'lib/facter/resolvers/partitions.rb'
+    - 'lib/facter/util/api_debugger.rb'
