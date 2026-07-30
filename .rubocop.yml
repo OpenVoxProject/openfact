@@ -1,14 +1,14 @@
 ---
 inherit_from: .rubocop_todo.yml
-
 AllCops:
-  TargetRubyVersion: 2.7
+  NewCops: enable
+  TargetRubyVersion: 3.0
   Exclude:
     - acceptance/**/*
     - vendor/**/*
     - .vendor/**/*
 
-require:
+plugins:
   - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
@@ -46,7 +46,7 @@ Naming/MethodName:
     - 'spec/mocks/win32ole.rb'
     - 'spec/mocks/ffi.rb'
 
-Naming/PredicateName:
+Naming/PredicatePrefix:
   Exclude:
     - 'spec/**/*'
 
