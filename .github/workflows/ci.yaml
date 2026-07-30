@@ -12,6 +12,13 @@ permissions:
   contents: read
 
 jobs:
+  validate_manpage:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      # on violations, `man` outputs `warning...` but exit code still stays 0, hence the grep workaround
+      - run: LC_ALL=C.UTF-8 MANROFFSEQ='' MANWIDTH=80 man --warnings -E UTF-8 -l -Tutf8 -Z man/man1/facter.1 2>&1 | grep -vz warning
+
   rubocop_and_matrix:
     runs-on: ubuntu-24.04
     outputs:
@@ -173,6 +180,7 @@ jobs:
   tests:
     if: always()
     needs:
+      - validate_manpage
       - rubocop_and_matrix
       - linux_unit_tests
       - windows_unit_tests
