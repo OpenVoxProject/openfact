@@ -36,7 +36,7 @@ module Facter
           end
 
           def convert_to_seconds(days, hours, minutes, seconds)
-            days * 24 * 3600 + hours * 3600 + minutes * 60 + seconds
+            (days * 24 * 3600) + (hours * 3600) + (minutes * 60) + seconds
           end
         end
       end

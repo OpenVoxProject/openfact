@@ -13,7 +13,7 @@ module Facter
         end
 
         def read_path_from_env
-          @fact_list[:path] = ENV['PATH']
+          @fact_list[:path] = ENV.fetch('PATH', nil)
         end
       end
     end

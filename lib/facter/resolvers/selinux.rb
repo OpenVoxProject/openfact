@@ -58,7 +58,7 @@ module Facter
             @fact_list[:config_policy] = line.split('=').last.strip if /^SELINUXTYPE=/.match?(line)
           end
 
-          !file_lines.empty? ? true : false
+          file_lines.empty? ? false : true
         end
       end
     end

@@ -25,7 +25,7 @@ module LegacyFacter
       end
 
       def self.windows_data_dir
-        ENV['ProgramData'] || ENV['APPDATA'] if LegacyFacter::Util::Config.windows?
+        ENV['ProgramData'] || ENV.fetch('APPDATA', nil) if LegacyFacter::Util::Config.windows?
       end
 
       def self.external_facts_dirs

@@ -15,7 +15,7 @@ module Facter
         def retrieve_windows_binaries_path
           require_relative '../../../facter/resolvers/windows/ffi/system32_ffi'
 
-          windows_path = ENV['SystemRoot']
+          windows_path = ENV['SystemRoot'] # rubocop:disable Style/FetchEnvVar
 
           if !windows_path || windows_path.empty?
             @log.debug 'Unable to find correct value for SystemRoot enviroment variable'

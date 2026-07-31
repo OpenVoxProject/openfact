@@ -42,21 +42,8 @@ describe Facts::Solaris::Ldom do
       end
 
       it 'returns virtual fact as ldom' do
-        expect(fact.call_the_resolver).to match_array(
-          [
-            an_object_having_attributes(name: 'ldom', value: value, type: :core),
-            an_object_having_attributes(name: 'ldom_domainchassis', value: 'AK00358110', type: :legacy),
-            an_object_having_attributes(name: 'ldom_domaincontrol', value: 'opdx-a0-sun2', type: :legacy),
-            an_object_having_attributes(name: 'ldom_domainname', value: 'sol11-9', type: :legacy),
-            an_object_having_attributes(name: 'ldom_domainrole_control', value: 'false', type: :legacy),
-            an_object_having_attributes(name: 'ldom_domainrole_impl', value: 'LDoms', type: :legacy),
-            an_object_having_attributes(name: 'ldom_domainrole_io', value: 'false', type: :legacy),
-            an_object_having_attributes(name: 'ldom_domainrole_root', value: 'false', type: :legacy),
-            an_object_having_attributes(name: 'ldom_domainrole_service', value: 'false', type: :legacy),
-            an_object_having_attributes(name: 'ldom_domainuuid', value: 'd7a3a4df-ce8c-47a9-b396-cb5a5f30c0b2',
-                                        type: :legacy)
-          ]
-        )
+        expect(fact.call_the_resolver).to contain_exactly(an_object_having_attributes(name: 'ldom', value: value, type: :core), an_object_having_attributes(name: 'ldom_domainchassis', value: 'AK00358110', type: :legacy), an_object_having_attributes(name: 'ldom_domaincontrol', value: 'opdx-a0-sun2', type: :legacy), an_object_having_attributes(name: 'ldom_domainname', value: 'sol11-9', type: :legacy), an_object_having_attributes(name: 'ldom_domainrole_control', value: 'false', type: :legacy), an_object_having_attributes(name: 'ldom_domainrole_impl', value: 'LDoms', type: :legacy), an_object_having_attributes(name: 'ldom_domainrole_io', value: 'false', type: :legacy), an_object_having_attributes(name: 'ldom_domainrole_root', value: 'false', type: :legacy), an_object_having_attributes(name: 'ldom_domainrole_service', value: 'false', type: :legacy), an_object_having_attributes(name: 'ldom_domainuuid', value: 'd7a3a4df-ce8c-47a9-b396-cb5a5f30c0b2',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     type: :legacy))
       end
     end
 

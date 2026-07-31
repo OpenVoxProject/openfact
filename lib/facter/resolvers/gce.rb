@@ -6,7 +6,7 @@ module Facter
       init_resolver
 
       METADATA_URL = 'http://metadata.google.internal/computeMetadata/v1/?recursive=true&alt=json'
-      HEADERS = { "Metadata-Flavor": 'Google', "Accept": 'application/json' }.freeze
+      HEADERS = { 'Metadata-Flavor': 'Google', Accept: 'application/json' }.freeze
 
       class << self
         private

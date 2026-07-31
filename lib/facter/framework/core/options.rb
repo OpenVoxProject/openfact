@@ -16,7 +16,7 @@ module Facter
       end
 
       def []=(key, value)
-        OptionStore.send("#{key}=".to_sym, value)
+        OptionStore.send(:"#{key}=", value)
       end
 
       def custom_dir?

@@ -56,7 +56,7 @@ module Facter
         end
 
         def determine_session_timeout
-          session_env = ENV['EC2_SESSION_TIMEOUT']
+          session_env = ENV.fetch('EC2_SESSION_TIMEOUT', nil)
           session_env ? session_env.to_i : EC2_SESSION_TIMEOUT
         end
 

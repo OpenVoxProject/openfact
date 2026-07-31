@@ -4,7 +4,7 @@ describe LegacyFacter::Util::Normalization do
   subject(:normalization) { LegacyFacter::Util::Normalization }
 
   def utf16(str)
-    if String.method_defined?(:encode) && defined?(::Encoding)
+    if String.method_defined?(:encode) && defined?(Encoding)
       str.encode(Encoding::UTF_16LE)
     else
       str
@@ -12,7 +12,7 @@ describe LegacyFacter::Util::Normalization do
   end
 
   def utf8(str)
-    if String.method_defined?(:encode) && defined?(::Encoding)
+    if String.method_defined?(:encode) && defined?(Encoding)
       str.encode(Encoding::UTF_8)
     else
       str
@@ -20,7 +20,7 @@ describe LegacyFacter::Util::Normalization do
   end
 
   describe 'validating strings' do
-    describe 'and string encoding is supported', if: String.instance_methods.include?(:encoding) do
+    describe 'and string encoding is supported', if: String.method_defined?(:encoding) do
       it 'accepts strings that are ASCII and match their encoding and converts them to UTF-8' do
         str = 'ASCII'.encode(Encoding::ASCII)
         normalized_str = normalization.normalize(str)
@@ -92,7 +92,7 @@ describe LegacyFacter::Util::Normalization do
       end
     end
 
-    describe 'and string encoding is not supported', unless: String.instance_methods.include?(:encoding) do
+    describe 'and string encoding is not supported', unless: String.method_defined?(:encoding) do
       it 'accepts strings that are UTF-8 and match their encoding' do
         str = "let's make a ☃!"
         expect(normalization.normalize(str)).to eq(str)

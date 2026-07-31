@@ -10,7 +10,7 @@ describe Facter::Core::Execution::Base do
       test_env = { 'LANG' => 'C', 'LC_ALL' => 'C', 'FOO' => 'BAR' }
       executor.with_env test_env do
         test_env.each_key do |key|
-          expect(ENV[key]).to eq test_env[key]
+          expect(ENV.fetch(key, nil)).to eq test_env[key]
         end
       end
     end
@@ -24,7 +24,7 @@ describe Facter::Core::Execution::Base do
       # grab some values from the existing ENV (arbitrarily choosing 3 here)
       ENV.keys.first(3).each do |key|
         # save the original values so that we can test against them later
-        orig_env[key] = ENV[key]
+        orig_env[key] = ENV.fetch(key, nil)
         # create bogus temp values for the chosen keys
         new_env[key] = sentinel_value
       end
@@ -32,7 +32,7 @@ describe Facter::Core::Execution::Base do
       # verify that, during the 'with_env', the new values are used
       executor.with_env new_env do
         orig_env.each_key do |key|
-          expect(ENV[key]).to eq new_env[key]
+          expect(ENV.fetch(key, nil)).to eq new_env[key]
         end
       end
     end
@@ -46,14 +46,14 @@ describe Facter::Core::Execution::Base do
       # grab some values from the existing ENV (arbitrarily choosing 3 here)
       ENV.keys.first(3).each do |key|
         # save the original values so that we can test against them later
-        orig_env[key] = ENV[key]
+        orig_env[key] = ENV.fetch(key, nil)
         # create bogus temp values for the chosen keys
         new_env[key] = sentinel_value
       end
 
       # verify that, after the 'with_env', the old values are restored
       orig_env.each_key do |key|
-        expect(ENV[key]).to eq orig_env[key]
+        expect(ENV.fetch(key, nil)).to eq orig_env[key]
       end
     end
 
@@ -72,7 +72,7 @@ describe Facter::Core::Execution::Base do
 
       handy_method
 
-      expect(ENV[sentinel_var]).to eq 'foo'
+      expect(ENV.fetch(sentinel_var, nil)).to eq 'foo'
     end
   end
 

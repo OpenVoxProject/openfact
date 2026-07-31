@@ -31,11 +31,11 @@ module Facter
           def add_mount_points_fact(line)
             elem = line.split("\s")
 
-            if line[0] != ' '
+            if line[0] == ' '
+              device = elem[0]
+            else
               server = elem.shift
               device = "#{server}:#{elem[0]}"
-            else
-              device = elem[0]
             end
 
             @fact_list[:mountpoints][elem[1]] = { device: device, filesystem: elem[2],
