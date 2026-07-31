@@ -80,6 +80,7 @@ jobs:
         ruby:
           - '3.2'
           - '4.0'
+      fail-fast: false
     runs-on: windows-2025
     steps:
       - name: Checkout current PR
