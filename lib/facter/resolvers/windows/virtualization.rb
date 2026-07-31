@@ -30,8 +30,7 @@ module Facter
             win = Facter::Util::Windows::Win32Ole.new
             comp = win.exec_query('SELECT Manufacturer,Model,OEMStringArray FROM Win32_ComputerSystem')
             unless comp
-              @log.debug 'WMI query returned no results for Win32_ComputerSystem with values'\
-              ' Manufacturer, Model and OEMStringArray.'
+              @log.debug 'WMI query returned no results for Win32_ComputerSystem with values Manufacturer, Model and OEMStringArray.'
               return
             end
 

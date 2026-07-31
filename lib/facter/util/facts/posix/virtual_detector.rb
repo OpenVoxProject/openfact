@@ -8,8 +8,8 @@ module Facter
           class << self
             def platform
               @fact_value ||= # rubocop:disable Naming/MemoizedInstanceVariableName
-                check_docker_lxc || check_freebsd || check_openbsd || check_gce || check_illumos_lx || \
-                retrieve_from_virt_what || check_vmware || check_open_vz || check_vserver || \
+                check_docker_lxc || check_freebsd || check_openbsd || check_gce || check_illumos_lx ||
+                retrieve_from_virt_what || check_vmware || check_open_vz || check_vserver ||
                 check_xen || check_other_facts || check_lspci || 'physical'
             end
 

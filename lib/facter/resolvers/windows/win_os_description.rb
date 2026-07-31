@@ -16,8 +16,7 @@ module Facter
           win = Facter::Util::Windows::Win32Ole.new
           op_sys = win.return_first('SELECT ProductType,OtherTypeDescription FROM Win32_OperatingSystem')
           unless op_sys
-            @log.debug 'WMI query returned no results for Win32_OperatingSystem'\
-                       'with values ProductType and OtherTypeDescription.'
+            @log.debug 'WMI query returned no results for Win32_OperatingSystem with values ProductType and OtherTypeDescription.'
             return
           end
           @fact_list[:consumerrel] = (op_sys.ProductType == 1)

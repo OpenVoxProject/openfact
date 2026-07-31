@@ -104,8 +104,7 @@ describe Facter::Util::Fact do
 
     it 'raises an error if there is an existing resolution with a different type' do
       expect(logger).to receive(:error).with(
-        "Unable to add resolve \"named\" for fact 'yay': Cannot return resolution named with type aggregate; already "\
-          'defined as simple', true
+        "Unable to add resolve \"named\" for fact 'yay': Cannot return resolution named with type aggregate; already defined as simple", true
       )
 
       fact.define_resolution('named', type: :simple)

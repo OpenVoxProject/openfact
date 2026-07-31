@@ -64,8 +64,7 @@ module LegacyFacter
           next if file_blocked?(basename)
 
           if facts.find { |f| f.name == basename } && cm.fact_cache_enabled?(basename)
-            Facter.log_exception(Exception.new("Caching is enabled for group \"#{basename}\" while "\
-              'there are at least two external facts files with the same filename'))
+            Facter.log_exception(Exception.new("Caching is enabled for group \"#{basename}\" while there are at least two external facts files with the same filename"))
           else
             searched_fact = Facter::SearchedFact.new(basename, nil, nil, :file)
             searched_fact.file = file
@@ -93,10 +92,7 @@ module LegacyFacter
           if data == false
             log.warn "Could not interpret fact file #{fact.file}"
           elsif (data == {}) || data.nil?
-            log.debug(
-              "Structured data fact file #{fact.file} was parsed but was either empty or an invalid filetype "\
-                '(valid filetypes are .yaml, .json, and .txt).'
-            )
+            log.debug("Structured data fact file #{fact.file} was parsed but was either empty or an invalid filetype (valid filetypes are .yaml, .json, and .txt).")
           elsif !data.is_a?(Hash)
             log.error("Structured data fact file #{fact.file} was parsed but no key=>value data was returned.")
           else

@@ -6,6 +6,7 @@ module Facter
       module FFI
         module Ioctl
           extend ::FFI::Library
+
           ffi_lib ::FFI::Library::LIBC, 'socket'
 
           attach_function :ioctl_base, :ioctl, %i[int int pointer], :int

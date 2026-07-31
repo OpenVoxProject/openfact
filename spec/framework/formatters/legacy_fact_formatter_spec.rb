@@ -95,8 +95,7 @@ describe Facter::LegacyFactFormatter do
         end
 
         it 'prints only the fact that is not nil' do
-          expect(legacy_formatter.format([nil_resolved_fact1, resolved_fact2])).to eq('resolved_fact2 =>'\
-                                                                                                ' resolved_fact2_value')
+          expect(legacy_formatter.format([nil_resolved_fact1, resolved_fact2])).to eq('resolved_fact2 => resolved_fact2_value')
         end
       end
 
@@ -106,8 +105,7 @@ describe Facter::LegacyFactFormatter do
         end
 
         it 'prints only the fact that is not nil' do
-          expect(legacy_formatter.format([nil_nested_fact1, nil_nested_fact2, resolved_fact2]))
-            .to eq('resolved_fact2 => resolved_fact2_value')
+          expect(legacy_formatter.format([nil_nested_fact1, nil_nested_fact2, resolved_fact2])).to eq('resolved_fact2 => resolved_fact2_value')
         end
       end
     end
@@ -201,27 +199,23 @@ describe Facter::LegacyFactFormatter do
     context 'with fact value that is nil' do
       context 'with a root level fact' do
         it 'prints no values if all facts are nil' do
-          expect(legacy_formatter.format([nil_resolved_fact1, nil_resolved_fact2]))
-            .to eq("nil_resolved_fact1 => \nnil_resolved_fact2 => ")
+          expect(legacy_formatter.format([nil_resolved_fact1, nil_resolved_fact2])).to eq("nil_resolved_fact1 => \nnil_resolved_fact2 => ")
         end
 
         it 'prints a value only for the fact that is not nil' do
-          expect(legacy_formatter.format([nil_resolved_fact1, resolved_fact2]))
-            .to eq("nil_resolved_fact1 => \nresolved_fact2 => resolved_fact2_value")
+          expect(legacy_formatter.format([nil_resolved_fact1, resolved_fact2])).to eq("nil_resolved_fact1 => \nresolved_fact2 => resolved_fact2_value")
         end
       end
 
       context 'with facts that are nested' do
         it 'returns empty strings for first and leaf level query' do
-          expect(legacy_formatter.format([nil_resolved_fact1, nil_nested_fact2]))
-            .to eq("my.nested.fact2 => \nnil_resolved_fact1 => ")
+          expect(legacy_formatter.format([nil_resolved_fact1, nil_nested_fact2])).to eq("my.nested.fact2 => \nnil_resolved_fact1 => ")
         end
 
         it 'returns empty strings for leaf level query' do
           nil_nested_fact1.user_query = 'my.nested.fact1'
 
-          expect(legacy_formatter.format([nil_resolved_fact1, resolved_fact2]))
-            .to eq("nil_resolved_fact1 => \nresolved_fact2 => resolved_fact2_value")
+          expect(legacy_formatter.format([nil_resolved_fact1, resolved_fact2])).to eq("nil_resolved_fact1 => \nresolved_fact2 => resolved_fact2_value")
         end
       end
     end
@@ -235,37 +229,31 @@ describe Facter::LegacyFactFormatter do
 
   context 'when fact starts with double ":"' do
     let(:resolved_fact) do
-      instance_spy(Facter::ResolvedFact, name: 'networking', value: { ip6: '::1' },
-                                         user_query: 'networking', type: :core)
+      instance_spy(Facter::ResolvedFact, name: 'networking', value: { ip6: '::1' }, user_query: 'networking', type: :core)
     end
 
     it 'formats the fact correctly' do
-      expect(legacy_formatter.format([resolved_fact]))
-        .to eq("{\n  ip6 => \"::1\"\n}")
+      expect(legacy_formatter.format([resolved_fact])).to eq("{\n  ip6 => \"::1\"\n}")
     end
   end
 
   context 'when fact name contains a windows path' do
     let(:resolved_fact) do
-      instance_spy(Facter::ResolvedFact, name: 'C:\\Program Files\\App', value: 'bin_dir',
-                                         user_query: '', type: :core)
+      instance_spy(Facter::ResolvedFact, name: 'C:\\Program Files\\App', value: 'bin_dir', user_query: '', type: :core)
     end
 
     it 'formats the fact correctly' do
-      expect(legacy_formatter.format([resolved_fact]))
-        .to eq('C:\\Program Files\\App => bin_dir')
+      expect(legacy_formatter.format([resolved_fact])).to eq('C:\\Program Files\\App => bin_dir')
     end
   end
 
   context 'when fact value contains newline' do
     let(:resolved_fact) do
-      instance_spy(Facter::ResolvedFact, name: 'custom_fact', value: 'value1 \n value2',
-                                         user_query: '', type: :core)
+      instance_spy(Facter::ResolvedFact, name: 'custom_fact', value: 'value1 \n value2', user_query: '', type: :core)
     end
 
     it 'formats the fact correctly' do
-      expect(legacy_formatter.format([resolved_fact]))
-        .to eq("custom_fact => value1 \n value2")
+      expect(legacy_formatter.format([resolved_fact])).to eq("custom_fact => value1 \n value2")
     end
   end
 end
