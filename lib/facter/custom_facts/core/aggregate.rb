@@ -109,7 +109,7 @@ module Facter
       # @api private
       def evaluate(&block)
         if @last_evaluated
-          msg = +"Already evaluated #{@name}"
+          msg = "Already evaluated #{@name}"
           msg << " at #{@last_evaluated}" if msg.is_a? String
           msg << ', reevaluating anyways'
           log.warn msg

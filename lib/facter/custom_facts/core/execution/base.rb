@@ -20,7 +20,7 @@ module Facter
           old = {}
           values.each do |var, value|
             # save the old value if it exists
-            if (old_val = ENV[var])
+            if (old_val = ENV.fetch(var, nil))
               old[var] = old_val
             end
             # set the new (temporary) value for the environment variable
@@ -44,7 +44,7 @@ module Facter
         def execute(command, options = {})
           on_fail, expand, logger, timeout = extract_options(options)
 
-          expanded_command = if !expand && builtin_command?(command) || logger
+          expanded_command = if (!expand && builtin_command?(command)) || logger
                                command
                              else
                                expand_command(command)
@@ -116,7 +116,7 @@ module Facter
           expand = options.fetch(:expand, true)
           logger = options[:logger]
           timeout = (options[:timeout] || options[:time_limit] || options[:limit]).to_i
-          timeout = timeout.positive? ? timeout : nil
+          timeout = nil unless timeout.positive?
 
           (options.keys & DEPRECATED_TIMEOUT_OPTIONS).each do |key|
             @log.warnonce("#{key} is deprecated and will be removed in a future version, use timeout instead")

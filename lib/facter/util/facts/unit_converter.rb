@@ -42,7 +42,7 @@ module Facter
           def determine_exponent(bytes)
             prefix = %w[KiB MiB GiB TiB PiB EiB]
             exp = (Math.log2(bytes) / 10.0).floor
-            converted_number = (100.0 * (bytes / 1024.0**exp)).round / 100.0
+            converted_number = (100.0 * (bytes / (1024.0**exp))).round / 100.0
 
             if (converted_number - 1024.0).abs < Float::EPSILON
               exp += 1
@@ -57,7 +57,7 @@ module Facter
           def determine_metric_prefix(num)
             metric_prefix = { 0 => '', 3 => 'k', 6 => 'M', 9 => 'G', 12 => 'T' }
             power = Math.log10(num).floor
-            display_exponent = power - power % 3
+            display_exponent = power - (power % 3)
             coefficient = power.zero? ? num.to_f : num.fdiv(10**display_exponent)
             [coefficient, metric_prefix[display_exponent]]
           end

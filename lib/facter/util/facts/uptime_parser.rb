@@ -75,23 +75,23 @@ module Facter
           def calculate_days_hours_minutes(output)
             return unless output =~ /(\d+) day(?:s|\(s\))?,?\s+(\d+):-?(\d+)/
 
-            SECS_IN_A_DAY * Regexp.last_match(1).to_i +
-              SECS_IN_AN_HOUR * Regexp.last_match(2).to_i +
-              SECS_IN_A_MINUTE * Regexp.last_match(3).to_i
+            (SECS_IN_A_DAY * Regexp.last_match(1).to_i) +
+              (SECS_IN_AN_HOUR * Regexp.last_match(2).to_i) +
+              (SECS_IN_A_MINUTE * Regexp.last_match(3).to_i)
           end
 
           def calculate_days_hours(output)
             return unless output =~ /(\d+) day(?:s|\(s\))?,\s+(\d+) hr(?:s|\(s\))?,/
 
-            SECS_IN_A_DAY * Regexp.last_match(1).to_i +
-              SECS_IN_AN_HOUR * Regexp.last_match(2).to_i
+            (SECS_IN_A_DAY * Regexp.last_match(1).to_i) +
+              (SECS_IN_AN_HOUR * Regexp.last_match(2).to_i)
           end
 
           def calculate_days_minutes(output)
             return unless output =~ /(\d+) day(?:s|\(s\))?,\s+(\d+) min(?:s|\(s\))?,/
 
-            SECS_IN_A_DAY * Regexp.last_match(1).to_i +
-              SECS_IN_A_MINUTE * Regexp.last_match(2).to_i
+            (SECS_IN_A_DAY * Regexp.last_match(1).to_i) +
+              (SECS_IN_A_MINUTE * Regexp.last_match(2).to_i)
           end
 
           def calculate_days(output)
@@ -106,8 +106,8 @@ module Facter
           def calculate_hours_minutes(output)
             return unless output =~ /up\s+(\d+):-?(\d+),/
 
-            SECS_IN_AN_HOUR * Regexp.last_match(1).to_i +
-              SECS_IN_A_MINUTE * Regexp.last_match(2).to_i
+            (SECS_IN_AN_HOUR * Regexp.last_match(1).to_i) +
+              (SECS_IN_A_MINUTE * Regexp.last_match(2).to_i)
           end
 
           def calculate_hours(output)

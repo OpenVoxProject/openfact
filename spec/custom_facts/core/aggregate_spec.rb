@@ -23,7 +23,7 @@ describe Facter::Core::Aggregate do
     aggregate3.options(weight: 3)
 
     expect(
-      [aggregate1, aggregate2, aggregate3].sort { |a, b| b <=> a }
+      [aggregate1, aggregate2, aggregate3].sort.reverse
     ).to eq([aggregate3, aggregate2, aggregate1])
   end
 
@@ -81,7 +81,7 @@ describe Facter::Core::Aggregate do
       aggregate_res.chunk(:first, require: [:second]) {}
       aggregate_res.chunk(:second, require: [:first]) {}
 
-      allow(Facter).to receive(:log_exception).with(StandardError, /dependency cycles: .*[:first, :second]/)
+      allow(Facter).to receive(:log_exception).with(StandardError, /dependency cycles: .*[:first, :second]/) # rubocop:disable Lint/DuplicateRegexpCharacterClassElement
       expect { aggregate_res.value }.to raise_error(Facter::ResolveCustomFactError)
     end
 

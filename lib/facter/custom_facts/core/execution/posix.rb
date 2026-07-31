@@ -25,14 +25,14 @@ module Facter
           nil
         end
 
-        ABSOLUTE_PATH_REGEX = %r{^/}.freeze
+        ABSOLUTE_PATH_REGEX = %r{^/}
 
         def absolute_path?(path)
           !!(path =~ ABSOLUTE_PATH_REGEX)
         end
 
-        DOUBLE_QUOTED_COMMAND = /\A"(.+?)"(?:\s+(.*))?/.freeze
-        SINGLE_QUOTED_COMMAND = /\A'(.+?)'(?:\s+(.*))?/.freeze
+        DOUBLE_QUOTED_COMMAND = /\A"(.+?)"(?:\s+(.*))?/
+        SINGLE_QUOTED_COMMAND = /\A'(.+?)'(?:\s+(.*))?/
 
         def expand_command(command)
           exe = nil
@@ -48,7 +48,7 @@ module Facter
           return unless exe && (expanded = which(exe))
 
           expanded = expanded.dup
-          expanded = +"'#{expanded}'" if /\s/.match?(expanded)
+          expanded = "'#{expanded}'" if /\s/.match?(expanded)
           expanded << " #{args}" if args
 
           expanded
