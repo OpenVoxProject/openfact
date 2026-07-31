@@ -74,6 +74,8 @@ jobs:
       - run: bundle exec rake spec_random
 
   windows_unit_tests:
+    needs:
+      - rubocop_and_matrix
     name: Unit tests on Windows with Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
@@ -93,6 +95,8 @@ jobs:
       - run: bundle exec rake spec_random
 
   acceptance_tests:
+    needs:
+      - rubocop_and_matrix
     name: Platform
     strategy:
       matrix:
@@ -152,6 +156,8 @@ jobs:
         run: ruby $Env:FACTER_ROOT/.github/actions/presuite.rb ${{ matrix.os }}
 
   integration_tests:
+    needs:
+      - rubocop_and_matrix
     name: Integration on ${{ matrix.cfg.os }} with Ruby ${{ matrix.cfg.ruby }}
     strategy:
       fail-fast: false
