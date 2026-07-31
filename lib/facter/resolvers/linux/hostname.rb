@@ -50,7 +50,7 @@ module Facter
             end
 
             log.debug("Tried to retrieve hostname and got: #{output}")
-            output unless output&.empty?
+            output unless output && output.empty?
           end
 
           def parse_fqdn(output)

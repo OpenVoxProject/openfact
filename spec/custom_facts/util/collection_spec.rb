@@ -97,7 +97,7 @@ describe LegacyFacter::Util::Collection do
       name = "Uncool\0Name"
       normalization_error = LegacyFacter::Util::Normalization::NormalizationError
       expect(logger).to receive(:log_exception).with(an_instance_of(normalization_error)) do |exception|
-        expect(exception.message).to match(/contains a null byte reference/)
+        expect(exception.message).to include('contains a null byte reference')
       end
       collection.define_fact(name)
     end
