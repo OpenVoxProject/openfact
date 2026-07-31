@@ -68,7 +68,7 @@ describe 'Facter' do
           end
           facter_code.call do
             expect(logger).to receive(:log_exception).with(an_instance_of(normalization_error)) do |exception|
-              expect(exception.message).to match(/contains a null byte reference/)
+              expect(exception.message).to include('contains a null byte reference')
             end
           end
         end
@@ -81,7 +81,7 @@ describe 'Facter' do
           end
           facter_code.call do
             expect(logger).to receive(:log_exception).with(an_instance_of(normalization_error)) do |exception|
-              expect(exception.message).to match(/contains a null byte reference/)
+              expect(exception.message).to include('contains a null byte reference')
             end
           end
         end
@@ -146,7 +146,7 @@ describe 'Facter' do
         it 'shows errors in the logs when trying to read in the facts with bad values' do
           allow(Facter).to receive(:log_exception) do |exception, message|
             expect(exception).to be_a(LegacyFacter::Util::Normalization::NormalizationError)
-            expect(message).to match(/contains a null byte reference/)
+            expect(message).to include('contains a null byte reference')
           end
           expect(Facter.value('valid_key')).to be_nil
         end
