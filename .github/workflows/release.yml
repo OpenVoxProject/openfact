@@ -8,10 +8,14 @@ on:
         required: true
         type: string
       base-branch:
-        description: 'The branch where we do this release.'
+        description: 'The branch to release from.'
         required: false
-        default: ''
         type: string
+        type: choice
+        options:
+          - main
+          - '5.x'
+        default: 'main'
 
 permissions: {}
 
