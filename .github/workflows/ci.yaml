@@ -15,7 +15,7 @@ jobs:
   validate_manpage:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # on violations, `man` outputs `warning...` but exit code still stays 0, hence the grep workaround
       - run: LC_ALL=C.UTF-8 MANROFFSEQ='' MANWIDTH=80 man --warnings -E UTF-8 -l -Tutf8 -Z man/man1/facter.1 2>&1 | grep -vz warning
 
@@ -24,7 +24,7 @@ jobs:
     outputs:
       ruby: ${{ steps.ruby.outputs.versions }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
         with:
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # we explictly force Java 17 because that's the lowest one we support when building packages with ezbake
       - name: Set up Java 17 for JRuby 9
         if: contains(matrix.ruby, 'jruby-9')
@@ -84,7 +84,7 @@ jobs:
     runs-on: windows-2025
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Rspec checks
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
@@ -110,7 +110,7 @@ jobs:
 
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: facter
 
@@ -176,7 +176,7 @@ jobs:
       BUNDLE_WITH: 'integration'
     steps:
       - name: Checkout current PR
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Rspec checks
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
