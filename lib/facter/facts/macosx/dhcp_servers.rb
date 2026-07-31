@@ -8,7 +8,7 @@ module Facts
 
       def call_the_resolver
         fact_value = construct_addresses_hash
-        fact_value = !fact_value || fact_value.empty? ? nil : fact_value
+        fact_value = nil if !fact_value || fact_value.empty?
         Facter::ResolvedFact.new(FACT_NAME, fact_value, :legacy)
       end
 

@@ -121,9 +121,9 @@ module Facter
 
             ip_protocol_type = ipv4_type ? '' : '6'
 
-            values["ip#{ip_protocol_type}".to_sym] = binding[:address]
-            values["netmask#{ip_protocol_type}".to_sym] = binding[:netmask]
-            values["network#{ip_protocol_type}".to_sym] = binding[:network]
+            values[:"ip#{ip_protocol_type}"] = binding[:address]
+            values[:"netmask#{ip_protocol_type}"] = binding[:netmask]
+            values[:"network#{ip_protocol_type}"] = binding[:network]
             values[:scope6] = get_scope(binding[:address]) unless ipv4_type
           end
         end

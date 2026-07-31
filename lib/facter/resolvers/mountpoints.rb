@@ -48,7 +48,7 @@ module Facter
               mount = {}
               get_mount_data(file_system, mount)
 
-              if mount[:path] =~ %r{^/(proc|sys)} && mount[:filesystem] != 'tmpfs' || mount[:filesystem] == 'autofs'
+              if (mount[:path] =~ %r{^/(proc|sys)} && mount[:filesystem] != 'tmpfs') || mount[:filesystem] == 'autofs'
                 next
               end
 

@@ -83,8 +83,8 @@ describe LegacyFacter::Util::Config do
       allow(LegacyFacter::Util::Root).to receive(:root?).and_return(false)
       LegacyFacter::Util::Config.setup_default_ext_facts_dirs
       expect(LegacyFacter::Util::Config.external_facts_dirs)
-        .to eq [File.join(ENV['HOME'], '.facter', 'facts.d'),
-                File.join(ENV['HOME'], '.puppetlabs', 'opt', 'facter', 'facts.d')]
+        .to eq [File.join(ENV.fetch('HOME', nil), '.facter', 'facts.d'),
+                File.join(ENV.fetch('HOME', nil), '.puppetlabs', 'opt', 'facter', 'facts.d')]
     end
 
     it 'includes additional values when user appends to the list' do

@@ -162,7 +162,7 @@ module Facter
       end
 
       def set(key, value)
-        send("#{key}=".to_sym, value)
+        send(:"#{key}=", value)
       end
 
       def reset

@@ -30,7 +30,7 @@ module Facter
         end
 
         def determine_session_timeout
-          session_env = ENV['AZ_SESSION_TIMEOUT']
+          session_env = ENV.fetch('AZ_SESSION_TIMEOUT', nil)
           session_env ? session_env.to_i : AZ_SESSION_TIMEOUT
         end
       end

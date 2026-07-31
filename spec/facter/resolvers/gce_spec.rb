@@ -2,7 +2,7 @@
 
 describe Facter::Resolvers::Gce do
   let(:gce_metadata_url) { 'http://metadata.google.internal/computeMetadata/v1/?recursive=true&alt=json' }
-  let(:gce_url_headers) { { "Metadata-Flavor": 'Google', "Accept": 'application/json' } }
+  let(:gce_url_headers) { { 'Metadata-Flavor': 'Google', Accept: 'application/json' } }
 
   before do
     allow(Facter::Util::Resolvers::Http).to receive(:get_request)

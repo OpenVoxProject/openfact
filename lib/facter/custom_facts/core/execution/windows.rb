@@ -22,7 +22,7 @@ module Facter
               dest = File.join(dir, bin)
               dest.gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
               if File.extname(dest).empty?
-                exts = ENV['PATHEXT']
+                exts = ENV['PATHEXT'] # rubocop:disable Style/FetchEnvVar
                 exts = exts ? exts.split(File::PATH_SEPARATOR) : DEFAULT_COMMAND_EXTENSIONS
                 exts.each do |ext|
                   destext = dest + ext
@@ -38,13 +38,13 @@ module Facter
         slash = '[\\\\/]'
         name = '[^\\\\/]+'
         ABSOLUTE_PATH_REGEX =
-          /^(([A-Z]:#{slash})|(#{slash}#{slash}#{name}#{slash}#{name})|(#{slash}#{slash}\?#{slash}#{name}))/i.freeze
+          /^(([A-Z]:#{slash})|(#{slash}#{slash}#{name}#{slash}#{name})|(#{slash}#{slash}\?#{slash}#{name}))/i
 
         def absolute_path?(path)
           !!(path =~ ABSOLUTE_PATH_REGEX)
         end
 
-        DOUBLE_QUOTED_COMMAND = /\A"(.+?)"(?:\s+(.*))?/.freeze
+        DOUBLE_QUOTED_COMMAND = /\A"(.+?)"(?:\s+(.*))?/
 
         def expand_command(command)
           exe = nil
@@ -59,7 +59,7 @@ module Facter
           return unless exe && (expanded = which(exe))
 
           expanded = expanded.dup
-          expanded = +"\"#{expanded}\"" if /\s+/.match?(expanded)
+          expanded = "\"#{expanded}\"" if /\s+/.match?(expanded)
           expanded << " #{args}" if args
 
           expanded
@@ -69,7 +69,7 @@ module Facter
           expand = options.fetch(:expand, true)
           raise ArgumentError.new, 'Unsupported argument on Windows expand with value false' unless expand
 
-          super(command, options)
+          super
         end
       end
     end

@@ -4,7 +4,7 @@ module Facter
   module Util
     module ApiDebugger
       def self.prepended(receiver)
-        exclude, print_caller = parse_options(ENV['API_DEBUG'])
+        exclude, print_caller = parse_options(ENV.fetch('API_DEBUG', nil))
 
         receiver_methods = receiver.instance_methods - Object.methods
         receiver_methods.each do |meth|

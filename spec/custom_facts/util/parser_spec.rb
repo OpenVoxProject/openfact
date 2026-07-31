@@ -263,8 +263,8 @@ describe LegacyFacter::Util::Parser do
       end
 
       context 'when executing powershell' do
-        let(:sysnative_powershell) { "#{ENV['SYSTEMROOT']}\\sysnative\\WindowsPowershell\\v1.0\\powershell.exe" }
-        let(:system32_powershell)  { "#{ENV['SYSTEMROOT']}\\system32\\WindowsPowershell\\v1.0\\powershell.exe" }
+        let(:sysnative_powershell) { "#{ENV.fetch('SYSTEMROOT', nil)}\\sysnative\\WindowsPowershell\\v1.0\\powershell.exe" }
+        let(:system32_powershell)  { "#{ENV.fetch('SYSTEMROOT', nil)}\\system32\\WindowsPowershell\\v1.0\\powershell.exe" }
 
         let(:sysnative_regexp)  { /^"#{Regexp.escape(sysnative_powershell)}"/ }
         let(:system32_regexp)   { /^"#{Regexp.escape(system32_powershell)}"/ }

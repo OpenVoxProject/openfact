@@ -33,7 +33,7 @@ module Facter
           end
 
           def determine_ssh_dir
-            progdata_dir = ENV['programdata']
+            progdata_dir = ENV['programdata'] # rubocop:disable Style/FetchEnvVar
 
             return if !progdata_dir || progdata_dir.empty?
 

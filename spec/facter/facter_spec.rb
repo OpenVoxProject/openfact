@@ -596,8 +596,8 @@ describe Facter do
       end
 
       context 'when exception and message are hashes' do
-        let(:message) { { 'a': 1 } }
-        let(:exception) { { 'b': 2 } }
+        let(:message) { { a: 1 } }
+        let(:exception) { { b: 2 } }
         let(:expected_message) { { a: 1 }.to_s }
 
         it_behaves_like 'when exception param is not an exception'
@@ -680,8 +680,8 @@ describe Facter do
       end
 
       context 'when exception and message are hashes' do
-        let(:message) { { 'a': 1 } }
-        let(:exception) { { 'b': 2 } }
+        let(:message) { { a: 1 } }
+        let(:exception) { { b: 2 } }
         let(:expected_message) { { a: 1 }.to_s }
 
         it_behaves_like 'when exception param is not an exception'

@@ -28,7 +28,9 @@ module Facter
         def build_fact_list(output)
           uname_results = output.split("\n")
 
-          if !uname_results.empty?
+          if uname_results.empty?
+            log.warn('Request to uname returned no output. Uname related facts are not populated.')
+          else
             @fact_list[:machine],
             @fact_list[:nodename],
             @fact_list[:processor],
@@ -39,8 +41,6 @@ module Facter
             # Fall back to -m (machine), which is the procedure suggested by the
             # uutils/coreutils developers.
             @fact_list[:processor] = @fact_list[:machine] if @fact_list[:processor] == 'unknown'
-          else
-            log.warn('Request to uname returned no output. Uname related facts are not populated.')
           end
         end
       end

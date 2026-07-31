@@ -69,7 +69,7 @@ module Facter
       pretty_json.gsub!(/"(.*)"\ =>/, '\1 =>')
 
       @log.debug('Remove double backslashes from paths')
-      pretty_json.gsub(/\\\\/, '\\')
+      pretty_json.gsub('\\\\', '\\')
     end
 
     def remove_enclosing_accolades(pretty_fact_json)

@@ -5,8 +5,8 @@ describe Facter::Resolvers::Aix::FfiHelper do
   let(:averages_size) { double('FFI::MemoryPointer', write_int: 24) }
 
   before do
-    allow(::FFI::MemoryPointer).to receive(:new).with(:long_long, 3).and_return(averages)
-    allow(::FFI::MemoryPointer).to receive(:new).with(:int, 1).and_return(averages_size)
+    allow(FFI::MemoryPointer).to receive(:new).with(:long_long, 3).and_return(averages)
+    allow(FFI::MemoryPointer).to receive(:new).with(:int, 1).and_return(averages_size)
   end
 
   after do

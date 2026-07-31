@@ -8,7 +8,7 @@ module Facts
 
         def call_the_resolver
           fact_value = Facter::Resolvers::Aix::Networking.resolve(:interfaces)
-          fact_value = fact_value&.any? ? fact_value : nil
+          fact_value = nil unless fact_value&.any?
 
           Facter::ResolvedFact.new(FACT_NAME, fact_value)
         end

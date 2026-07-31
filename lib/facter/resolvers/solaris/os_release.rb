@@ -35,7 +35,7 @@ module Facter
           def search_for_os_version(regex_pattern, text)
             result = text.match(regex_pattern)
             major, minor = result.captures if result
-            minor = regex_pattern == /Solaris (\d+)/ ? '0' : minor
+            minor = '0' if regex_pattern == /Solaris (\d+)/
             [major, minor] if major && minor
           end
         end

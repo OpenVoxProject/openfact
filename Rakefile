@@ -38,11 +38,11 @@ namespace :pl_ci do
   task :gem_build, [:gemspec] do |_t, args|
     args.with_defaults(gemspec: 'facter.gemspec')
     stdout, stderr, status = Open3.capture3("gem build #{args.gemspec}")
-    if !status.exitstatus.zero?
+    if status.exitstatus.zero?
+      puts stdout
+    else
       puts "Error building facter.gemspec \n#{stdout} \n#{stderr}"
       exit(1)
-    else
-      puts stdout
     end
   end
 
