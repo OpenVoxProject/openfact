@@ -112,3 +112,7 @@ Style/GlobalStdStream:
 
 Style/IfUnlessModifier:
   Enabled: false
+
+# this cop wants dev deps in Gemfile, we want them in the gemspec, to track them better on rubygems.org
+Gemspec/DevelopmentDependencies:
+  Enabled: false
