@@ -54,4 +54,9 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'ostruct', '< 0.7'
   spec.add_runtime_dependency 'thor', ['>= 1.0.1', '< 2']
   spec.add_runtime_dependency 'tsort', '< 0.3'
+  # we have the same for openvox
+  if Gem.win_platform?
+    spec.add_runtime_dependency 'fiddle', '~> 1.1'
+    spec.add_runtime_dependency 'win32ole', '~> 1.8'
+  end
 end
