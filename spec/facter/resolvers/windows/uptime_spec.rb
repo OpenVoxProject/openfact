@@ -149,8 +149,7 @@ describe Facter::Resolvers::Windows::Uptime do
 
       it 'logs that query failed and days nil' do
         allow(Facter::Resolvers::Windows::Uptime.log).to receive(:debug)
-          .with('WMI query returned no results'\
-                'for Win32_OperatingSystem with values LocalDateTime and LastBootUpTime.')
+          .with('WMI query returned no results for Win32_OperatingSystem with values LocalDateTime and LastBootUpTime.')
         allow(Facter::Resolvers::Windows::Uptime.log).to receive(:debug)
           .with('Unable to determine system uptime!')
         expect(Facter::Resolvers::Windows::Uptime.resolve(:days)).to be_nil

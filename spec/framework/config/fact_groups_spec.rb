@@ -153,8 +153,8 @@ describe Facter::FactGroups do
 
       it 'logs an error message' do
         allow(logger).to receive(:error)
-        expect(logger).to receive(:error).with('Could not parse time unit invalid_units '\
-          "(try #{Facter::FactGroups::STRING_TO_SECONDS.keys.reject(&:empty?).join(', ')})").twice
+        expect(logger).to receive(:error).with('Could not parse time unit invalid_units ' \
+                                               "(try #{Facter::FactGroups::STRING_TO_SECONDS.keys.reject(&:empty?).join(', ')})").twice
 
         fg.get_group_ttls('hostname')
       end

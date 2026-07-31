@@ -124,8 +124,7 @@ module Facter
 
           extra_keys = options.keys - VALID_OPTIONS - DEPRECATED_TIMEOUT_OPTIONS
           unless extra_keys.empty?
-            @log.warn("Unexpected key passed to Facter::Core::Execution.execute option: #{extra_keys.join(',')}" \
-                      " - valid keys: #{VALID_OPTIONS.join(',')}")
+            @log.warn("Unexpected key passed to Facter::Core::Execution.execute option: #{extra_keys.join(',')} - valid keys: #{VALID_OPTIONS.join(',')}")
           end
 
           [on_fail, expand, logger, timeout]

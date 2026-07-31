@@ -8,8 +8,8 @@ describe Facter::Resolvers::SwVers do
       Facter::Resolvers::SwVers.invalidate_cache
       allow(Facter::Core::Execution).to receive(:execute)
         .with('sw_vers', logger: an_instance_of(Facter::Log))
-        .and_return("ProductName:\tmacOS\nProductVersion:\t13.3.1\n"\
-          "ProductVersionExtra:\t(a)\nBuildVersion:\t22E772610a\n")
+        .and_return("ProductName:\tmacOS\nProductVersion:\t13.3.1\n" \
+                    "ProductVersionExtra:\t(a)\nBuildVersion:\t22E772610a\n")
     end
 
     it 'returns os ProductName' do
@@ -34,8 +34,8 @@ describe Facter::Resolvers::SwVers do
       Facter::Resolvers::SwVers.invalidate_cache
       allow(Facter::Core::Execution).to receive(:execute)
         .with('sw_vers', logger: an_instance_of(Facter::Log))
-        .and_return("ProductName:\tMac OS X\nProductVersion:\t10.14.1\n"\
-          "BuildVersion:\t18B75\n")
+        .and_return("ProductName:\tMac OS X\nProductVersion:\t10.14.1\n" \
+                    "BuildVersion:\t18B75\n")
     end
 
     it 'returns os ProductName' do

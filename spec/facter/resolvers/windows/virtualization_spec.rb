@@ -242,8 +242,8 @@ describe Facter::Resolvers::Windows::Virtualization do
 
     it 'logs that query failed and virtual nil' do
       allow(Facter::Resolvers::Windows::Virtualization.log).to receive(:debug)
-        .with('WMI query returned no results'\
-                                      ' for Win32_ComputerSystem with values Manufacturer, Model and OEMStringArray.')
+        .with('WMI query returned no results ' \
+              'for Win32_ComputerSystem with values Manufacturer, Model and OEMStringArray.')
       expect(Facter::Resolvers::Windows::Virtualization.resolve(:virtual)).to be_nil
     end
 

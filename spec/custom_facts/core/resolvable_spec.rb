@@ -58,8 +58,7 @@ describe LegacyFacter::Core::Resolvable do
     it 'raises ResolveCustomFactError' do
       allow(resolvable).to receive(:resolve_value).and_raise RuntimeError, 'kaboom!'
       allow(Facter).to receive(:log_exception)
-        .with(RuntimeError, "Error while resolving custom fact fact='stub fact', " \
-          "resolution='resolvable': kaboom!")
+        .with(RuntimeError, "Error while resolving custom fact fact='stub fact', resolution='resolvable': kaboom!")
       expect { resolvable.value }.to raise_error(Facter::ResolveCustomFactError)
     end
 

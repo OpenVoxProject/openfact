@@ -35,11 +35,11 @@ describe Facter::Resolvers::Macosx::Processors do
     end
 
     let(:query_string) do
-      'sysctl hw.logicalcpu_max '\
-      'hw.physicalcpu_max '\
-      'machdep.cpu.brand_string '\
-      'hw.cpufrequency_max '\
-      'machdep.cpu.core_count machdep.cpu.thread_count'
+      'sysctl hw.logicalcpu_max ' \
+        'hw.physicalcpu_max ' \
+        'machdep.cpu.brand_string ' \
+        'hw.cpufrequency_max ' \
+        'machdep.cpu.core_count machdep.cpu.thread_count'
     end
 
     it 'returns number of processors' do
@@ -73,10 +73,10 @@ describe Facter::Resolvers::Macosx::Processors do
     end
 
     let(:query_string) do
-      'sysctl hw.logicalcpu_max '\
-        'hw.physicalcpu_max '\
-        'machdep.cpu.brand_string '\
-        'hw.cpufrequency_max '\
+      'sysctl hw.logicalcpu_max ' \
+        'hw.physicalcpu_max ' \
+        'machdep.cpu.brand_string ' \
+        'hw.cpufrequency_max ' \
         'machdep.cpu.core_count machdep.cpu.thread_count'
     end
 

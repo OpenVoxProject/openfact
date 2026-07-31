@@ -97,8 +97,7 @@ module Facter
         def extract_dhcp(interface_name, raw_data, parsed_interface_data)
           return unless /status:\s+active/.match?(raw_data)
 
-          result = Facter::Core::Execution.execute("ipconfig getoption #{interface_name} " \
-                                                     'server_identifier', logger: log)
+          result = Facter::Core::Execution.execute("ipconfig getoption #{interface_name} server_identifier", logger: log)
 
           parsed_interface_data[:dhcp] = result.match(/^[\d.a-f:\s]+$/)&.to_s&.strip unless result.empty?
         end
