@@ -10,7 +10,6 @@ on:
       base-branch:
         description: 'The branch to release from.'
         required: false
-        type: string
         type: choice
         options:
           - main
