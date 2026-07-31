@@ -16,7 +16,7 @@ module Facter
           def read_netstat(fact_name)
             @fact_list[:interfaces] = {}
             output = Facter::Core::Execution.execute('netstat -rn', logger: log)
-            output = output.each_line.select { |line| (line =~ /\s\s[0-9]+.[0-9]+.[0-9]+.[0-9]+|\s\s.*:[0-9a-f]+/) }
+            output = output.each_line.select { |line| line =~ /\s\s[0-9]+.[0-9]+.[0-9]+.[0-9]+|\s\s.*:[0-9a-f]+/ }
             @fact_list[:interfaces] = load_interfaces
 
             populate_with_mtu_and_mac!(@fact_list[:interfaces])

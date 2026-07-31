@@ -8,7 +8,7 @@ describe Facter do
       it 'returns no stderr' do
         _, err, = IntegrationHelper.exec_facter
 
-        expect(err).not_to match(/ERROR Facter/)
+        expect(err).not_to include('ERROR Facter')
       end
 
       it 'returns 0 exit code' do
@@ -40,7 +40,7 @@ describe Facter do
         it 'returns no error' do
           _, err = IntegrationHelper.exec_facter('-pjdt')
 
-          expect(err).not_to match(/ERROR Facter::OptionsValidator - unrecognised option/)
+          expect(err).not_to include('ERROR Facter::OptionsValidator - unrecognised option')
         end
       end
 
@@ -62,7 +62,7 @@ describe Facter do
         end
 
         it 'outputs DEBUG logs' do
-          expect(err).to match(/DEBUG/)
+          expect(err).to include('DEBUG')
         end
       end
 
@@ -74,7 +74,7 @@ describe Facter do
         end
 
         it 'outputs DEBUG logs' do
-          expect(err).to match(/DEBUG/)
+          expect(err).to include('DEBUG')
         end
       end
     end
