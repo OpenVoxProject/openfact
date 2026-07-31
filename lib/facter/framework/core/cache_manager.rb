@@ -77,8 +77,7 @@ module Facter
 
     def external_fact_in_custom_group?(searched_fact, fact_name, fact)
       if searched_fact.type == :file && fact[:group] != fact_name
-        @log.error("Cannot cache '#{fact_name}' fact from '#{fact[:group]}' group. "\
-                    'Caching custom group is not supported for external facts.')
+        @log.error("Cannot cache '#{fact_name}' fact from '#{fact[:group]}' group. Caching custom group is not supported for external facts.")
         return true
       end
 
@@ -121,8 +120,7 @@ cache_format_version is incorrect!")
       else
         return unless data[searched_fact.name]
 
-        [Facter::ResolvedFact.new(searched_fact.name, data[searched_fact.name], searched_fact.type,
-                                  searched_fact.user_query)]
+        [Facter::ResolvedFact.new(searched_fact.name, data[searched_fact.name], searched_fact.type, searched_fact.user_query)]
       end
     end
 
@@ -131,8 +129,7 @@ cache_format_version is incorrect!")
       data.each do |fact_name, fact_value|
         next if fact_name == 'cache_format_version'
 
-        fact = Facter::ResolvedFact.new(fact_name, fact_value, searched_fact.type,
-                                        searched_fact.user_query)
+        fact = Facter::ResolvedFact.new(fact_name, fact_value, searched_fact.type, searched_fact.user_query)
         fact.file = searched_fact.file
         facts << fact
       end

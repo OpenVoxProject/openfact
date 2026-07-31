@@ -252,9 +252,7 @@ module Facter
           LegacyFacter::Util::Values.deep_merge(result, current)
         end
       rescue LegacyFacter::Util::Values::DeepMergeError => e
-        raise ArgumentError, 'Could not deep merge all chunks (Original error: ' \
-                         "#{e.message}), ensure that chunks return either an Array or Hash or " \
-                         'override the aggregate block', e.backtrace
+        raise ArgumentError, "Could not deep merge all chunks (Original error: #{e.message}), ensure that chunks return either an Array or Hash or override the aggregate block", e.backtrace
       end
 
       # Order chunks based on their dependencies

@@ -52,8 +52,7 @@ describe LegacyFacter::Util::DirectoryLoader do
       file = File.join(dir_loader.directories[0], 'data.yaml')
 
       expect(log_spy).to receive(:debug).with(
-        "Structured data fact file #{file} was parsed but was either empty or an invalid filetype (valid filetypes "\
-          'are .yaml, .json, and .txt).'
+        "Structured data fact file #{file} was parsed but was either empty or an invalid filetype (valid filetypes are .yaml, .json, and .txt)."
       )
 
       dir_loader.load(collection)
@@ -64,9 +63,7 @@ describe LegacyFacter::Util::DirectoryLoader do
       write_to_file('data.yaml', YAML.dump(data))
       file = File.join(dir_loader.directories[0], 'data.yaml')
 
-      expect(log_spy).to receive(:error).with(
-        "Structured data fact file #{file} was parsed but no key=>value data was returned."
-      )
+      expect(log_spy).to receive(:error).with("Structured data fact file #{file} was parsed but no key=>value data was returned.")
 
       dir_loader.load(collection)
     end

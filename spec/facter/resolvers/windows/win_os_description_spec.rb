@@ -18,8 +18,7 @@ describe Facter::Resolvers::WinOsDescription do
 
     it 'logs debug message and facts are nil' do
       allow(Facter::Resolvers::WinOsDescription.log).to receive(:debug)
-        .with('WMI query returned no results for Win32_OperatingSystem'\
-                   'with values ProductType and OtherTypeDescription.')
+        .with('WMI query returned no results for Win32_OperatingSystem with values ProductType and OtherTypeDescription.')
 
       expect(Facter::Resolvers::WinOsDescription.resolve(:full)).to be_nil
     end

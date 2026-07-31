@@ -5,6 +5,7 @@ module Facter
     module Solaris
       class Mountpoints < BaseResolver
         include Facter::Util::Resolvers::FilesystemHelper
+
         init_resolver
 
         class << self

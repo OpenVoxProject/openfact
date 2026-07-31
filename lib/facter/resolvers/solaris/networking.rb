@@ -55,8 +55,7 @@ module Facter
             ioctl = FFI::Ioctl.ioctl(FFI::SIOCGARP, arp, lifreq.ss_family)
 
             if ioctl == -1
-              @log.debug("Could not read MAC address for interface #{lifreq.name} "\
-                          "error code is: #{::FFI::LastError.error}")
+              @log.debug("Could not read MAC address for interface #{lifreq.name} error code is: #{::FFI::LastError.error}")
             end
 
             mac = arp.sa_data_to_mac

@@ -8,6 +8,7 @@ module Facter
       module Ffi
         module LoadAverages
           extend ::FFI::Library
+
           ffi_lib ::FFI::Library::LIBC
 
           attach_function :getloadavg, %i[pointer int], :int

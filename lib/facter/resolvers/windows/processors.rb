@@ -19,14 +19,14 @@ module Facter
 
         def read_fact_from_win32_processor(fact_name)
           win = Facter::Util::Windows::Win32Ole.new
-          query_string = 'SELECT Name,'\
-          'Architecture,'\
-          'NumberOfLogicalProcessors,'\
-          'NumberOfCores FROM Win32_Processor'
+          query_string = 'SELECT Name,' \
+                         'Architecture,' \
+                         'NumberOfLogicalProcessors,' \
+                         'NumberOfCores FROM Win32_Processor'
           proc = win.exec_query(query_string)
           unless proc
-            log.debug 'WMI query returned no results'\
-            'for Win32_Processor with values Name, Architecture and NumberOfLogicalProcessors.'
+            log.debug 'WMI query returned no results' \
+                      'for Win32_Processor with values Name, Architecture and NumberOfLogicalProcessors.'
             return
           end
           result = iterate_proc(proc)

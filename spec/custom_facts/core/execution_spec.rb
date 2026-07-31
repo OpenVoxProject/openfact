@@ -85,8 +85,7 @@ describe Facter::Core::Execution do
       it 'does not include deprecated timeout keys in the unexpected key warning' do
         allow(logger).to receive(:warnonce)
         expect(logger).to receive(:warn)
-          .with('Unexpected key passed to Facter::Core::Execution.execute option: bad_opt' \
-            ' - valid keys: on_fail,expand,logger,timeout')
+          .with('Unexpected key passed to Facter::Core::Execution.execute option: bad_opt - valid keys: on_fail,expand,logger,timeout')
 
         execution.execute('waffles', time_limit: 90, bad_opt: true)
       end
@@ -94,8 +93,7 @@ describe Facter::Core::Execution do
       it 'ignores the passed in logger when logging warnings' do
         allow(logger).to receive(:warnonce)
         expect(logger).to receive(:warn)
-          .with('Unexpected key passed to Facter::Core::Execution.execute option: bad_opt' \
-            ' - valid keys: on_fail,expand,logger,timeout')
+          .with('Unexpected key passed to Facter::Core::Execution.execute option: bad_opt - valid keys: on_fail,expand,logger,timeout')
 
         execution.execute('waffles', time_limit: 90, bad_opt: true, logger: Facter::Log.new('ignored'))
       end

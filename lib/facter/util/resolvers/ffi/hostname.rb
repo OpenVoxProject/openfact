@@ -21,6 +21,7 @@ module Facter
           HOST_NAME_MAX = 64
 
           extend ::FFI::Library
+
           ffi_lib ::FFI::Library::LIBC
 
           attach_function :getaddrinfo, %i[string string pointer pointer], :int

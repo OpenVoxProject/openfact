@@ -24,7 +24,7 @@ describe Facter::Util::Resolvers::Networking::PrimaryInterface do
     before do
       allow(Facter::Util::FileHelper)
         .to receive(:safe_read)
-        .with('/proc/net/route', '') \
+        .with('/proc/net/route', '')
         .and_return(output)
     end
 

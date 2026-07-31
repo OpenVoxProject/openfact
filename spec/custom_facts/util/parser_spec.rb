@@ -173,8 +173,7 @@ describe LegacyFacter::Util::Parser do
       allow(Facter::Log).to receive(:new).with("foo#{ext}").and_return(logger)
 
       expects_script_to_return(cmd, yaml_data, data, 'some error')
-      expect(logger).to have_received(:warn).with("Command /tmp/foo#{ext} completed with the "\
-        'following stderr message: some error')
+      expect(logger).to have_received(:warn).with("Command /tmp/foo#{ext} completed with the following stderr message: some error")
     end
 
     it 'handles Time correctly' do
@@ -193,8 +192,7 @@ describe LegacyFacter::Util::Parser do
     it 'quotes scripts with spaces' do
       path = "/h a s s p a c e s#{ext}"
 
-      expect(Facter::Core::Execution).to receive(:execute_command)
-        .with("\"#{path}\"").and_return([data_in_txt, nil])
+      expect(Facter::Core::Execution).to receive(:execute_command).with("\"#{path}\"").and_return([data_in_txt, nil])
       expects_script_to_return(path, data_in_txt, data)
     end
 
@@ -212,8 +210,7 @@ describe LegacyFacter::Util::Parser do
         allow(LegacyFacter::Util::Config).to receive(:windows?).and_return(false)
 
         cmds.each do |cmd|
-          expect(LegacyFacter::Util::Parser.parser_for(cmd))
-            .to be_an_instance_of(LegacyFacter::Util::Parser::NothingParser)
+          expect(LegacyFacter::Util::Parser.parser_for(cmd)).to be_an_instance_of(LegacyFacter::Util::Parser::NothingParser)
         end
       end
 
@@ -221,8 +218,7 @@ describe LegacyFacter::Util::Parser do
         allow(LegacyFacter::Util::Config).to receive(:windows?).and_return(true)
 
         cmds.each do |cmd|
-          expect(LegacyFacter::Util::Parser.parser_for(cmd))
-            .to be_an_instance_of(LegacyFacter::Util::Parser::ScriptParser)
+          expect(LegacyFacter::Util::Parser.parser_for(cmd)).to be_an_instance_of(LegacyFacter::Util::Parser::ScriptParser)
         end
       end
     end
@@ -263,8 +259,7 @@ describe LegacyFacter::Util::Parser do
         allow(Facter::Log).to receive(:new).with('foo.ps1').and_return(logger)
 
         expects_to_parse_powershell(ps1, data)
-        expect(logger).to have_received(:warn).with('Command "powershell.exe" -NoProfile -NonInteractive -NoLogo '\
-          '-ExecutionPolicy Bypass -File "/tmp/foo.ps1" completed with the following stderr message: some error')
+        expect(logger).to have_received(:warn).with('Command "powershell.exe" -NoProfile -NonInteractive -NoLogo -ExecutionPolicy Bypass -File "/tmp/foo.ps1" completed with the following stderr message: some error')
       end
 
       context 'when executing powershell' do
@@ -277,10 +272,7 @@ describe LegacyFacter::Util::Parser do
 
         it 'prefers the sysnative alias to resolve 64-bit powershell on 32-bit ruby' do
           allow(File).to receive(:readable?).with(sysnative_powershell).and_return(true)
-          allow(Facter::Core::Execution)
-            .to receive(:execute_command)
-            .with(sysnative_regexp)
-            .and_return([data_in_txt, nil])
+          allow(Facter::Core::Execution).to receive(:execute_command).with(sysnative_regexp).and_return([data_in_txt, nil])
 
           expects_to_parse_powershell(ps1, data)
         end
@@ -288,8 +280,7 @@ describe LegacyFacter::Util::Parser do
         it "uses system32 if sysnative alias doesn't exist on 64-bit ruby" do
           allow(File).to receive(:readable?).with(sysnative_powershell).and_return(false)
           allow(File).to receive(:readable?).with(system32_powershell).and_return(true)
-          allow(Facter::Core::Execution).to receive(:execute_command).with(system32_regexp)
-                                                                     .and_return([data_in_txt, nil])
+          allow(Facter::Core::Execution).to receive(:execute_command).with(system32_regexp).and_return([data_in_txt, nil])
 
           expects_to_parse_powershell(ps1, data)
         end
@@ -297,10 +288,7 @@ describe LegacyFacter::Util::Parser do
         it "uses 'powershell' as a last resort" do
           allow(File).to receive(:readable?).with(sysnative_powershell).and_return(false)
           allow(File).to receive(:readable?).with(system32_powershell).and_return(false)
-          allow(Facter::Core::Execution)
-            .to receive(:execute_command)
-            .with(powershell_regexp)
-            .and_return([data_in_txt, nil])
+          allow(Facter::Core::Execution).to receive(:execute_command).with(powershell_regexp).and_return([data_in_txt, nil])
 
           expects_to_parse_powershell(ps1, data)
         end

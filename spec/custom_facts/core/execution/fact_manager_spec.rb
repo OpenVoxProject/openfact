@@ -82,8 +82,7 @@ describe Facter::Core::Execution::Base do
       allow(FileTest).to receive(:file?).and_return(false)
       allow(File).to receive(:executable?).with('/sbin/foo').and_return(true)
       allow(FileTest).to receive(:file?).with('/sbin/foo').and_return(true)
-      expect(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/sbin/foo')
-                                                                  .and_return('')
+      expect(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/sbin/foo').and_return('')
       executor.execute('foo')
     end
 
@@ -99,8 +98,7 @@ describe Facter::Core::Execution::Base do
       end
 
       it 'does not expant builtin command' do
-        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/bin/foo')
-                                                                   .and_return('')
+        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/bin/foo').and_return('')
         allow(Open3).to receive(:capture2).with('type /bin/foo').and_return('builtin')
         executor.execute('/bin/foo', expand: false)
       end
@@ -118,12 +116,10 @@ describe Facter::Core::Execution::Base do
       end
 
       it 'throws exception' do
-        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, 'foo')
-                                                                   .and_return('')
+        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, 'foo').and_return('')
         allow(Open3).to receive(:capture2).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, 'type foo').and_return('builtin')
         expect { execution_base.execute('foo', expand: false) }
-          .to raise_error(ArgumentError,
-                          'Unsupported argument on Windows expand with value false')
+          .to raise_error(ArgumentError, 'Unsupported argument on Windows expand with value false')
       end
     end
 
@@ -132,8 +128,7 @@ describe Facter::Core::Execution::Base do
       let(:command) { '/bin/foo' }
 
       before do
-        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, command)
-                                                                   .and_return(['', 'some error'])
+        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, command).and_return(['', 'some error'])
 
         allow(File).to receive(:executable?).with(command).and_return(true)
         allow(FileTest).to receive(:file?).with(command).and_return(true)
@@ -141,8 +136,7 @@ describe Facter::Core::Execution::Base do
 
       it 'logs warning messages on stderr' do
         executor.execute(command, logger: logger)
-        expect(logger).to have_received(:debug).with('Command /bin/foo completed with '\
-          'the following stderr message: some error')
+        expect(logger).to have_received(:debug).with('Command /bin/foo completed with the following stderr message: some error')
       end
     end
 
@@ -163,8 +157,7 @@ describe Facter::Core::Execution::Base do
 
     describe 'when command execution fails' do
       before do
-        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/bin/foo')
-                                                                   .and_raise('kaboom!')
+        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/bin/foo').and_raise('kaboom!')
         allow(File).to receive(:executable?).and_return(false)
         allow(FileTest).to receive(:file?).and_return(false)
         allow(File).to receive(:executable?).with('/bin/foo').and_return(true)
@@ -189,17 +182,13 @@ describe Facter::Core::Execution::Base do
       end
 
       it 'returns the output of the command' do
-        allow(Facter::Core::Execution::Popen3).to receive(:popen3e)
-          .with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/sbin/foo')
-          .and_return('hi')
+        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/sbin/foo').and_return('hi')
 
         expect(executor.execute('foo')).to eq 'hi'
       end
 
       it 'strips off trailing newlines' do
-        allow(Facter::Core::Execution::Popen3).to receive(:popen3e)
-          .with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/sbin/foo')
-          .and_return "hi\n"
+        allow(Facter::Core::Execution::Popen3).to receive(:popen3e).with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/sbin/foo').and_return "hi\n"
 
         expect(executor.execute('foo')).to eq 'hi'
       end

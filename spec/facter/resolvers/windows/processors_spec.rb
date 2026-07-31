@@ -5,10 +5,10 @@ describe Facter::Resolvers::Processors do
 
   before do
     win = double('Facter::Util::Windows::Win32Ole')
-    query_string = 'SELECT Name,'\
-    'Architecture,'\
-    'NumberOfLogicalProcessors,'\
-    'NumberOfCores FROM Win32_Processor'
+    query_string = 'SELECT Name,' \
+                   'Architecture,' \
+                   'NumberOfLogicalProcessors,' \
+                   'NumberOfCores FROM Win32_Processor'
 
     allow(Facter::Util::Windows::Win32Ole).to receive(:new).and_return(win)
     allow(win).to receive(:exec_query)
@@ -116,8 +116,8 @@ describe Facter::Resolvers::Processors do
 
     it 'logs that query failed and isa nil' do
       allow(resolver.log).to receive(:debug)
-        .with('WMI query returned no results'\
-        'for Win32_Processor with values Name, Architecture and NumberOfLogicalProcessors.')
+        .with('WMI query returned no results' \
+              'for Win32_Processor with values Name, Architecture and NumberOfLogicalProcessors.')
       expect(resolver.resolve(:isa)).to be_nil
     end
 

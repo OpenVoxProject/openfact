@@ -3,7 +3,7 @@
 describe Facter::Resolvers::Linux::FipsEnabled do
   describe '#resolve' do
     before do
-      allow(Facter::Util::FileHelper).to receive(:safe_read)\
+      allow(Facter::Util::FileHelper).to receive(:safe_read)
         .with('/proc/sys/crypto/fips_enabled').and_return(file_content)
     end
 

@@ -36,6 +36,7 @@ require 'ostruct'
 
 class Installer
   include FileUtils
+
   InstallOptions = OpenStruct.new
 
   # Returns true if OS is windows (copied from facter/util/config.rb)

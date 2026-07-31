@@ -227,8 +227,7 @@ module Facter
 
         if resolve
           if resolution_type != resolve.resolution_type
-            raise ArgumentError, "Cannot return resolution #{resolution_name} with type" \
-                                 " #{resolution_type}; already defined as #{resolve.resolution_type}"
+            raise ArgumentError, "Cannot return resolution #{resolution_name} with type #{resolution_type}; already defined as #{resolve.resolution_type}"
           end
         else
           case resolution_type
@@ -237,8 +236,7 @@ module Facter
           when :aggregate
             resolve = Facter::Core::Aggregate.new(resolution_name, self)
           else
-            raise ArgumentError,
-                  "Expected resolution type to be one of (:simple, :aggregate) but was #{resolution_type}"
+            raise ArgumentError, "Expected resolution type to be one of (:simple, :aggregate) but was #{resolution_type}"
           end
 
           @resolves << resolve
