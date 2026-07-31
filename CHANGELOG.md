@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.0.0](https://github.com/openvoxproject/openfact/tree/6.0.0) (2026-07-31)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.0...6.0.0)
+
+**Breaking changes:**
+
+- \[Deprecation\] `Resolvable#limit` Compatibility Bridge for `timeout` [\#91](https://github.com/OpenVoxProject/openfact/issues/91)
+- \[Deprecation\] Legacy Timeout Option Aliases in `Facter::Core::Execution.execute` [\#90](https://github.com/OpenVoxProject/openfact/issues/90)
+- \[Deprecation\] `ldapname` Fact Option and Accessor [\#87](https://github.com/OpenVoxProject/openfact/issues/87)
+- Ruby: Drop 2.7; Require 3+ [\#153](https://github.com/OpenVoxProject/openfact/pull/153) ([bastelfreak](https://github.com/bastelfreak))
+- search\_path: Add common elements from $PATH [\#138](https://github.com/OpenVoxProject/openfact/pull/138) ([bastelfreak](https://github.com/bastelfreak))
+- deprecation: add runtime warnings to deprecated exec/which methods [\#121](https://github.com/OpenVoxProject/openfact/pull/121) ([silug](https://github.com/silug))
+- Deprecate Resolvable\#limit compatibility bridge for timeout [\#115](https://github.com/OpenVoxProject/openfact/pull/115) ([silug](https://github.com/silug))
+- Deprecate time\_limit and limit timeout aliases in Facter::Core::Execution.execute [\#114](https://github.com/OpenVoxProject/openfact/pull/114) ([silug](https://github.com/silug))
+- Remove deprecated ldapname fact option and accessor [\#111](https://github.com/OpenVoxProject/openfact/pull/111) ([silug](https://github.com/silug))
+- Drop Ruby 2.5 / 2.6 support [\#69](https://github.com/OpenVoxProject/openfact/pull/69) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- rubocop: autofix part 2 [\#160](https://github.com/OpenVoxProject/openfact/pull/160) ([bastelfreak](https://github.com/bastelfreak))
+- rubocop: autofix part 1 [\#159](https://github.com/OpenVoxProject/openfact/pull/159) ([bastelfreak](https://github.com/bastelfreak))
+- Add Ruby 4 support+tests on windows [\#156](https://github.com/OpenVoxProject/openfact/pull/156) ([bastelfreak](https://github.com/bastelfreak))
+- CI: overhaul Ruby matrix [\#155](https://github.com/OpenVoxProject/openfact/pull/155) ([bastelfreak](https://github.com/bastelfreak))
+- CI: Update jruby-9.4.12.1-\>jruby-9.4.15.0 [\#154](https://github.com/OpenVoxProject/openfact/pull/154) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Fix missing .El tag in manpage [\#151](https://github.com/OpenVoxProject/openfact/pull/151) ([jcharaoui](https://github.com/jcharaoui))
+
+**Merged pull requests:**
+
+- thor: require 1.5 [\#44](https://github.com/OpenVoxProject/openfact/pull/44) ([kenyon](https://github.com/kenyon))
+
 ## [5.7.0](https://github.com/openvoxproject/openfact/tree/5.7.0) (2026-07-12)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.6.1...5.7.0)
