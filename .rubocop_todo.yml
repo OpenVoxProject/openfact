@@ -6,6 +6,155 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+# Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+Gemspec/RequireMFA:
+  Exclude:
+    - 'openfact.gemspec'
+
+# Offense count: 6
+# This cop supports safe autocorrection (--autocorrect).
+Layout/EmptyLinesAfterModuleInclusion:
+  Exclude:
+    - 'install.rb'
+    - 'lib/facter/resolvers/macosx/mountpoints.rb'
+    - 'lib/facter/resolvers/solaris/ffi/functions.rb'
+    - 'lib/facter/resolvers/solaris/mountpoints.rb'
+    - 'lib/facter/util/resolvers/ffi/hostname.rb'
+    - 'lib/facter/util/resolvers/ffi/load_averages.rb'
+
+# Offense count: 11
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: leading, trailing
+Layout/LineContinuationLeadingSpace:
+  Exclude:
+    - 'lib/facter/custom_facts/core/execution/base.rb'
+    - 'lib/facter/custom_facts/util/fact.rb'
+    - 'lib/facter/models/fact_collection.rb'
+    - 'lib/facter/resolvers/windows/virtualization.rb'
+    - 'spec/custom_facts/core/execution_spec.rb'
+    - 'spec/facter/resolvers/windows/system32_spec.rb'
+    - 'spec/facter/resolvers/windows/virtualization_spec.rb'
+    - 'spec/framework/core/options/options_validator_spec.rb'
+    - 'spec/framework/formatters/legacy_fact_formatter_spec.rb'
+
+# Offense count: 43
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: space, no_space
+Layout/LineContinuationSpacing:
+  Enabled: false
+
+# Offense count: 33
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle, IndentationWidth.
+# SupportedStyles: aligned, indented
+Layout/LineEndStringConcatenationIndentation:
+  Enabled: false
+
+# Offense count: 16
+# This cop supports safe autocorrection (--autocorrect).
+Lint/AmbiguousOperatorPrecedence:
+  Exclude:
+    - 'lib/facter/custom_facts/core/execution/base.rb'
+    - 'lib/facter/resolvers/linux/docker_uptime.rb'
+    - 'lib/facter/resolvers/mountpoints.rb'
+    - 'lib/facter/util/facts/unit_converter.rb'
+    - 'lib/facter/util/facts/uptime_parser.rb'
+
+# Offense count: 1
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: RequireParenthesesForMethodChains.
+Lint/AmbiguousRange:
+  Exclude:
+    - 'lib/facter/framework/parsers/query_parser.rb'
+
+# Offense count: 3
+# Configuration parameters: IgnoreLiteralBranches, IgnoreConstantBranches, IgnoreDuplicateElseBranch.
+Lint/DuplicateBranch:
+  Exclude:
+    - 'lib/facter/framework/logging/logger_helper.rb'
+    - 'lib/facter/resolvers/hostname.rb'
+    - 'lib/facter/resolvers/linux/hostname.rb'
+
+# Offense count: 2
+# This cop supports safe autocorrection (--autocorrect).
+Lint/DuplicateRegexpCharacterClassElement:
+  Exclude:
+    - 'spec/custom_facts/core/aggregate_spec.rb'
+
+# Offense count: 52
+# Configuration parameters: AllowComments, AllowEmptyLambdas.
+Lint/EmptyBlock:
+  Enabled: false
+
+# Offense count: 4
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Lint/RedundantDirGlobSort:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+# Offense count: 11
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: strict, consistent
+Lint/SymbolConversion:
+  Exclude:
+    - 'lib/facter/framework/core/options.rb'
+    - 'lib/facter/framework/core/options/option_store.rb'
+    - 'lib/facter/resolvers/gce.rb'
+    - 'lib/facter/util/resolvers/networking/networking.rb'
+    - 'spec/facter/facter_spec.rb'
+    - 'spec/facter/resolvers/gce_spec.rb'
+
+# Offense count: 18
+Lint/UselessConstantScoping:
+  Exclude:
+    - 'lib/facter/resolvers/bsd/processors.rb'
+    - 'lib/facter/resolvers/openbsd/dmi.rb'
+    - 'lib/facter/resolvers/openbsd/processors.rb'
+    - 'lib/facter/resolvers/openbsd/virtual.rb'
+    - 'lib/facter/resolvers/solaris/dmi.rb'
+
+# Offense count: 12
+# Configuration parameters: Mode, AllowedMethods, AllowedPatterns, AllowBangMethods, WaywardPredicates.
+# AllowedMethods: call
+# WaywardPredicates: infinite?, nonzero?
+Naming/PredicateMethod:
+  Exclude:
+    - 'lib/facter/facts/freebsd/is_virtual.rb'
+    - 'lib/facter/facts/linux/is_virtual.rb'
+    - 'lib/facter/facts/openbsd/is_virtual.rb'
+    - 'lib/facter/facts/solaris/is_virtual.rb'
+    - 'lib/facter/framework/cli/cli_launcher.rb'
+    - 'lib/facter/resolvers/selinux.rb'
+    - 'lib/facter/resolvers/windows/ffi/ffi.rb'
+    - 'lib/facter/resolvers/windows/ffi/network_utils.rb'
+    - 'lib/facter/resolvers/windows/processors.rb'
+    - 'lib/facter/util/resolvers/networking/networking.rb'
+    - 'spec/custom_facts/puppetlabs_spec/files.rb'
+    - 'spec/custom_facts/util/confine_spec.rb'
+
+# Offense count: 3
+# Configuration parameters: MinSize.
+Performance/CollectionLiteralInLoop:
+  Exclude:
+    - 'lib/facter/framework/core/fact/external/external_fact_manager.rb'
+    - 'lib/facter/framework/core/fact/internal/internal_fact_manager.rb'
+    - 'lib/facter/models/fact_collection.rb'
+
+# Offense count: 1
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Performance/MapCompact:
+  Exclude:
+    - 'lib/facter/framework/core/fact_manager.rb'
+
+# Offense count: 3
+Performance/MethodObjectAsBlock:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
 # Offense count: 3
 # This cop supports safe autocorrection (--autocorrect).
 Performance/RegexpMatch:
@@ -13,14 +162,63 @@ Performance/RegexpMatch:
     - 'install.rb'
 
 # Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+Performance/SortReverse:
+  Exclude:
+    - 'spec/custom_facts/core/aggregate_spec.rb'
+
+# Offense count: 18
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Performance/StringInclude:
+  Exclude:
+    - 'install.rb'
+    - 'lib/facter/custom_facts/core/execution/base.rb'
+    - 'lib/facter/facts/linux/hypervisors/hyper_v.rb'
+    - 'lib/facter/facts/linux/hypervisors/virtualbox.rb'
+    - 'lib/facter/facts/linux/hypervisors/xen.rb'
+    - 'lib/facter/facts/windows/ec2_metadata.rb'
+    - 'lib/facter/facts/windows/ec2_userdata.rb'
+    - 'lib/facter/resolvers/aix/networking.rb'
+    - 'lib/facter/resolvers/aix/partitions.rb'
+    - 'lib/facter/resolvers/os_release.rb'
+    - 'lib/facter/resolvers/selinux.rb'
+    - 'lib/facter/resolvers/virt_what.rb'
+    - 'spec_integration/spec_helper.rb'
+
+# Offense count: 3
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: OnlySumOrWithInitialValue.
+Performance/Sum:
+  Exclude:
+    - 'lib/facter/resolvers/freebsd/swap_memory.rb'
+
+# Offense count: 1
 RSpec/IdenticalEqualityAssertion:
   Exclude:
     - 'spec/facter/util/resolvers/ssh_helper_spec.rb'
+
+# Offense count: 20
+# This cop supports unsafe autocorrection (--autocorrect-all).
+RSpec/IncludeExamples:
+  Exclude:
+    - 'spec/facter/facts/linux/kernelmajversion_spec.rb'
+    - 'spec/facter/facts/linux/kernelversion_spec.rb'
+    - 'spec/facter/facts/solaris/kernelmajversion_spec.rb'
+    - 'spec/facter/resolvers/ssh_spec.rb'
+    - 'spec/facter/util/facts/uptime_parser_spec.rb'
 
 # Offense count: 50
 # Configuration parameters: Max, AllowedIdentifiers, AllowedPatterns.
 RSpec/IndexedLet:
   Enabled: false
+
+# Offense count: 7
+RSpec/LeakyLocalVariable:
+  Exclude:
+    - 'spec/facter/facter_spec.rb'
+    - 'spec_integration/facter_resolve_spec.rb'
+    - 'spec_integration/facter_spec.rb'
+    - 'spec_integration/facter_to_hash_spec.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -40,7 +238,7 @@ RSpec/NoExpectationExample:
     - 'spec/custom_facts/util/parser_spec.rb'
     - 'spec/facter/resolvers/ec2_spec.rb'
 
-# Offense count: 128
+# Offense count: 131
 # This cop supports unsafe autocorrection (--autocorrect-all).
 RSpec/ReceiveMessages:
   Enabled: false
@@ -67,6 +265,13 @@ RSpec/VerifiedDoubleReference:
     - 'spec/framework/core/options/option_store_spec.rb'
     - 'spec/framework/core/options_spec.rb'
 
+# Offense count: 2
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/BitwisePredicate:
+  Exclude:
+    - 'lib/facter/resolvers/windows/networking.rb'
+    - 'lib/facter/util/linux/if_inet6.rb'
+
 # Offense count: 14
 Style/ClassVars:
   Exclude:
@@ -74,10 +279,109 @@ Style/ClassVars:
     - 'spec/custom_facts/puppetlabs_spec/files.rb'
     - 'spec/framework/logging/logger_spec.rb'
 
+# Offense count: 1
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: AllowedReceivers.
+Style/CollectionCompact:
+  Exclude:
+    - 'lib/facter/resolvers/partitions.rb'
+
+# Offense count: 4
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/CollectionQuerying:
+  Exclude:
+    - 'lib/facter.rb'
+    - 'lib/facter/framework/formatters/json_fact_formatter.rb'
+    - 'lib/facter/framework/formatters/yaml_fact_formatter.rb'
+
 # Offense count: 985
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Enabled: false
+
+# Offense count: 5
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/EnvHome:
+  Exclude:
+    - 'lib/facter/custom_facts/util/config.rb'
+    - 'spec/custom_facts/util/config_spec.rb'
+
+# Offense count: 24
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: AllowedVars, DefaultToNil.
+Style/FetchEnvVar:
+  Exclude:
+    - 'lib/facter/custom_facts/core/execution/base.rb'
+    - 'lib/facter/custom_facts/core/execution/windows.rb'
+    - 'lib/facter/custom_facts/util/config.rb'
+    - 'lib/facter/custom_facts/util/parser.rb'
+    - 'lib/facter/resolvers/az.rb'
+    - 'lib/facter/resolvers/ec2.rb'
+    - 'lib/facter/resolvers/path.rb'
+    - 'lib/facter/resolvers/windows/ssh.rb'
+    - 'lib/facter/resolvers/windows/system32.rb'
+    - 'lib/facter/util/api_debugger.rb'
+    - 'spec/custom_facts/core/execution/fact_manager_spec.rb'
+    - 'spec/custom_facts/util/config_spec.rb'
+    - 'spec/custom_facts/util/parser_spec.rb'
+    - 'spec/facter/resolvers/path_spec.rb'
+
+# Offense count: 5
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: AllowSplatArgument.
+Style/HashConversion:
+  Exclude:
+    - 'lib/facter.rb'
+    - 'lib/facter/custom_facts/util/normalization.rb'
+    - 'lib/facter/resolvers/solaris/mountpoints.rb'
+
+# Offense count: 1
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: AllowedMethods.
+# AllowedMethods: infinite?, nonzero?
+Style/IfWithBooleanLiteralBranches:
+  Exclude:
+    - 'lib/facter/resolvers/windows/virtualization.rb'
+
+# Offense count: 21
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/MapIntoArray:
+  Enabled: false
+
+# Offense count: 5
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/MapToHash:
+  Exclude:
+    - 'lib/facter.rb'
+    - 'lib/facter/framework/cli/cli.rb'
+    - 'lib/facter/resolvers/solaris/ldom.rb'
+    - 'lib/facter/util/macosx/system_profile_executor.rb'
+
+# Offense count: 2
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: AllowedMethods.
+Style/ModuleMemberExistenceCheck:
+  Exclude:
+    - 'spec/custom_facts/util/normalization_spec.rb'
+
+# Offense count: 5
+# This cop supports safe autocorrection (--autocorrect).
+Style/NegatedIfElseCondition:
+  Exclude:
+    - 'Rakefile'
+    - 'install.rb'
+    - 'lib/facter/resolvers/aix/mountpoints.rb'
+    - 'lib/facter/resolvers/selinux.rb'
+    - 'lib/facter/resolvers/uname.rb'
+
+# Offense count: 15
+Style/OpenStructUse:
+  Exclude:
+    - 'install.rb'
+    - 'lib/docs/generate.rb'
+    - 'spec/facter/resolvers/identity_spec.rb'
+    - 'spec/facter/resolvers/windows/networking_spec.rb'
+    - 'spec/facter/util/resolvers/filesystem_helper_spec.rb'
 
 # Offense count: 2
 # Configuration parameters: AllowedMethods.
@@ -85,6 +389,108 @@ Style/Documentation:
 Style/OptionalBooleanParameter:
   Exclude:
     - 'lib/facter/util/resolvers/http.rb'
+
+# Offense count: 4
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: same_as_string_literals, single_quotes, double_quotes
+Style/QuotedSymbols:
+  Exclude:
+    - 'lib/facter/resolvers/gce.rb'
+    - 'spec/facter/resolvers/gce_spec.rb'
+
+# Offense count: 35
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: Methods.
+Style/RedundantArgument:
+  Enabled: false
+
+# Offense count: 4
+# This cop supports safe autocorrection (--autocorrect).
+Style/RedundantConstantBase:
+  Exclude:
+    - 'spec/custom_facts/util/normalization_spec.rb'
+    - 'spec/facter/resolvers/aix/ffi_helper_spec.rb'
+
+# Offense count: 1
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/RedundantFilterChain:
+  Exclude:
+    - 'lib/facter/framework/core/fact_filter.rb'
+
+# Offense count: 6
+# This cop supports safe autocorrection (--autocorrect).
+Style/RedundantFreeze:
+  Exclude:
+    - 'lib/facter/custom_facts/core/execution/posix.rb'
+    - 'lib/facter/custom_facts/core/execution/windows.rb'
+    - 'lib/facter/custom_facts/util/parser.rb'
+
+# Offense count: 4
+# This cop supports safe autocorrection (--autocorrect).
+Style/RedundantInterpolationUnfreeze:
+  Exclude:
+    - 'lib/facter/custom_facts/core/aggregate.rb'
+    - 'lib/facter/custom_facts/core/execution/posix.rb'
+    - 'lib/facter/custom_facts/core/execution/windows.rb'
+    - 'lib/facter/custom_facts/util/resolution.rb'
+
+# Offense count: 4
+# This cop supports safe autocorrection (--autocorrect).
+Style/RedundantLineContinuation:
+  Exclude:
+    - 'lib/facter/util/facts/posix/virtual_detector.rb'
+    - 'spec/facter/resolvers/fips_enabled_spec.rb'
+    - 'spec/facter/util/resolvers/networking/primary_interface_spec.rb'
+
+# Offense count: 2
+# This cop supports safe autocorrection (--autocorrect).
+Style/RedundantRegexpArgument:
+  Exclude:
+    - 'lib/facter/framework/formatters/legacy_fact_formatter.rb'
+    - 'lib/facter/resolvers/solaris/processors.rb'
+
+# Offense count: 7
+# This cop supports safe autocorrection (--autocorrect).
+Style/RedundantSelfAssignmentBranch:
+  Exclude:
+    - 'lib/facter/custom_facts/core/execution/base.rb'
+    - 'lib/facter/facts/aix/networking/interfaces.rb'
+    - 'lib/facter/facts/linux/dhcp_servers.rb'
+    - 'lib/facter/facts/macosx/dhcp_servers.rb'
+    - 'lib/facter/facts/solaris/dhcp_servers.rb'
+    - 'lib/facter/facts/windows/dhcp_servers.rb'
+    - 'lib/facter/resolvers/solaris/os_release.rb'
+
+# Offense count: 2
+# This cop supports safe autocorrection (--autocorrect).
+Style/RedundantStringEscape:
+  Exclude:
+    - 'lib/facter/util/macosx/system_profile_executor.rb'
+
+# Offense count: 1
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: AllowedMethods, AllowedPatterns.
+Style/ReturnNilInPredicateMethodDefinition:
+  Exclude:
+    - 'lib/facter/framework/core/fact/internal/internal_fact_manager.rb'
+
+# Offense count: 7
+# Configuration parameters: Max.
+Style/SafeNavigationChainLength:
+  Exclude:
+    - 'lib/facter/resolvers/linux/networking.rb'
+    - 'lib/facter/resolvers/mountpoints.rb'
+    - 'lib/facter/resolvers/networking.rb'
+    - 'lib/facter/util/linux/socket_parser.rb'
+
+# Offense count: 4
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Style/SelectByRegexp:
+  Exclude:
+    - 'lib/facter/resolvers/linux/processors.rb'
+    - 'lib/facter/resolvers/partitions.rb'
+    - 'lib/facter/util/linux/dhcp.rb'
 
 # Offense count: 13
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -98,3 +504,9 @@ Style/SlicingWithRange:
     - 'lib/facter/resolvers/networking.rb'
     - 'lib/facter/resolvers/partitions.rb'
     - 'lib/facter/util/api_debugger.rb'
+
+# Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+Style/SuperArguments:
+  Exclude:
+    - 'lib/facter/custom_facts/core/execution/windows.rb'

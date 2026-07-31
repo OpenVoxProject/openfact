@@ -78,7 +78,6 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - '2.7'
           - '3.2'
           - '4.0'
     runs-on: windows-2025
@@ -158,7 +157,6 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-          - {os: ubuntu-24.04, ruby: '2.7'} # openvox agent 7
           - {os: ubuntu-24.04, ruby: '3.0'} # support for foreman
           - {os: ubuntu-24.04, ruby: '3.1'} # openvox server 7
           - {os: ubuntu-26.04, ruby: '3.2'} # openvox agent 8
@@ -168,7 +166,6 @@ jobs:
           - {os: ubuntu-24.04, ruby: 'jruby-9.4.15.0'} # openvox server 8 target https://github.com/OpenVoxProject/jruby-deps/pull/21
           - {os: ubuntu-26.04, ruby: 'jruby-10.0.5.0'} # openvox server 9 target
           - {os: ubuntu-26.04, ruby: 'jruby-10.1.1.0'} # openvox server 9 target
-          - {os: windows-2025, ruby: '2.7'} # openvox agent 7
           - {os: windows-2025, ruby: '3.2'} # openvox agent 8
           - {os: windows-2025, ruby: '4.0'} # openvox agent 9
     runs-on: ${{ matrix.cfg.os }}

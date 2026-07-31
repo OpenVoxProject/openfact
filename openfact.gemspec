@@ -24,7 +24,8 @@ Gem::Specification.new do |spec|
   base = "#{__dir__}#{File::SEPARATOR}"
   spec.files = dirs.map { |path| path.sub(base, '') }
 
-  spec.required_ruby_version = '>= 2.7'
+  # Foreman packages openfact and builds it against Ruby 3.0
+  spec.required_ruby_version = '>= 3.0'
   spec.bindir = 'bin'
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
@@ -47,16 +48,16 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'webmock', '~> 3.12'
   spec.add_development_dependency 'yard', '~> 0.9'
 
-  spec.add_runtime_dependency 'base64', '>= 0.1', '< 0.4'
-  spec.add_runtime_dependency 'benchmark', '< 0.6'
-  spec.add_runtime_dependency 'hocon', '~> 1.3'
-  spec.add_runtime_dependency 'logger', '~> 1.5'
-  spec.add_runtime_dependency 'ostruct', '< 0.7'
-  spec.add_runtime_dependency 'thor', ['>= 1.0.1', '< 2']
-  spec.add_runtime_dependency 'tsort', '< 0.3'
+  spec.add_dependency 'base64', '>= 0.1', '< 0.4'
+  spec.add_dependency 'benchmark', '< 0.6'
+  spec.add_dependency 'hocon', '~> 1.3'
+  spec.add_dependency 'logger', '~> 1.5'
+  spec.add_dependency 'ostruct', '< 0.7'
+  spec.add_dependency 'thor', ['>= 1.0.1', '< 2']
+  spec.add_dependency 'tsort', '< 0.3'
   # we have the same for openvox
   if Gem.win_platform?
-    spec.add_runtime_dependency 'fiddle', '~> 1.1'
-    spec.add_runtime_dependency 'win32ole', '~> 1.8'
+    spec.add_dependency 'fiddle', '~> 1.1'
+    spec.add_dependency 'win32ole', '~> 1.8'
   end
 end
