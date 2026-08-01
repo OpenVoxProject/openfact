@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-desc 'Build Facter manpages'
+desc 'Build OpenFact manpages'
 task :gen_manpages do
   require 'fileutils'
 
