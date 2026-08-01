@@ -26,8 +26,8 @@ module Facter
 
         # This previously acted as a helper method for versions of Ruby older
         # than 2.5, before Dir.children was added. As it isn't a private
-        # method, we can't remove it entirely until the next major Facter
-        # release (presumably Facter 5).
+        # method, we can't remove it entirely until the next major OpenFact
+        # release.
         def dir_children(path)
           Dir.children(path)
         end

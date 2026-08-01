@@ -10,11 +10,10 @@ used to inform conditional expressions in Puppet.
 
 ## Documentation
 
-Documentation for the Facter project can be found on the [Puppet Docs
-site](https://puppet.com/docs/puppet/latest/facter.html).
+Documentation for OpenFact can be found on the [OpenVox Docs
+site](https://docs.openvoxproject.org/openfact/latest/).
 
-At the time of writing, the OpenVoxProject does not have a documentation website.
-But your help is very welcome!
+Your help improving the documentation is very welcome!
 Reach out to the [Documentation Special Interest Group](https://github.com/voxpupuli/community-triage/wiki/SIG.Documentation) if you want to help.
 
 ## Supported platforms

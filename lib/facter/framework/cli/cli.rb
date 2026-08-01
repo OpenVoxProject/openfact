@@ -104,7 +104,7 @@ module Facter
     class_option :puppet,
                  type: :boolean,
                  aliases: '-p',
-                 desc: 'Load the Puppet libraries, thus allowing Facter to load Puppet-specific facts.'
+                 desc: 'Load the OpenVox libraries, thus allowing OpenFact to load OpenVox-specific facts.'
 
     desc '--man', 'Display manual.', hide: true
     map ['--man'] => :man

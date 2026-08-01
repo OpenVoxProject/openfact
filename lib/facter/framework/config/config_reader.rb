@@ -34,7 +34,7 @@ module Facter
       def refresh_config(config_path)
         @conf = File.readable?(config_path) ? Hocon.load(config_path) : {}
       rescue StandardError => e
-        log.warn("Facter failed to read config file #{config_path} with the following error: #{e.message}")
+        log.warn("OpenFact failed to read config file #{config_path} with the following error: #{e.message}")
         @conf = {}
       end
 

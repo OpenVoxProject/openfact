@@ -30,11 +30,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  # While we require both ffi and sys-filesystem in parts of Facter, we specify
+  # While we require both ffi and sys-filesystem in parts of OpenFact, we specify
   # them as development, not runtime, dependencies. Both gems either directly
   # or indirectly contain native extensions. The intent behind excluding these
   # gems from runtime dependencies is to allow users to be able to install
-  # Facter without a compiler.
+  # OpenFact without a compiler.
   # ffi 1.16.0 - 1.16.2 are broken on Windows
   spec.add_development_dependency 'ffi', '>= 1.15.5', '< 1.18.0', '!= 1.16.0', '!= 1.16.1', '!= 1.16.2'
   spec.add_development_dependency 'rake', '~> 13.0', '>= 13.0.6'

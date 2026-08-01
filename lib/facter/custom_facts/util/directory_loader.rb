@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# A Facter plugin that loads external facts.
+# An OpenFact plugin that loads external facts.
 #
 # Default Unix Directories:
 # /opt/puppetlabs/custom_facts/facts.d, /etc/custom_facts/facts.d, /etc/puppetlabs/custom_facts/facts.d

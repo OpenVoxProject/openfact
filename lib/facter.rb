@@ -15,7 +15,7 @@ module Facter
   @already_searched = {}
 
   class << self
-    # Method used by puppet-agent to retrieve facts
+    # Method used by openvox-agent to retrieve facts
     # @param args_as_string [string] facter cli arguments
     #
     # @return [Hash<String, Object>]
@@ -45,8 +45,8 @@ module Facter
       Hash[queried_facts(cli.args)]
     end
 
-    # Method used by cli to set puppet paths
-    # in order to retrieve puppet custom and external facts
+    # Method used by cli to set OpenVox paths
+    # in order to retrieve OpenVox custom and external facts
     #
     # @return nil
     #
@@ -54,7 +54,7 @@ module Facter
     def puppet_facts
       require 'puppet'
 
-      # don't allow puppet logger to be injected in Facter
+      # don't allow the OpenVox logger to be injected in OpenFact
       Options[:allow_external_loggers] = false
 
       Puppet.initialize_settings
@@ -69,7 +69,7 @@ module Facter
         end
       end
     rescue LoadError => e
-      logger.error("Could not load puppet gem, got #{e}")
+      logger.error("Could not load the openvox gem, got #{e}")
     end
 
     # Alias method for Facter.fact()
@@ -375,7 +375,7 @@ module Facter
     # @api public
     def to_hash
       log_blocked_facts
-      logger.debug("Facter version: #{Facter::VERSION}")
+      logger.debug("OpenFact version: #{Facter::VERSION}")
 
       resolved_facts = Facter::FactManager.instance.resolve_facts
       resolved_facts.reject! { |fact| fact.type == :custom && fact.value.nil? }
@@ -439,7 +439,7 @@ module Facter
       @already_searched[user_query]
     end
 
-    # Returns Facter version
+    # Returns OpenFact version
     #
     # @return [String] Current version
     #
@@ -456,7 +456,7 @@ module Facter
     def to_user_output(cli_options, *args)
       init_cli_options(cli_options)
       logger.info("executed with command line: #{ARGV.drop(1).join(' ')}")
-      logger.debug("Facter version: #{Facter::VERSION}")
+      logger.debug("OpenFact version: #{Facter::VERSION}")
       log_blocked_facts
       resolved_facts = resolve_facts_for_user_query(args)
       fact_formatter = Facter::FormatterFactory.build(Facter::Options.get)
