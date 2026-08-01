@@ -52,7 +52,7 @@ module Facter
 
       def set_logger_format
         @@logger.formatter = proc do |severity, datetime, _progname, msg|
-          datetime = datetime.strftime(@datetime_format || '%Y-%m-%d %H:%M:%S.%6N ')
+          datetime = datetime.strftime('%Y-%m-%dT%H:%M:%S.%6N%:z')
           "[#{datetime}] #{severity} #{msg} \n"
         end
       end
