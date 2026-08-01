@@ -151,7 +151,7 @@ describe Facter::ConfigReader do
       end
 
       it 'loggs a warning' do
-        expect(log).to receive(:warn).with(/Facter failed to read config file/)
+        expect(log).to receive(:warn).with(/OpenFact failed to read config file/)
 
         config_reader.init
       end

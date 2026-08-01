@@ -1,9 +1,9 @@
 ---
 project: 'facter'
-author: 'Puppet Labs'
-email: 'team-nw@puppet.com'
-homepage: 'https://github.com/puppetlabs/facter'
-summary: 'Facter, a system inventory tool'
+author: 'OpenVox Project'
+email: 'openvox@voxpupuli.org'
+homepage: 'https://github.com/OpenVoxProject/openfact'
+summary: 'OpenFact, a system inventory tool'
 description: 'You can prove anything with facts!'
 version_file: 'lib/facter/version.rb'
 files: 'bin/facter lib/facter.rb lib/**/*.rb'
