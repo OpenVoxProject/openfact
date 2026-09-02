@@ -10,7 +10,6 @@ on:
       base-branch:
         description: 'The branch that will be used as the origin for the release branch.'
         required: false
-        type: string
         type: choice
         options:
           - main
