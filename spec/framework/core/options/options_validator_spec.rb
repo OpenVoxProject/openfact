@@ -54,12 +54,11 @@ describe Facter::OptionsValidator do
     end
 
     context 'when parsing resolved options' do
-      # rubocop:disable Style/BlockDelimiters
+      # rubocop:disable-next Style/BlockDelimiters
       let(:options) {
         { puppet: true, external_facts: false, external_dir: Facter::OptionStore.default_external_dir + [''],
           ruby: true, custom_facts: true }
       }
-      # rubocop:enable Style/BlockDelimiters
 
       it 'writes message and exit' do
         stub_const('Puppet', { pluginfactdest: '' })

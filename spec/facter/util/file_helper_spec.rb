@@ -6,9 +6,8 @@ describe Facter::Util::FileHelper do
   let(:path) { '/Users/admin/file.txt' }
   let(:entries) { ['file.txt', 'a'] }
   let(:content) { 'file content' }
-  # rubocop:disable Style/SpecialGlobalVars
+  # rubocop:disable-next Style/SpecialGlobalVars
   let(:sep) { $/ }
-  # rubocop:enable Style/SpecialGlobalVars
   let(:error_message) do
     "Facter::Util::FileHelper - #{Facter::CYAN}File at: /Users/admin/file.txt is not accessible.#{Facter::RESET}"
   end
