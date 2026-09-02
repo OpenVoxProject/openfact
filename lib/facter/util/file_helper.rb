@@ -15,14 +15,13 @@ module Facter
           default_return
         end
 
-        # rubocop:disable Style/SpecialGlobalVars
+        # rubocop:disable-next Style/SpecialGlobalVars
         def safe_readlines(path, default_return = [], sep = $/, chomp: false)
           return File.readlines(path, sep, chomp: chomp, encoding: Encoding::UTF_8) if File.readable?(path)
 
           log_failed_to_read(path)
           default_return
         end
-        # rubocop:enable Style/SpecialGlobalVars
 
         # This previously acted as a helper method for versions of Ruby older
         # than 2.5, before Dir.children was added. As it isn't a private
