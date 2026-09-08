@@ -10,6 +10,11 @@ module Facter
 
         init_resolver
 
+        # Upper bound, in seconds, for the fqdn lookup. A hung name service
+        # otherwise stalls fact collection until the agent's runtimeout fires
+        # (OpenVoxProject/openvox#485). Only applied on Rubies that honour it.
+        FQDN_LOOKUP_TIMEOUT = 10
+
         class << self
           private
 
@@ -65,14 +70,33 @@ module Facter
 
           def retrieve_fqdn_for_host(host)
             begin
-              name = Socket.getaddrinfo(host, 0, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, Socket::AI_CANONNAME)[0]
+              addr = Addrinfo.getaddrinfo(host, 0, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, Socket::AI_CANONNAME,
+                                          **addrinfo_options)[0]
             rescue StandardError => e
-              log.debug("Socket.getaddrinfo failed to retrieve fqdn for hostname #{host} with: #{e}")
+              log.debug("Addrinfo.getaddrinfo failed to retrieve fqdn for hostname #{host} with: #{e}")
+              # The name service is not answering. The FFI lookup below has no
+              # timeout and holds the GVL while it waits, so do not try it.
+              return if lookup_timed_out?(e)
             end
 
-            return name[2] if !name.nil? && !name.empty? && host != name[2] && name[2] != name[3]
+            name = addr&.canonname
+            return name if exists_and_not_empty?(name) && host != name && name != addr.ip_address
 
             retrieve_fqdn_for_host_with_ffi(host)
+          end
+
+          def lookup_timed_out?(error)
+            error.is_a?(Errno::ETIMEDOUT) || (defined?(IO::TimeoutError) && error.is_a?(IO::TimeoutError))
+          end
+
+          # Addrinfo.getaddrinfo only honours the timeout keyword from Ruby 4.0
+          # on. Older MRI accepts and ignores it; JRuby does not accept it.
+          def addrinfo_options
+            addrinfo_timeout_supported? ? { timeout: FQDN_LOOKUP_TIMEOUT } : {}
+          end
+
+          def addrinfo_timeout_supported?
+            RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('4.0')
           end
 
           def retrieve_fqdn_for_host_with_ffi(host)
