@@ -9,6 +9,11 @@ module Facter
 
       init_resolver
 
+      # Upper bound, in seconds, for the fqdn lookup. A hung name service
+      # otherwise stalls fact collection until the agent's runtimeout fires
+      # (OpenVoxProject/openvox#485). Only applied on Rubies that honour it.
+      FQDN_LOOKUP_TIMEOUT = 10
+
       class << self
         private
 
@@ -48,14 +53,27 @@ module Facter
 
         def retrieve_with_addrinfo(host)
           begin
-            name = Socket.getaddrinfo(host, 0, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, Socket::AI_CANONNAME)[0]
+            addr = Addrinfo.getaddrinfo(host, 0, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, Socket::AI_CANONNAME,
+                                        **addrinfo_options)[0]
           rescue StandardError => e
-            @log.debug("Socket.getaddrinfo failed to retrieve fqdn for hostname #{host} with: #{e}")
+            @log.debug("Addrinfo.getaddrinfo failed to retrieve fqdn for hostname #{host} with: #{e}")
             return
           end
-          return if name.nil? || name.empty? || host == name[2] || name[2] == name[3]
 
-          name[2]
+          name = addr&.canonname
+          return if name.nil? || name.empty? || host == name || name == addr.ip_address
+
+          name
+        end
+
+        # Addrinfo.getaddrinfo only honours the timeout keyword from Ruby 4.0
+        # on. Older MRI accepts and ignores it; JRuby does not accept it.
+        def addrinfo_options
+          addrinfo_timeout_supported? ? { timeout: FQDN_LOOKUP_TIMEOUT } : {}
+        end
+
+        def addrinfo_timeout_supported?
+          RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('4.0')
         end
 
         def exists_and_valid_fqdn?(fqdn, hostname)
