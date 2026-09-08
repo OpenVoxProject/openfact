@@ -146,6 +146,48 @@ describe Facter::Util::Resolvers::Http do
     it_behaves_like 'an http request'
   end
 
+  describe '#get_request!' do
+    context 'when successful' do
+      it 'returns the response body' do
+        stub_request(:get, url).to_return(status: 200, body: 'success')
+
+        expect(http.get_request!(url)).to eql('success')
+      end
+
+      it 'preserves an empty response body' do
+        stub_request(:get, url).to_return(status: 200, body: '')
+
+        expect(http.get_request!(url)).to eql('')
+      end
+    end
+
+    context 'when the response is unsuccessful' do
+      it 'raises a request error' do
+        stub_request(:get, url).to_return(status: 503, body: 'Service Unavailable')
+
+        expect { http.get_request!(url) }
+          .to raise_error(Facter::Util::Resolvers::Http::RequestError, /HTTP status 503/)
+      end
+    end
+
+    context 'when the request times out' do
+      it 'propagates the timeout' do
+        stub_request(:get, url).to_timeout
+
+        expect { http.get_request!(url) }.to raise_error(Timeout::Error)
+      end
+    end
+
+    context 'when the HTTP request raises an error' do
+      it 'propagates the error' do
+        error = StandardError.new('some error')
+        stub_request(:get, url).to_raise(error)
+
+        expect { http.get_request!(url) }.to raise_error(error)
+      end
+    end
+  end
+
   describe '#put_request' do
     let(:http_verb) { :put }
     let(:client_method) { :put_request }
