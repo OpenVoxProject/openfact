@@ -7,13 +7,6 @@ on:
 
 permissions: {}
 
-env:
-  GIT_AUTHOR_NAME: OpenVoxProjectBot
-  GIT_AUTHOR_EMAIL: 215568489+OpenVoxProjectBot@users.noreply.github.com
-  GIT_COMMITTER_NAME: OpenVoxProjectBot
-  GIT_COMMITTER_EMAIL: 215568489+OpenVoxProjectBot@users.noreply.github.com
-  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-
 jobs:
   backport:
     name: Backport merged pull request
