@@ -42,10 +42,50 @@ describe Facter::Resolvers::Linux::Hostname do
 
       context 'when it returns only the hostname and ruby addrinfo works' do
         let(:host) { hostname }
-        let(:addr_info) { [['', '', "#{hostname}.#{domain}", '']] }
+        let(:addr_info) { [instance_double(Addrinfo, canonname: "#{hostname}.#{domain}", ip_address: '10.0.0.1')] }
 
         before do
-          allow(Socket).to receive(:getaddrinfo).and_return(addr_info)
+          allow(Addrinfo).to receive(:getaddrinfo).and_return(addr_info)
+        end
+
+        it_behaves_like 'detects values'
+      end
+
+      context 'when it returns only the hostname and ruby addrinfo times out' do
+        let(:host) { hostname }
+        let(:domain) { 'baz' }
+        let(:timeout_error) { defined?(IO::TimeoutError) ? IO::TimeoutError : Errno::ETIMEDOUT }
+
+        before do
+          allow(Addrinfo).to receive(:getaddrinfo).and_raise(timeout_error, 'user specified timeout')
+          allow(Facter::Util::Resolvers::Ffi::Hostname).to receive(:getffiaddrinfo)
+        end
+
+        it 'bounds the lookup with a timeout when Ruby honours it' do
+          stub_const('RUBY_ENGINE', 'ruby')
+          stub_const('RUBY_VERSION', '4.0.0')
+
+          hostname_resolver.resolve(:fqdn)
+
+          expect(Addrinfo).to have_received(:getaddrinfo)
+            .with(hostname, 0, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, Socket::AI_CANONNAME,
+                  timeout: Facter::Resolvers::Linux::Hostname::FQDN_LOOKUP_TIMEOUT)
+        end
+
+        it 'omits the timeout when Ruby does not honour it' do
+          stub_const('RUBY_ENGINE', 'ruby')
+          stub_const('RUBY_VERSION', '3.4.0')
+
+          hostname_resolver.resolve(:fqdn)
+
+          expect(Addrinfo).to have_received(:getaddrinfo)
+            .with(hostname, 0, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, Socket::AI_CANONNAME)
+        end
+
+        it 'does not fall back to the FFI lookup' do
+          hostname_resolver.resolve(:fqdn)
+
+          expect(Facter::Util::Resolvers::Ffi::Hostname).not_to have_received(:getffiaddrinfo)
         end
 
         it_behaves_like 'detects values'
@@ -56,7 +96,7 @@ describe Facter::Resolvers::Linux::Hostname do
         let(:output) { fqdn }
 
         before do
-          allow(Socket).to receive(:getaddrinfo).and_return([])
+          allow(Addrinfo).to receive(:getaddrinfo).and_return([])
           allow(Facter::Util::Resolvers::Ffi::Hostname).to receive(:getffiaddrinfo).and_return(output)
         end
 
@@ -153,11 +193,11 @@ describe Facter::Resolvers::Linux::Hostname do
       end
 
       context 'when it returns only the hostname and ruby addrinfo works' do
-        let(:addr_info) { [['', '', "#{hostname}.#{domain}", '']] }
+        let(:addr_info) { [instance_double(Addrinfo, canonname: "#{hostname}.#{domain}", ip_address: '10.0.0.1')] }
         let(:ffi_host) { hostname }
 
         before do
-          allow(Socket).to receive(:getaddrinfo).and_return(addr_info)
+          allow(Addrinfo).to receive(:getaddrinfo).and_return(addr_info)
         end
 
         it_behaves_like 'detects values'
@@ -168,7 +208,7 @@ describe Facter::Resolvers::Linux::Hostname do
         let(:output) { fqdn }
 
         before do
-          allow(Socket).to receive(:getaddrinfo).and_return([])
+          allow(Addrinfo).to receive(:getaddrinfo).and_return([])
           allow(Facter::Util::Resolvers::Ffi::Hostname).to receive(:getffiaddrinfo).and_return(output)
         end
 
