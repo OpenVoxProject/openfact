@@ -25,6 +25,8 @@ jobs:
       ruby: ${{ steps.ruby.outputs.versions }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Install Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
         with:
@@ -52,6 +54,8 @@ jobs:
     steps:
       - name: Checkout current PR
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       # we explictly force Java 17 because that's the lowest one we support when building packages with ezbake
       - name: Set up Java 17 for JRuby 9
         if: contains(matrix.ruby, 'jruby-9')
@@ -87,6 +91,8 @@ jobs:
     steps:
       - name: Checkout current PR
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Rspec checks
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
@@ -117,6 +123,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: facter
+          persist-credentials: false
 
       - name: Install Ruby 3.2
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
@@ -181,6 +188,8 @@ jobs:
     steps:
       - name: Checkout current PR
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Rspec checks
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
