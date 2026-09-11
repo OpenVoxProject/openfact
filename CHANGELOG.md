@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.1.0](https://github.com/openvoxproject/openfact/tree/6.1.0) (2026-09-11)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/6.0.0...6.1.0)
+
+**Implemented enhancements:**
+
+- Rebrand Puppet/Facter -\> OpenVox/OpenFact in docs and comments [\#168](https://github.com/OpenVoxProject/openfact/pull/168) ([silug](https://github.com/silug))
+
+**Fixed bugs:**
+
+- \[Bug\]: EC2 metadata resolver can return and cache a partially populated fact when a child HTTP request fails [\#175](https://github.com/OpenVoxProject/openfact/issues/175)
+- Reject partial EC2 metadata results [\#176](https://github.com/OpenVoxProject/openfact/pull/176) ([djuarezg](https://github.com/djuarezg))
+- Fix and improve timestamp formatting in logs [\#167](https://github.com/OpenVoxProject/openfact/pull/167) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- bump rubocop to 1.90.0 and align lint-driven style updates [\#173](https://github.com/OpenVoxProject/openfact/pull/173) ([corporate-gadfly](https://github.com/corporate-gadfly))
+
 ## [6.0.0](https://github.com/openvoxproject/openfact/tree/6.0.0) (2026-07-31)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.0...6.0.0)
