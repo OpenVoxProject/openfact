@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Install Ruby
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
         with:
@@ -31,6 +33,8 @@ jobs:
           retention-days: 1
           compression-level: 0
 
+  # the github release could be created by .github/workflows/release.yml
+  # we had to disable it there because our github releases are immutable and we want to attach the gem
   create-github-release:
     needs: build-release
     name: Create GitHub release
@@ -46,7 +50,7 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create --repo ${{ github.repository }} ${{ github.ref_name }} --generate-notes *.gem
+        run: gh release create --repo ${{ github.repository }} ${{ github.ref_name }} --verify-tag --latest --generate-notes *.gem
 
   release-to-github:
     needs: build-release
