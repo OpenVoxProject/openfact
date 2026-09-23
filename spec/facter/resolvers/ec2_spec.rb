@@ -49,6 +49,12 @@ describe Facter::Resolvers::Ec2 do
         expect(ec2.resolve(:userdata)).to eql('userdata')
       end
 
+      it 'does not fetch userdata while resolving metadata' do
+        ec2.resolve(:metadata)
+
+        expect(a_request(:get, userdata_uri)).not_to have_been_made
+      end
+
       it 'parses ec2 network/ directory as a multi-level hash' do
         network_hash = {
           'network' => {
@@ -81,8 +87,8 @@ describe Facter::Resolvers::Ec2 do
         expect(ec2.resolve(:metadata)).to match(hash_including(network_hash))
       end
 
-      it 'fetches the available data' do
-        stub_request(:get, "#{metadata_uri}instance_type").with(headers: headers).to_return(status: 404)
+      it 'preserves a successful empty value' do
+        stub_request(:get, "#{metadata_uri}instance_type").with(headers: headers).to_return(status: 200, body: '')
 
         expect(ec2.resolve(:metadata)).to match(
           {
@@ -92,6 +98,20 @@ describe Facter::Resolvers::Ec2 do
           }
         )
       end
+
+      it 'rejects all metadata when one request is unsuccessful' do
+        stub_request(:get, "#{metadata_uri}instance_type").with(headers: headers).to_return(status: 404)
+
+        expect { ec2.resolve(:metadata) }.to raise_error(Facter::Util::Resolvers::Http::RequestError)
+        expect(ec2.instance_variable_get(:@fact_list)).not_to have_key(:metadata)
+      end
+
+      it 'rejects all metadata when one request times out' do
+        stub_request(:get, "#{metadata_uri}instance_type").with(headers: headers).to_timeout
+
+        expect { ec2.resolve(:metadata) }.to raise_error(Timeout::Error)
+        expect(ec2.instance_variable_get(:@fact_list)).not_to have_key(:metadata)
+      end
     end
 
     context 'when an exception is thrown' do
@@ -100,8 +120,9 @@ describe Facter::Resolvers::Ec2 do
         stub_request(:get, metadata_uri).to_raise(StandardError)
       end
 
-      it 'returns empty ec2 metadata' do
-        expect(ec2.resolve(:metadata)).to eql({})
+      it 'does not return partial ec2 metadata' do
+        expect { ec2.resolve(:metadata) }.to raise_error(StandardError)
+        expect(ec2.instance_variable_get(:@fact_list)).not_to have_key(:metadata)
       end
 
       it 'returns empty ec2 userdata' do

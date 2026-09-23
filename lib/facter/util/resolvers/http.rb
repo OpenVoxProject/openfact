@@ -6,6 +6,8 @@ module Facter
       module Http
         @log = Facter::Log.new(self)
 
+        class RequestError < StandardError; end
+
         class << self
           CONNECTION_TIMEOUT = 0.6
           SESSION_TIMEOUT = 5
@@ -27,6 +29,15 @@ module Facter
             make_request(url, headers, timeouts, 'GET', proxy)
           end
 
+          # Makes a GET HTTP request and returns its response body.
+          #
+          # Unlike get_request, this method raises when the response code is
+          # not 200 or when the request fails. A successful empty response is
+          # still returned as an empty string.
+          def get_request!(url, headers = {}, timeouts = {}, proxy = true)
+            make_request!(url, headers, timeouts, 'GET', proxy)
+          end
+
           # Makes a PUT HTTP request and returns its response
           # @param (see #get_request)
           # @return (see #get_request)
@@ -37,6 +48,28 @@ module Facter
           private
 
           def make_request(url, headers, timeouts, request_type, proxy)
+            response = perform_request(url, headers, timeouts, request_type, proxy)
+
+            successful_response?(response) ? response.body : ''
+          rescue StandardError => e
+            @log.debug("Trying to connect to #{url} but got: #{e.message}")
+            ''
+          end
+
+          def make_request!(url, headers, timeouts, request_type, proxy)
+            response = perform_request(url, headers, timeouts, request_type, proxy)
+
+            return response.body if successful_response?(response)
+
+            raise RequestError, "Request to #{url} failed with HTTP status #{response.code}"
+          rescue RequestError
+            raise
+          rescue StandardError => e
+            @log.debug("Trying to connect to #{url} but got: #{e.message}")
+            raise
+          end
+
+          def perform_request(url, headers, timeouts, request_type, proxy)
             require 'net/http'
 
             uri = URI.parse(url)
@@ -52,11 +85,7 @@ module Facter
             # Make the request
             response = http.request(request)
             response.uri = url
-
-            successful_response?(response) ? response.body : ''
-          rescue StandardError => e
-            @log.debug("Trying to connect to #{url} but got: #{e.message}")
-            ''
+            response
           end
 
           def http_obj(parsed_url, timeouts, proxy)

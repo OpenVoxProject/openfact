@@ -18,14 +18,19 @@ module Facter
         end
 
         def read_facts(fact_name)
-          @fact_list[:metadata] = {}
-          query_for_metadata(EC2_METADATA_ROOT_URL, @fact_list[:metadata])
-          @fact_list[:userdata] = get_data_from(EC2_USERDATA_ROOT_URL).strip.force_encoding('UTF-8')
+          if fact_name == :metadata
+            metadata = {}
+            query_for_metadata(EC2_METADATA_ROOT_URL, metadata)
+            @fact_list[:metadata] = metadata
+          else
+            @fact_list[:userdata] = get_data_from(EC2_USERDATA_ROOT_URL).strip.force_encoding('UTF-8')
+          end
+
           @fact_list[fact_name]
         end
 
         def query_for_metadata(url, container)
-          metadata = get_data_from(url)
+          metadata = get_metadata_from(url)
           metadata.each_line do |line|
             next if line.empty?
 
@@ -34,14 +39,15 @@ module Facter
 
             if http_path_component.end_with?('/')
               child = {}
-              child[http_path_component] = query_for_metadata("#{url}#{http_path_component}", child)
-              child.reject! { |key, _info| key == http_path_component }
+              query_for_metadata("#{url}#{http_path_component}", child)
               name = http_path_component.chomp('/')
               container[name] = child
             else
-              container[http_path_component] = get_data_from("#{url}#{http_path_component}").strip
+              container[http_path_component] = get_metadata_from("#{url}#{http_path_component}").strip
             end
           end
+
+          container
         end
 
         def build_path_component(line)
@@ -53,6 +59,12 @@ module Facter
           headers = {}
           headers['X-aws-ec2-metadata-token'] = v2_token if v2_token
           Facter::Util::Resolvers::Http.get_request(url, headers, { session: determine_session_timeout }, false)
+        end
+
+        def get_metadata_from(url)
+          headers = {}
+          headers['X-aws-ec2-metadata-token'] = v2_token if v2_token
+          Facter::Util::Resolvers::Http.get_request!(url, headers, { session: determine_session_timeout }, false)
         end
 
         def determine_session_timeout
