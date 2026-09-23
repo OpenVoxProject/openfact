@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.7.1](https://github.com/openvoxproject/openfact/tree/5.7.1) (2026-09-23)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.0...5.7.1)
+
+**Fixed bugs:**
+
+- \[Bug\]: EC2 metadata resolver can return and cache a partially populated fact when a child HTTP request fails [\#175](https://github.com/OpenVoxProject/openfact/issues/175)
+- \[Backport 5.x\] Reject partial EC2 metadata results [\#179](https://github.com/OpenVoxProject/openfact/pull/179) ([OpenVoxProjectBot](https://github.com/OpenVoxProjectBot))
+
 ## [5.7.0](https://github.com/openvoxproject/openfact/tree/5.7.0) (2026-07-12)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.6.1...5.7.0)
