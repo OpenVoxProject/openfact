@@ -19,9 +19,7 @@ module Facter
 
         def read_facts(fact_name)
           if fact_name == :metadata
-            metadata = {}
-            query_for_metadata(EC2_METADATA_ROOT_URL, metadata)
-            @fact_list[:metadata] = metadata
+            @fact_list[:metadata] = read_metadata
           else
             @fact_list[:userdata] = get_data_from(EC2_USERDATA_ROOT_URL).strip.force_encoding('UTF-8')
           end
@@ -29,9 +27,29 @@ module Facter
           @fact_list[fact_name]
         end
 
+        # A failed root listing means no EC2-compatible metadata service is
+        # available, so there is no metadata to report. Once the root listing
+        # succeeds, any failed child request rejects the whole result.
+        def read_metadata
+          root_listing = root_metadata_listing
+          return {} unless root_listing
+
+          add_metadata_entries(EC2_METADATA_ROOT_URL, root_listing, {})
+        end
+
+        def root_metadata_listing
+          get_metadata_from(EC2_METADATA_ROOT_URL)
+        rescue StandardError => e
+          log.debug("EC2 metadata is not available: #{e.message}")
+          nil
+        end
+
         def query_for_metadata(url, container)
-          metadata = get_metadata_from(url)
-          metadata.each_line do |line|
+          add_metadata_entries(url, get_metadata_from(url), container)
+        end
+
+        def add_metadata_entries(url, listing, container)
+          listing.each_line do |line|
             next if line.empty?
 
             http_path_component = build_path_component(line)
