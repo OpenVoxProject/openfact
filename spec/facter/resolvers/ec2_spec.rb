@@ -112,6 +112,36 @@ describe Facter::Resolvers::Ec2 do
         expect { ec2.resolve(:metadata) }.to raise_error(Timeout::Error)
         expect(ec2.instance_variable_get(:@fact_list)).not_to have_key(:metadata)
       end
+
+      it 'rejects all metadata when a nested directory request is unsuccessful' do
+        stub_request(:get, metadata_uri).with(headers: headers).to_return(status: 200, body: "ami_id\nplacement/")
+        stub_request(:get, "#{metadata_uri}placement/").with(headers: headers).to_return(status: 503)
+
+        expect { ec2.resolve(:metadata) }.to raise_error(Facter::Util::Resolvers::Http::RequestError)
+        expect(ec2.instance_variable_get(:@fact_list)).not_to have_key(:metadata)
+      end
+    end
+
+    context 'when the root metadata request is unsuccessful' do
+      it 'returns empty ec2 metadata for a non-200 response' do
+        stub_request(:get, metadata_uri).with(headers: headers).to_return(status: 404)
+
+        expect(ec2.resolve(:metadata)).to eql({})
+      end
+
+      it 'returns empty ec2 metadata when the request times out' do
+        stub_request(:get, metadata_uri).with(headers: headers).to_timeout
+
+        expect(ec2.resolve(:metadata)).to eql({})
+      end
+
+      it 'does not request any child metadata' do
+        stub_request(:get, metadata_uri).with(headers: headers).to_return(status: 404)
+
+        ec2.resolve(:metadata)
+
+        expect(a_request(:get, "#{metadata_uri}instance_type")).not_to have_been_made
+      end
     end
 
     context 'when an exception is thrown' do
@@ -120,9 +150,8 @@ describe Facter::Resolvers::Ec2 do
         stub_request(:get, metadata_uri).to_raise(StandardError)
       end
 
-      it 'does not return partial ec2 metadata' do
-        expect { ec2.resolve(:metadata) }.to raise_error(StandardError)
-        expect(ec2.instance_variable_get(:@fact_list)).not_to have_key(:metadata)
+      it 'returns empty ec2 metadata' do
+        expect(ec2.resolve(:metadata)).to eql({})
       end
 
       it 'returns empty ec2 userdata' do
