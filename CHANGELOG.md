@@ -2,13 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.1](https://github.com/openvoxproject/openfact/tree/6.2.1) (2026-09-29)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/6.2.0...6.2.1)
+
+**Fixed bugs:**
+
+- Treat a failed EC2 root metadata request as no metadata [\#207](https://github.com/OpenVoxProject/openfact/pull/207) ([silug](https://github.com/silug))
+
 ## [6.2.0](https://github.com/openvoxproject/openfact/tree/6.2.0) (2026-09-23)
 
-[Full Changelog](https://github.com/openvoxproject/openfact/compare/6.1.0...6.2.0)
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.1...6.2.0)
 
 **Fixed bugs:**
 
 - Bound the fqdn lookup in the hostname resolvers [\#177](https://github.com/OpenVoxProject/openfact/pull/177) ([silug](https://github.com/silug))
+
+## [5.7.1](https://github.com/openvoxproject/openfact/tree/5.7.1) (2026-09-23)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/6.1.0...5.7.1)
 
 ## [6.1.0](https://github.com/openvoxproject/openfact/tree/6.1.0) (2026-09-11)
 
