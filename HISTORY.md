@@ -1,3 +1,213 @@
+## [6.0.0](https://github.com/openvoxproject/openfact/tree/6.0.0) (2026-07-31)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.0...6.0.0)
+
+**Breaking changes:**
+
+- \[Deprecation\] `Resolvable#limit` Compatibility Bridge for `timeout` [\#91](https://github.com/OpenVoxProject/openfact/issues/91)
+- \[Deprecation\] Legacy Timeout Option Aliases in `Facter::Core::Execution.execute` [\#90](https://github.com/OpenVoxProject/openfact/issues/90)
+- \[Deprecation\] `ldapname` Fact Option and Accessor [\#87](https://github.com/OpenVoxProject/openfact/issues/87)
+- Ruby: Drop 2.7; Require 3+ [\#153](https://github.com/OpenVoxProject/openfact/pull/153) ([bastelfreak](https://github.com/bastelfreak))
+- search\_path: Add common elements from $PATH [\#138](https://github.com/OpenVoxProject/openfact/pull/138) ([bastelfreak](https://github.com/bastelfreak))
+- deprecation: add runtime warnings to deprecated exec/which methods [\#121](https://github.com/OpenVoxProject/openfact/pull/121) ([silug](https://github.com/silug))
+- Deprecate Resolvable\#limit compatibility bridge for timeout [\#115](https://github.com/OpenVoxProject/openfact/pull/115) ([silug](https://github.com/silug))
+- Deprecate time\_limit and limit timeout aliases in Facter::Core::Execution.execute [\#114](https://github.com/OpenVoxProject/openfact/pull/114) ([silug](https://github.com/silug))
+- Remove deprecated ldapname fact option and accessor [\#111](https://github.com/OpenVoxProject/openfact/pull/111) ([silug](https://github.com/silug))
+- Drop Ruby 2.5 / 2.6 support [\#69](https://github.com/OpenVoxProject/openfact/pull/69) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- rubocop: autofix part 2 [\#160](https://github.com/OpenVoxProject/openfact/pull/160) ([bastelfreak](https://github.com/bastelfreak))
+- rubocop: autofix part 1 [\#159](https://github.com/OpenVoxProject/openfact/pull/159) ([bastelfreak](https://github.com/bastelfreak))
+- Add Ruby 4 support+tests on windows [\#156](https://github.com/OpenVoxProject/openfact/pull/156) ([bastelfreak](https://github.com/bastelfreak))
+- CI: overhaul Ruby matrix [\#155](https://github.com/OpenVoxProject/openfact/pull/155) ([bastelfreak](https://github.com/bastelfreak))
+- CI: Update jruby-9.4.12.1-\>jruby-9.4.15.0 [\#154](https://github.com/OpenVoxProject/openfact/pull/154) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Fix missing .El tag in manpage [\#151](https://github.com/OpenVoxProject/openfact/pull/151) ([jcharaoui](https://github.com/jcharaoui))
+
+**Merged pull requests:**
+
+- thor: require 1.5 [\#44](https://github.com/OpenVoxProject/openfact/pull/44) ([kenyon](https://github.com/kenyon))
+
+## [5.7.1](https://github.com/openvoxproject/openfact/tree/5.7.1) (2026-09-23)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.0...5.7.1)
+
+**Fixed bugs:**
+
+- \[Bug\]: EC2 metadata resolver can return and cache a partially populated fact when a child HTTP request fails [\#175](https://github.com/OpenVoxProject/openfact/issues/175)
+- \[Backport 5.x\] Reject partial EC2 metadata results [\#179](https://github.com/OpenVoxProject/openfact/pull/179) ([OpenVoxProjectBot](https://github.com/OpenVoxProjectBot))
+
+## [5.7.0](https://github.com/openvoxproject/openfact/tree/5.7.0) (2026-07-12)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.6.1...5.7.0)
+
+**Implemented enhancements:**
+
+- \#128 windows virtual fact support for proxmox/qemu [\#129](https://github.com/OpenVoxProject/openfact/pull/129) ([Hedius](https://github.com/Hedius))
+
+**Fixed bugs:**
+
+- \[Bug\]: virtual fact not working on Windows on Proxmox non Amazaon KVM [\#128](https://github.com/OpenVoxProject/openfact/issues/128)
+
+## [5.6.1](https://github.com/openvoxproject/openfact/tree/5.6.1) (2026-05-11)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.6.0...5.6.1)
+
+**Fixed bugs:**
+
+- Fix unclosed .Bl list in FILES section of man.erb [\#119](https://github.com/OpenVoxProject/openfact/pull/119) ([miharp](https://github.com/miharp))
+- interfaces: parse flags radix correctly [\#110](https://github.com/OpenVoxProject/openfact/pull/110) ([klemensn](https://github.com/klemensn))
+
+**Merged pull requests:**
+
+- CI: Drop JRuby 9.3.14 testing  [\#118](https://github.com/OpenVoxProject/openfact/pull/118) ([bastelfreak](https://github.com/bastelfreak))
+- gemspec: remove upper Ruby version limit [\#107](https://github.com/OpenVoxProject/openfact/pull/107) ([bastelfreak](https://github.com/bastelfreak))
+
+## [5.6.0](https://github.com/openvoxproject/openfact/tree/5.6.0) (2026-04-09)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.5.0...5.6.0)
+
+**Implemented enhancements:**
+
+- Add oci as supported container runtime [\#99](https://github.com/OpenVoxProject/openfact/pull/99) ([slauger](https://github.com/slauger))
+- networking.interfaces: Provide ifconfig\(8\) flags, rdomain, description and groups [\#94](https://github.com/OpenVoxProject/openfact/pull/94) ([klemensn](https://github.com/klemensn))
+- mountpoints: OpenBSD: mount\(8\) -v for more options and disklabel\(8\) UID [\#92](https://github.com/OpenVoxProject/openfact/pull/92) ([klemensn](https://github.com/klemensn))
+
+**Fixed bugs:**
+
+- \[Bug\]: processors.extensions fact 'unknown' on Ubuntu 26.04 / need to use uname -m on machines with uutils/coreutils version of uname [\#95](https://github.com/OpenVoxProject/openfact/issues/95)
+
+**Merged pull requests:**
+
+- CI: Update actions/checkout v4-\>v6 [\#101](https://github.com/OpenVoxProject/openfact/pull/101) ([bastelfreak](https://github.com/bastelfreak))
+- Fix OS detection for Gentoo now that they changed to single-quotes in /etc/os-release [\#100](https://github.com/OpenVoxProject/openfact/pull/100) ([anthonyryan1](https://github.com/anthonyryan1))
+- Fallback to using uname machine for hosts using uutils/coreutils [\#98](https://github.com/OpenVoxProject/openfact/pull/98) ([alavaliant](https://github.com/alavaliant))
+
+## [5.5.0](https://github.com/openvoxproject/openfact/tree/5.5.0) (2026-02-20)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.4.0...5.5.0)
+
+**Implemented enhancements:**
+
+- Add tsort dependency [\#85](https://github.com/OpenVoxProject/openfact/pull/85) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Parse mount point options with spaces correctly on OpenBSD [\#84](https://github.com/OpenVoxProject/openfact/pull/84) ([klemensn](https://github.com/klemensn))
+
+## [5.4.0](https://github.com/openvoxproject/openfact/tree/5.4.0) (2026-02-15)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.3.0...5.4.0)
+
+**Implemented enhancements:**
+
+- ffi: Allow 1.17.x [\#81](https://github.com/OpenVoxProject/openfact/pull/81) ([bastelfreak](https://github.com/bastelfreak))
+- Add JRuby-10 support [\#73](https://github.com/OpenVoxProject/openfact/pull/73) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Report SMT aware processors count on OpenBSD [\#77](https://github.com/OpenVoxProject/openfact/pull/77) ([klemensn](https://github.com/klemensn))
+- Don't run dhcpcd command when it isn't running [\#74](https://github.com/OpenVoxProject/openfact/pull/74) ([nmburgan](https://github.com/nmburgan))
+
+**Merged pull requests:**
+
+- Update rubocop to latest version [\#83](https://github.com/OpenVoxProject/openfact/pull/83) ([bastelfreak](https://github.com/bastelfreak))
+- CI: Remove jruby 9.4.8 testing [\#82](https://github.com/OpenVoxProject/openfact/pull/82) ([bastelfreak](https://github.com/bastelfreak))
+
+## [5.3.0](https://github.com/openvoxproject/openfact/tree/5.3.0) (2026-01-06)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.2.1...5.3.0)
+
+**Implemented enhancements:**
+
+- CI: Add jruby-9.4.12.1 [\#70](https://github.com/OpenVoxProject/openfact/pull/70) ([bastelfreak](https://github.com/bastelfreak))
+- Add Ruby 4.0 support [\#63](https://github.com/OpenVoxProject/openfact/pull/63) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- \[Bug\]: is\_virtual yields true on OpenBSD inside QEMU/Cloud hypervisors [\#61](https://github.com/OpenVoxProject/openfact/issues/61)
+- Fix Solaris processors regex [\#66](https://github.com/OpenVoxProject/openfact/pull/66) ([ekohl](https://github.com/ekohl))
+- Detect QEMU and Yandex hypervisors to yield correct {is\_,}virtual facts [\#62](https://github.com/OpenVoxProject/openfact/pull/62) ([klemensn](https://github.com/klemensn))
+
+## [5.2.1](https://github.com/openvoxproject/openfact/tree/5.2.1) (2025-12-15)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.2.0...5.2.1)
+
+**Merged pull requests:**
+
+- Update logger dependency version constraint [\#55](https://github.com/OpenVoxProject/openfact/pull/55) ([nmburgan](https://github.com/nmburgan))
+
+## [5.2.0](https://github.com/openvoxproject/openfact/tree/5.2.0) (2025-12-04)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.1.0...5.2.0)
+
+**Implemented enhancements:**
+
+- Add os.support.end fact using os-release [\#33](https://github.com/OpenVoxProject/openfact/pull/33) ([ekohl](https://github.com/ekohl))
+
+**Merged pull requests:**
+
+- Rework facter man page [\#45](https://github.com/OpenVoxProject/openfact/pull/45) ([smortex](https://github.com/smortex))
+
+## [5.1.0](https://github.com/openvoxproject/openfact/tree/5.1.0) (2025-07-10)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.0.0...5.1.0)
+
+**Implemented enhancements:**
+
+- Add Ruby 3.4 support [\#36](https://github.com/OpenVoxProject/openfact/pull/36) ([bastelfreak](https://github.com/bastelfreak))
+- Add FreeBSD custom\_facts directory [\#35](https://github.com/OpenVoxProject/openfact/pull/35) ([smortex](https://github.com/smortex))
+- Allow latest version of thor [\#34](https://github.com/OpenVoxProject/openfact/pull/34) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- pin rubocop to \< 1.79 [\#40](https://github.com/OpenVoxProject/openfact/pull/40) ([bastelfreak](https://github.com/bastelfreak))
+
+## [5.0.0](https://github.com/openvoxproject/openfact/tree/5.0.0) (2025-06-27)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.0.0.rc1...5.0.0)
+
+## [5.0.0.rc1](https://github.com/openvoxproject/openfact/tree/5.0.0.rc1) (2025-06-27)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.0.0.rc0...5.0.0.rc1)
+
+**Fixed bugs:**
+
+- CI: Fix Release workflow [\#29](https://github.com/OpenVoxProject/openfact/pull/29) ([bastelfreak](https://github.com/bastelfreak))
+
+## [5.0.0.rc0](https://github.com/openvoxproject/openfact/tree/5.0.0.rc0) (2025-06-27)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/4.10.0...5.0.0.rc0)
+
+**Breaking changes:**
+
+- Rename to OpenFact [\#20](https://github.com/OpenVoxProject/openfact/pull/20) ([smortex](https://github.com/smortex))
+- Match class & file name for Solaris Filesystems [\#17](https://github.com/OpenVoxProject/openfact/pull/17) ([smortex](https://github.com/smortex))
+- Ensure platform-specific code is correctly namespaced [\#15](https://github.com/OpenVoxProject/openfact/pull/15) ([smortex](https://github.com/smortex))
+
+**Implemented enhancements:**
+
+- Unit tests: Add Ruby 3.3 to matrix [\#26](https://github.com/OpenVoxProject/openfact/pull/26) ([bastelfreak](https://github.com/bastelfreak))
+- Detect Windows Server 2025 [\#19](https://github.com/OpenVoxProject/openfact/pull/19) ([dermsd](https://github.com/dermsd))
+- Add support for ZFS facts on GNU/Linux [\#13](https://github.com/OpenVoxProject/openfact/pull/13) ([smortex](https://github.com/smortex))
+- Add MacOS-15 to CI [\#10](https://github.com/OpenVoxProject/openfact/pull/10) ([bastelfreak](https://github.com/bastelfreak))
+- Add Ubuntu 24.04 to CI [\#8](https://github.com/OpenVoxProject/openfact/pull/8) ([bastelfreak](https://github.com/bastelfreak))
+- Add Windows 2022 to CI [\#6](https://github.com/OpenVoxProject/openfact/pull/6) ([bastelfreak](https://github.com/bastelfreak))
+- Add MacOS-14 to CI [\#5](https://github.com/OpenVoxProject/openfact/pull/5) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Fix resolution of the `virtual` fact on FreeBSD [\#16](https://github.com/OpenVoxProject/openfact/pull/16) ([smortex](https://github.com/smortex))
+- Make compressed man pages reproducible [\#1](https://github.com/OpenVoxProject/openfact/pull/1) ([smortex](https://github.com/smortex))
+
+**Closed issues:**
+
+- Choose a new name for facter [\#12](https://github.com/OpenVoxProject/openfact/issues/12)
+
+
 ## 4.10.0
 
 After 4.0.44,  Facter release notes were provided as part of the [official Puppet documentation](https://puppet.com/docs/puppet/7/release_notes_facter.html) and were not tracked in this file.

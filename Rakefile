@@ -25,7 +25,8 @@ begin
     config.future_release = Facter::VERSION
     # we limit the changelog to all new openvox releases, to skip perforce onces
     # otherwise the changelog generate takes a lot amount of time
-    config.since_tag = '4.10.0'
+    config.since_tag = '6.0.0'
+    config.exclude_tags_regex = /\A5\./
   end
 rescue LoadError
   task :changelog do
