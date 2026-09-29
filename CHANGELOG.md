@@ -12,15 +12,11 @@ All notable changes to this project will be documented in this file.
 
 ## [6.2.0](https://github.com/openvoxproject/openfact/tree/6.2.0) (2026-09-23)
 
-[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.1...6.2.0)
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/6.1.0...6.2.0)
 
 **Fixed bugs:**
 
 - Bound the fqdn lookup in the hostname resolvers [\#177](https://github.com/OpenVoxProject/openfact/pull/177) ([silug](https://github.com/silug))
-
-## [5.7.1](https://github.com/openvoxproject/openfact/tree/5.7.1) (2026-09-23)
-
-[Full Changelog](https://github.com/openvoxproject/openfact/compare/6.1.0...5.7.1)
 
 ## [6.1.0](https://github.com/openvoxproject/openfact/tree/6.1.0) (2026-09-11)
 
@@ -72,6 +68,15 @@ All notable changes to this project will be documented in this file.
 **Merged pull requests:**
 
 - thor: require 1.5 [\#44](https://github.com/OpenVoxProject/openfact/pull/44) ([kenyon](https://github.com/kenyon))
+
+## [5.7.1](https://github.com/openvoxproject/openfact/tree/5.7.1) (2026-09-23)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.0...5.7.1)
+
+**Fixed bugs:**
+
+- \[Bug\]: EC2 metadata resolver can return and cache a partially populated fact when a child HTTP request fails [\#175](https://github.com/OpenVoxProject/openfact/issues/175)
+- \[Backport 5.x\] Reject partial EC2 metadata results [\#179](https://github.com/OpenVoxProject/openfact/pull/179) ([OpenVoxProjectBot](https://github.com/OpenVoxProjectBot))
 
 ## [5.7.0](https://github.com/openvoxproject/openfact/tree/5.7.0) (2026-07-12)
 
@@ -239,6 +244,7 @@ All notable changes to this project will be documented in this file.
 **Closed issues:**
 
 - Choose a new name for facter [\#12](https://github.com/OpenVoxProject/openfact/issues/12)
+
 
 ## 4.10.0
 
