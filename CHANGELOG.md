@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.7.2](https://github.com/openvoxproject/openfact/tree/5.7.2) (2026-10-06)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.1...5.7.2)
+
+**Merged pull requests:**
+
+- \[Backport 5.x\] Treat a failed EC2 root metadata request as no metadata [\#209](https://github.com/OpenVoxProject/openfact/pull/209) ([OpenVoxProjectBot](https://github.com/OpenVoxProjectBot))
+
 ## [5.7.1](https://github.com/openvoxproject/openfact/tree/5.7.1) (2026-09-23)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.0...5.7.1)
