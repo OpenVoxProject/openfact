@@ -9,10 +9,9 @@ describe Facter::Resolvers::LsbRelease do
     before do
       allow(Facter::Core::Execution).to receive(:which)
         .with('lsb_release').and_return('/usr/bin/lsb_release')
-      allow(Facter::Core::Execution::Popen3).to receive(:popen3e)
-        .with({ 'LANG' => 'C', 'LC_ALL' => 'C' }, 'lsb_release -a')
-        .and_return(["Distributor ID:\tUbuntu\nDescription:\tUbuntu 18.04.1 LTS\nRelease:\t18.04\nCodename:\tbionic\n",
-                     '', 0])
+      allow(Facter::Core::Execution).to receive(:execute)
+        .with('lsb_release -a', logger: an_instance_of(Facter::Log))
+        .and_return("Distributor ID:\tUbuntu\nDescription:\tUbuntu 18.04.1 LTS\nRelease:\t18.04\nCodename:\tbionic\n")
     end
 
     it 'returns os Distributor ID' do
@@ -44,9 +43,9 @@ describe Facter::Resolvers::LsbRelease do
     before do
       allow(Facter::Core::Execution).to receive(:which)
         .with('lsb_release').and_return('/usr/bin/lsb_release')
-      allow(Facter::Core::Execution::Popen3).to receive(:popen3e)
-        .with({ 'LANG' => 'C', 'LC_ALL' => 'C' }, 'lsb_release -a')
-        .and_return([load_fixture('centos_lsb_release').read, '', 0])
+      allow(Facter::Core::Execution).to receive(:execute)
+        .with('lsb_release -a', logger: an_instance_of(Facter::Log))
+        .and_return(load_fixture('centos_lsb_release').read)
     end
 
     it 'returns distro Distributor ID' do

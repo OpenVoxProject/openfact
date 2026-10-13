@@ -86,6 +86,31 @@ describe Facter::Core::Execution::Base do
       executor.execute('foo')
     end
 
+    context 'when a logger is given' do
+      let(:logger) { instance_spy(Facter::Log) }
+
+      before do
+        allow(ENV).to receive(:[]).and_call_original
+        allow(ENV).to receive(:[]).with('PATH').and_return('/usr/bin')
+        allow(File).to receive(:executable?).and_return(false)
+        allow(FileTest).to receive(:file?).and_return(false)
+      end
+
+      it 'expands commands found outside of PATH' do
+        allow(File).to receive(:executable?).with('/usr/sbin/zpool').and_return(true)
+        allow(FileTest).to receive(:file?).with('/usr/sbin/zpool').and_return(true)
+        expect(Facter::Core::Execution::Popen3).to receive(:popen3e)
+          .with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, '/usr/sbin/zpool upgrade -v').and_return(['', ''])
+        executor.execute('zpool upgrade -v', logger: logger)
+      end
+
+      it 'runs the command as given when it cannot be expanded' do
+        expect(Facter::Core::Execution::Popen3).to receive(:popen3e)
+          .with({ 'LC_ALL' => 'C', 'LANG' => 'C' }, 'zpool upgrade -v').and_raise(Errno::ENOENT, 'zpool')
+        expect(executor.execute('zpool upgrade -v', logger: logger)).to eq('')
+      end
+    end
+
     context 'with expand on posix' do
       let(:test_env) { { 'LANG' => 'C', 'LC_ALL' => 'C', 'PATH' => '/sbin' } }
 
