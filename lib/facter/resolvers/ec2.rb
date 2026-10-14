@@ -8,6 +8,7 @@ module Facter
       EC2_METADATA_ROOT_URL = 'http://169.254.169.254/latest/meta-data/'
       EC2_USERDATA_ROOT_URL = 'http://169.254.169.254/latest/user-data/'
       EC2_SESSION_TIMEOUT = 5
+      EC2_CONNECTION_TIMEOUT = 5
 
       class << self
         private
@@ -76,18 +77,23 @@ module Facter
         def get_data_from(url)
           headers = {}
           headers['X-aws-ec2-metadata-token'] = v2_token if v2_token
-          Facter::Util::Resolvers::Http.get_request(url, headers, { session: determine_session_timeout }, false)
+          Facter::Util::Resolvers::Http.get_request(url, headers, { session: determine_session_timeout, connection: determine_connection_timeout }, false)
         end
 
         def get_metadata_from(url)
           headers = {}
           headers['X-aws-ec2-metadata-token'] = v2_token if v2_token
-          Facter::Util::Resolvers::Http.get_request!(url, headers, { session: determine_session_timeout }, false)
+          Facter::Util::Resolvers::Http.get_request!(url, headers, { session: determine_session_timeout, connection: determine_connection_timeout }, false)
         end
 
         def determine_session_timeout
           session_env = ENV.fetch('EC2_SESSION_TIMEOUT', nil)
           session_env ? session_env.to_i : EC2_SESSION_TIMEOUT
+        end
+
+        def determine_connection_timeout
+          session_env = ENV.fetch('EC2_CONNECTION_TIMEOUT', nil)
+          session_env ? session_env.to_i : EC2_CONNECTION_TIMEOUT
         end
 
         def v2_token
