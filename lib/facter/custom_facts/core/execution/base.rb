@@ -44,8 +44,13 @@ module Facter
         def execute(command, options = {})
           on_fail, expand, logger, timeout = extract_options(options)
 
-          expanded_command = if (!expand && builtin_command?(command)) || logger
+          expanded_command = if !expand && builtin_command?(command)
                                command
+                             elsif logger
+                               # Internal resolvers rely on search_paths to find commands
+                               # outside of PATH (e.g. /usr/sbin/zpool on Solaris). Fall back
+                               # to the command as given so failures are logged, not raised.
+                               expand_command(command) || command
                              else
                                expand_command(command)
                              end
