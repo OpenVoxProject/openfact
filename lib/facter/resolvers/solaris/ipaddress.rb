@@ -14,13 +14,12 @@ module Facter
           end
 
           def read_ipaddress(fact_name)
-            ip = nil
             primary_interface = read_primary_interface
             unless primary_interface.nil?
               output = Facter::Core::Execution.execute("ifconfig #{primary_interface}", logger: log)
               output.each_line do |str|
                 if str.strip =~ /inet\s(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}) .+/
-                  @fact_list[:ip] = ip = Regexp.last_match(1)
+                  @fact_list[:ip] = Regexp.last_match(1)
                   break
                 end
               end
