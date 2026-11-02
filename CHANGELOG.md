@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.2](https://github.com/openvoxproject/openfact/tree/6.2.2) (2026-11-02)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/6.2.1...6.2.2)
+
+**Fixed bugs:**
+
+- Search default paths for commands run by core facts [\#221](https://github.com/OpenVoxProject/openfact/pull/221) ([alexjfisher](https://github.com/alexjfisher))
+
+**Closed issues:**
+
+- Core facts don't search `/sbin` and `/usr/sbin`, so commands outside PATH are not found [\#211](https://github.com/OpenVoxProject/openfact/issues/211)
+
 ## [6.2.1](https://github.com/openvoxproject/openfact/tree/6.2.1) (2026-09-29)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/6.2.0...6.2.1)
