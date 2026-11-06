@@ -10,7 +10,7 @@ module Facts
 
         fact_value = Facter::Resolvers::Ec2.resolve(:userdata)
 
-        Facter::ResolvedFact.new(FACT_NAME, fact_value&.empty? ? nil : fact_value)
+        Facter::ResolvedFact.new(FACT_NAME, fact_value && fact_value.empty? ? nil : fact_value)
       end
 
       private

@@ -10,20 +10,20 @@ module Facter
         end
 
         class Sockaddr < ::FFI::Struct
-          layout  :sa_family, :sa_family_t,
-                  :sa_data, [:uchar, 14]
+          layout :sa_family, :sa_family_t,
+                 :sa_data, [:uchar, 14]
         end
 
         class Lifnum < ::FFI::Struct
-          layout  :lifn_family, :sa_family_t,
-                  :lifn_flags, :int,
-                  :lifn_count, :int
+          layout :lifn_family, :sa_family_t,
+                 :lifn_flags, :int,
+                 :lifn_count, :int
         end
 
         class Arpreq < ::FFI::Struct
-          layout  :arp_pa, Sockaddr,
-                  :arp_ha, Sockaddr,
-                  :arp_flags, :int
+          layout :arp_pa, Sockaddr,
+                 :arp_ha, Sockaddr,
+                 :arp_flags, :int
 
           def sa_data_to_mac
             self[:arp_ha][:sa_data].entries[0, 6].map do |s|
@@ -41,27 +41,27 @@ module Facter
         end
 
         class Lifru1 < ::FFI::Union
-          layout  :lifru_addrlen, :int,
-                  :lifru_ppa, :uint_t
+          layout :lifru_addrlen, :int,
+                 :lifru_ppa, :uint_t
         end
 
         class Lifru < ::FFI::Union
-          layout  :lifru_addr, SockaddrStorage,
-                  :lifru_dstaddr, SockaddrStorage,
-                  :lifru_broadaddr, SockaddrStorage,
-                  :lifru_token, SockaddrStorage,
-                  :lifru_subnet, SockaddrStorage,
-                  :lifru_flags, :uint64,
-                  :lifru_metric, :int,
-                  :pad, [:char, 80]
+          layout :lifru_addr, SockaddrStorage,
+                 :lifru_dstaddr, SockaddrStorage,
+                 :lifru_broadaddr, SockaddrStorage,
+                 :lifru_token, SockaddrStorage,
+                 :lifru_subnet, SockaddrStorage,
+                 :lifru_flags, :uint64,
+                 :lifru_metric, :int,
+                 :pad, [:char, 80]
         end
 
         class Lifreq < ::FFI::Struct
-          layout  :lifr_name, [:char, 32],
-                  :lifr_lifru1, Lifru1,
-                  :lifr_movetoindex, :int,
-                  :lifr_lifru, Lifru,
-                  :pad, [:char, 80]
+          layout :lifr_name, [:char, 32],
+                 :lifr_lifru1, Lifru1,
+                 :lifr_movetoindex, :int,
+                 :lifr_lifru, Lifru,
+                 :pad, [:char, 80]
 
           def name
             self[:lifr_name].to_s
@@ -77,10 +77,10 @@ module Facter
         end
 
         class Lifconf < ::FFI::Struct
-          layout  :lifc_family, :uint,
-                  :lifc_flags, :int,
-                  :lifc_len, :int,
-                  :lifc_buf, :pointer
+          layout :lifc_family, :uint,
+                 :lifc_flags, :int,
+                 :lifc_len, :int,
+                 :lifc_buf, :pointer
 
           def self.new_for_ioctl(interface_count)
             lifconf = new
@@ -93,8 +93,8 @@ module Facter
         end
 
         class Lifcu < ::FFI::Union
-          layout  :lifcu_buf, :caddr_t,
-                  :lifcu_req, Lifreq
+          layout :lifcu_buf, :caddr_t,
+                 :lifcu_req, Lifreq
         end
 
         class InAddr < ::FFI::Struct
@@ -102,10 +102,10 @@ module Facter
         end
 
         class SockaddrIn < ::FFI::Struct
-          layout  :sin_family, :sa_family_t,
-                  :sin_port, :in_port_t,
-                  :sin_addr, InAddr,
-                  :sin_zero, [:char, 8]
+          layout :sin_family, :sa_family_t,
+                 :sin_port, :in_port_t,
+                 :sin_addr, InAddr,
+                 :sin_zero, [:char, 8]
 
           def s_addr
             self[:sin_addr][:s_addr]
@@ -117,11 +117,11 @@ module Facter
         end
 
         class SockaddrIn6 < ::FFI::Struct
-          layout  :sin6_family, :sa_family_t,
-                  :sin6_port, :in_port_t,
-                  :sin6_flowinfo, :uint32_t,
-                  :sin6_addr, In6Addr,
-                  :sin6_scope_id, :uint32_t
+          layout :sin6_family, :sa_family_t,
+                 :sin6_port, :in_port_t,
+                 :sin6_flowinfo, :uint32_t,
+                 :sin6_addr, In6Addr,
+                 :sin6_scope_id, :uint32_t
         end
       end
     end
