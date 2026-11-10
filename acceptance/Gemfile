@@ -12,6 +12,7 @@ end
 
 gem "beaker", *location_for(ENV['BEAKER_VERSION'] || "~> 7")
 gem 'beaker-puppet', *location_for(ENV['BEAKER_PUPPET_VERSION'] || "~> 4")
+gem 'beaker_puppet_helpers', *location_for(ENV['BEAKER_PUPPET_HELPERS_VERSION'] || "~> 3.3")
 gem "beaker-hostgenerator", *location_for(ENV['BEAKER_HOSTGENERATOR_VERSION'] || "~> 3")
 gem "beaker-vagrant", *location_for(ENV['BEAKER_VAGRANT_VERSION'] || "~> 2")
 gem "rake", ">= 12.3.3"
