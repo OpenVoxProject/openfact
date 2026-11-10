@@ -97,7 +97,7 @@ jobs:
     env:
       BEAKER_debug: true
       FACTER_ROOT: facter
-      RELEASE_STREAM: puppet8
+      RELEASE_STREAM: openvox8
 
     steps:
       - name: Checkout current PR
