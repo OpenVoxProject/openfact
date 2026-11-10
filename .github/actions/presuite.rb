@@ -5,7 +5,7 @@ require 'fileutils'
 
 def if_no_env_vars_set_defaults
   ENV['FACTER_ROOT'] = __dir__.gsub('/.github/actions', '') unless ENV['FACTER_ROOT']
-  ENV['RELEASE_STREAM'] = 'puppet8' unless ENV['RELEASE_STREAM']
+  ENV['RELEASE_STREAM'] = 'openvox9' unless ENV['RELEASE_STREAM']
 end
 
 def install_facter_acceptance_dependencies
@@ -42,23 +42,10 @@ def platform_with_options(platform)
   "#{platform}{hypervisor=none\\,hostname=localhost}"
 end
 
-def install_puppet_agent
-  message('INSTALL PUPPET AGENT')
+def install_openvox_agent
+  message('INSTALL OPENVOX AGENT')
 
-  beaker_puppet_root = run('bundle info beaker-puppet --path')
-
-  # Bundler/Rubygems can sometimes give output other than the filepath (deprecation warnings, etc.)
-  begin
-    if File.exist?(beaker_puppet_root.chomp)
-      presuite_file_path = File.join(beaker_puppet_root.chomp, 'setup', 'aio', '010_Install_Puppet_Agent.rb')
-
-      run("beaker exec pre-suite --pre-suite #{presuite_file_path} --preserve-state", './', env_path_var)
-    else
-      exit
-    end
-  rescue SystemExit
-    puts "`bundle info beaker-puppet --path` produced unexpected output, please address this."
-  end
+  run('beaker exec pre-suite --pre-suite pre-suite/install_openvox_agent.rb --preserve-state', './', env_path_var)
 end
 
 def puppet_puppet_bin_dir
@@ -151,7 +138,7 @@ verify_facter_standalone_exits_0
 Dir.chdir(ACCEPTANCE_PATH) do
   install_facter_acceptance_dependencies
   initialize_beaker
-  install_puppet_agent
+  install_openvox_agent
   install_facter
   run_acceptance_tests
 end
