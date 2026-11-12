@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [6.2.2](https://github.com/openvoxproject/openfact/tree/6.2.2) (2026-11-02)
+## [6.2.2](https://github.com/openvoxproject/openfact/tree/6.2.2) (2026-11-05)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/6.2.1...6.2.2)
 
