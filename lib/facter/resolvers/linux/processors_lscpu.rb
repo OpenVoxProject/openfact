@@ -6,12 +6,16 @@ module Facter
       class Lscpu < BaseResolver
         init_resolver
 
-        ITEMS = { threads_per_core: "-e 'Thread(s)'",
-                  cores_per_socket: "-e 'Core(s)'" }.freeze
+        ITEMS = {
+          threads_per_core: "-e 'Thread(s)'",
+          cores_per_socket: "-e 'Core(s)'",
+          numa_nodes: "-e 'NUMA node(s)'"
+        }.freeze
 
         class << self
           # :cores_per_socket
           # :threads_per_core
+          # :numa_nodes
 
           private
 
@@ -28,6 +32,7 @@ module Facter
           def build_fact_list(processors_data)
             build_threads_per_core(processors_data[0])
             build_cores_per_socket(processors_data[1])
+            build_numa_nodes(processors_data[2])
           end
 
           def build_threads_per_core(index)
@@ -36,6 +41,10 @@ module Facter
 
           def build_cores_per_socket(index)
             @fact_list[:cores_per_socket] = index.split(': ')[1].to_i
+          end
+
+          def build_numa_nodes(index)
+            @fact_list[:numa_nodes] = index.split(': ')[1].to_i
           end
         end
       end
