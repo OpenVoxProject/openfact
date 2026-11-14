@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'etc'
 require 'open3'
 require 'fileutils'
+require 'yaml'
 
 def if_no_env_vars_set_defaults
   ENV['FACTER_ROOT'] = __dir__.gsub('/.github/actions', '') unless ENV['FACTER_ROOT']
@@ -14,32 +16,28 @@ def install_facter_acceptance_dependencies
 end
 
 def initialize_beaker
-  beaker_platform_with_options = platform_with_options(beaker_platform)
-
   message('BEAKER INITIALIZE')
-  run("beaker init -h #{beaker_platform_with_options} -o #{File.join('config', 'aio', 'options.rb')}")
+  File.write('hosts.yaml', { 'HOSTS' => { 'localhost' => beaker_host } }.to_yaml)
+  run("beaker init -h hosts.yaml -o #{File.join('config', 'aio', 'options.rb')}")
 
   message('BEAKER PROVISION')
   run('beaker provision')
 end
 
-def beaker_platform
-  {
-    'ubuntu-22.04' => 'ubuntu2204-64a',
-    'ubuntu-24.04' => 'ubuntu2404-64a',
-    'macos-13' => 'osx13-64a',
-    'macos-14' => 'osx14-64a',
-    'macos-15' => 'osx15-64a',
-    'windows-2016' => 'windows2016-64a',
-    'windows-2019' => 'windows2019-64a',
-    'windows-2022' => 'windows2022-64a',
-  }[HOST_PLATFORM]
-end
-
-def platform_with_options(platform)
-  return "\"#{platform}{hypervisor=none,hostname=localhost,is_cygwin=false}\"" if platform.include? 'windows'
-
-  "#{platform}{hypervisor=none\\,hostname=localhost}"
+# The runner is the only host. Its platform comes from the runner's name, so a
+# new runner needs no beaker-hostgenerator release that knows its OS version.
+def beaker_host
+  os, version = HOST_PLATFORM.split('-')
+  host = case os
+         when 'macos'
+           { 'platform' => "osx-#{version}-#{Etc.uname[:machine]}" }
+         when 'windows'
+           { 'platform' => "windows-#{version}-64", 'packaging_platform' => 'windows-2012-x64',
+             'ruby_arch' => 'x64', 'is_cygwin' => false }
+         when 'ubuntu'
+           { 'platform' => "ubuntu-#{version}-amd64" }
+         end
+  host.merge('hypervisor' => 'none', 'roles' => ['agent'])
 end
 
 def install_openvox_agent
