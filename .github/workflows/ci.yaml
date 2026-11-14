@@ -113,6 +113,10 @@ jobs:
           - ubuntu-22.04
           - ubuntu-24.04
           - ubuntu-26.04
+          - macos-15
+          - macos-15-intel
+          - macos-26
+          - macos-26-intel
       fail-fast: false
     runs-on: ${{ matrix.os }}
     env:
@@ -156,6 +160,20 @@ jobs:
         run: |
           primary_interface=`route -n get default | awk '/interface: */{print $NF}'`
           sudo ifconfig $primary_interface inet6 add ::1/64
+
+      # beaker_puppet_helpers can't install on macOS, so this installs the
+      # newest release DMG of the collection, as the openvox suite does
+      - name: Install openvox-agent on macOS
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          url="https://downloads.voxpupuli.org/mac/${RELEASE_STREAM}"
+          dmg=$(curl --fail --silent --show-error "${url}/" |
+            grep -o "openvox-agent-[0-9.]*-1\.macos\.all\.$(uname -m)\.dmg" | sort -u -V | tail -n 1)
+          curl --fail --silent --show-error --location --output "${RUNNER_TEMP}/openvox-agent.dmg" "${url}/${dmg}"
+          sudo hdiutil attach "${RUNNER_TEMP}/openvox-agent.dmg" -nobrowse -mountpoint /Volumes/openvox-agent
+          sudo installer -pkg /Volumes/openvox-agent/*.pkg -target /
+          /opt/puppetlabs/bin/puppet --version
 
       - name: Run acceptance tests on Linux and MacOS platform
         if: runner.os != 'Windows'
