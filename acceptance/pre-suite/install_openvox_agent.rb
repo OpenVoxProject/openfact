@@ -12,10 +12,9 @@ test_name('install openvox-agent') do
   collection = ENV.fetch('RELEASE_STREAM')
 
   agents.each do |agent|
-    # beaker_puppet_helpers can't install on macOS, so the workflow does
-    next if agent['platform'].start_with?('osx')
-
-    if agent['platform'].include?('windows')
+    if agent['platform'].start_with?('osx')
+      BeakerPuppetHelpers::InstallUtils.install_openvox_agent_dmg_on(agent, collection)
+    elsif agent['platform'].include?('windows')
       install_msi_on(agent, collection)
     else
       BeakerPuppetHelpers::InstallUtils.install_puppet_release_repo_on(agent, collection)
