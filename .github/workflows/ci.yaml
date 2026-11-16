@@ -127,11 +127,11 @@ jobs:
           sudo chmod a-w /home/runner /usr/share &&
           sudo chmod -R a-w /home/runner/.config /home/linuxbrew
 
-      - name: Install dhclient for Linux
+      # The hosted runners lack the lease file that openfact reads networking.dhcp from.
+      # A renewal makes systemd-networkd write it again.
+      - name: Renew the DHCP lease on Linux
         if: runner.os == 'Linux'
-        run: |
-          sudo apt install isc-dhcp-client
-          sudo dhclient
+        run: sudo networkctl renew eth0
 
       # IPv6 is missing on the GitHub macOS image and we need it for the networking facts tests
       # https://github.com/actions/runner-images/issues/668
