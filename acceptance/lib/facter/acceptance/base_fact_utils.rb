@@ -431,12 +431,8 @@ module Facter
           os_version = '10'
         elsif agent['platform'] =~ /-11/
           os_version = '11'
-        elsif agent['platform'] =~ /2016/
-          os_version = '2016'
-        elsif agent['platform'] =~ /2019/
-          os_version = '2019'
-        elsif agent['platform'] =~ /2022/
-          os_version = '2022'
+        elsif agent['platform'] =~ /windows-(20\d\d)/
+          os_version = Regexp.last_match(1)
         else
           fail_test "Unknown Windows version #{agent['platform']}"
         end
