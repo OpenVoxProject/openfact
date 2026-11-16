@@ -52,7 +52,9 @@ test_name 'missing facts should not invalidate cache' do
       on(agent, facter('', environment: env))
       ls1 = agent.ls_ld("#{cache_folder}/networking")
       sleep 1
-      on(agent, facter('', environment: env))
+      on(agent, facter('--debug', environment: env)) do |facter_output|
+        refute_match(/caching values for/, facter_output.stderr, 'facter should not have written the cache again')
+      end
       ls2 = agent.ls_ld("#{cache_folder}/networking")
 
       assert_equal(ls1, ls2)
