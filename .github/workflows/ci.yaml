@@ -123,6 +123,8 @@ jobs:
       BEAKER_debug: true
       FACTER_ROOT: facter
       RELEASE_STREAM: openvox9
+      # A build with the gemspec fix from OpenVoxProject/openvox#793. Remove this line once a release has it.
+      OPENVOX_AGENT_VERSION: 9.4.0.34.ga31e44e6e
 
     steps:
       - name: Checkout current PR
