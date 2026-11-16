@@ -16,13 +16,15 @@ test_name "C100305: The Ruby fact should resolve as expected in AIO" do
       puppet_version = on(agent, puppet("--version")).stdout.chomp
       ruby_version   = if puppet_version =~ /^7\./
                          /2\.\d+\.\d+/
+                       elsif puppet_version =~ /^9\./
+                         /4\.\d+\.\d+/
                        else
                          /3\.\d+\.\d+/
                        end
 
       case agent['platform']
         when /windows/
-          ruby_platform = agent['ruby_arch'] == 'x64' ? 'x64-mingw32' : 'i386-mingw32'
+          ruby_platform = agent['ruby_arch'] == 'x64' ? /x64-mingw(32|-ucrt)/ : 'i386-mingw32'
         when /osx/
           if agent['platform'] =~ /arm64/
             if puppet_version =~ /^7\./ && agent['platform'].split('-')[1].to_i < 13
