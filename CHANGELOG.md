@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [6.2.2](https://github.com/openvoxproject/openfact/tree/6.2.2) (2026-11-02)
+## [6.2.3](https://github.com/openvoxproject/openfact/tree/6.2.3) (2026-11-17)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/6.2.2...6.2.3)
+
+**Fixed bugs:**
+
+- Keep the cache file when a requested fact is missing from it  [\#248](https://github.com/OpenVoxProject/openfact/pull/248) ([nmburgan](https://github.com/nmburgan))
+
+**Merged pull requests:**
+
+- Use openvox and add macos up to date platforms in acceptance [\#247](https://github.com/OpenVoxProject/openfact/pull/247) ([nmburgan](https://github.com/nmburgan))
+
+## [6.2.2](https://github.com/openvoxproject/openfact/tree/6.2.2) (2026-11-05)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/6.2.1...6.2.2)
 
