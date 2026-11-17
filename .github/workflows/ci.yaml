@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Ruby ${{ matrix.ruby }}
-        uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
         with:
           ruby-version: "3.4"
           bundler-cache: true
@@ -38,7 +38,6 @@ jobs:
       matrix:
         ruby: ${{ fromJSON(needs.rubocop_and_matrix.outputs.ruby) }}
         include:
-          - ruby: 'jruby-9.4.12.1' # used in OpenVox 8
           - ruby: 'jruby-9.4.15.0' # OpenVox 8 target https://github.com/OpenVoxProject/jruby-deps/pull/21
           - ruby: 'jruby-10.0.5.0' # latest JRuby for Ruby 3.4 compatibility / OpenVox 9 target version
     runs-on: ubuntu-24.04
@@ -60,7 +59,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Rspec checks
-        uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
@@ -79,7 +78,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Rspec checks
-        uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
@@ -107,7 +106,7 @@ jobs:
           path: facter
 
       - name: Install Ruby 3.2
-        uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
         with:
           ruby-version: '3.2'
           bundler-cache: true
@@ -154,7 +153,7 @@ jobs:
         cfg:
           - {os: ubuntu-latest, ruby: '2.7'}
           - {os: ubuntu-22.04, ruby: '3.2'} # with openssl 3
-          - {os: ubuntu-latest, ruby: 'jruby-9.4.12.1'}
+          - {os: ubuntu-latest, ruby: 'jruby-9.4.15.0'}
           - {os: ubuntu-latest, ruby: 'jruby-10.0.5.0'}
           - {os: windows-2022, ruby: '2.7'}
           - {os: windows-2022, ruby: '3.2'} # with openssl 3
@@ -166,7 +165,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Rspec checks
-        uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
         with:
           ruby-version: ${{ matrix.cfg.ruby }}
           bundler-cache: true

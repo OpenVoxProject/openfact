@@ -132,6 +132,29 @@ describe Facter::CacheManager do
         )
       end
 
+      context 'when a searched fact is not in the cache file' do
+        let(:searched_missing_fact) do
+          instance_spy(Facter::SearchedFact, name: 'os.release', fact_class: nil, user_query: '', type: :core, file: nil)
+        end
+
+        before do
+          allow(fact_groups).to receive(:get_fact).with('os.release').and_return(os_fact)
+          allow(File).to receive(:delete)
+        end
+
+        it 'keeps the cache file' do
+          cache_manager.resolve_facts([searched_missing_fact])
+
+          expect(File).not_to have_received(:delete)
+        end
+
+        it 'leaves the fact to be resolved' do
+          unresolved, cached = cache_manager.resolve_facts([searched_missing_fact])
+
+          expect([unresolved, cached]).to eq([[searched_missing_fact], []])
+        end
+      end
+
       context 'when file cannot be deleted because of access denied' do
         let(:cache_file) { File.join(cache_dir, 'ext_file.txt') }
 
