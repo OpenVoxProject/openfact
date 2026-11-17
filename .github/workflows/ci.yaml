@@ -109,14 +109,22 @@ jobs:
       matrix:
         os:
           - windows-2022
+          - windows-2025
           - ubuntu-22.04
           - ubuntu-24.04
+          - ubuntu-26.04
+          - macos-15
+          - macos-15-intel
+          - macos-26
+          - macos-26-intel
       fail-fast: false
     runs-on: ${{ matrix.os }}
     env:
       BEAKER_debug: true
       FACTER_ROOT: facter
-      RELEASE_STREAM: puppet8
+      RELEASE_STREAM: openvox9
+      # A build with the gemspec fix from OpenVoxProject/openvox#793. Remove this line once a release has it.
+      OPENVOX_AGENT_VERSION: 9.4.0.34.ga31e44e6e
 
     steps:
       - name: Checkout current PR
@@ -141,11 +149,11 @@ jobs:
           sudo chmod a-w /home/runner /usr/share &&
           sudo chmod -R a-w /home/runner/.config /home/linuxbrew
 
-      - name: Install dhclient for Linux
+      # The hosted runners lack the lease file that openfact reads networking.dhcp from.
+      # A renewal makes systemd-networkd write it again.
+      - name: Renew the DHCP lease on Linux
         if: runner.os == 'Linux'
-        run: |
-          sudo apt install isc-dhcp-client
-          sudo dhclient
+        run: sudo networkctl renew eth0
 
       # IPv6 is missing on the GitHub macOS image and we need it for the networking facts tests
       # https://github.com/actions/runner-images/issues/668
@@ -155,9 +163,10 @@ jobs:
           primary_interface=`route -n get default | awk '/interface: */{print $NF}'`
           sudo ifconfig $primary_interface inet6 add ::1/64
 
+      # The sudo of Ubuntu 26.04 ignores -E, so the pinned agent version is named as well
       - name: Run acceptance tests on Linux and MacOS platform
         if: runner.os != 'Windows'
-        run: sudo -E "PATH=$PATH" ruby $FACTER_ROOT/.github/actions/presuite.rb ${{ matrix.os }}
+        run: sudo -E --preserve-env=OPENVOX_AGENT_VERSION "PATH=$PATH" ruby $FACTER_ROOT/.github/actions/presuite.rb ${{ matrix.os }}
 
       - name: Run acceptance tests on Windows-like platform
         if: runner.os == 'Windows'
