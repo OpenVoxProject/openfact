@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.7.3](https://github.com/openvoxproject/openfact/tree/5.7.3) (2026-11-05)
+## [5.7.4](https://github.com/openvoxproject/openfact/tree/5.7.4) (2026-11-18)
+
+[Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.3...5.7.4)
+
+**Merged pull requests:**
+
+- \[Backport 5.x\] Keep the cache file when a requested fact is missing from it  [\#252](https://github.com/OpenVoxProject/openfact/pull/252) ([OpenVoxProjectBot](https://github.com/OpenVoxProjectBot))
+
+## [5.7.3](https://github.com/openvoxproject/openfact/tree/5.7.3) (2026-11-06)
 
 [Full Changelog](https://github.com/openvoxproject/openfact/compare/5.7.2...5.7.3)
 
