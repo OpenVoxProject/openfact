@@ -387,7 +387,7 @@ module Facter
         if agent['platform'] =~ /x86_64|amd64/
           os_arch     = 'amd64'
           os_hardware = 'x86_64'
-          processor_model_pattern = /(Intel\(R\).*)|(AMD.*)/
+          processor_model_pattern = /(Intel\(R\).*)|(AMD.*)/i
         elsif agent['platform'] =~ /aarch64/
           os_arch                 = 'aarch64'
           os_hardware             = 'aarch64'
@@ -431,12 +431,8 @@ module Facter
           os_version = '10'
         elsif agent['platform'] =~ /-11/
           os_version = '11'
-        elsif agent['platform'] =~ /2016/
-          os_version = '2016'
-        elsif agent['platform'] =~ /2019/
-          os_version = '2019'
-        elsif agent['platform'] =~ /2022/
-          os_version = '2022'
+        elsif agent['platform'] =~ /windows-(20\d\d)/
+          os_version = Regexp.last_match(1)
         else
           fail_test "Unknown Windows version #{agent['platform']}"
         end
@@ -459,7 +455,7 @@ module Facter
           'processors.count' => /[1-9]/,
           'processors.physicalcount' => /[1-9]/,
           'processors.isa' => /x86|x64/,
-          'processors.models' => /(Intel\(R\).*)|(AMD.*)/,
+          'processors.models' => /(Intel\(R\).*)|(AMD.*)/i,
           'kernel' => 'windows',
           'kernelrelease' => /\d+\.\d+/,
           'kernelversion' => /\d+\.\d+/,

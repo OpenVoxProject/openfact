@@ -1036,12 +1036,21 @@ networking:
                         bindings6:
                             type: array
                             description: The array of IPv6 address bindings for the interface.
+                        description:
+                            type: string
+                            description: The description of the network interface, as reported by ifconfig.
                         dhcp:
                             type: ip
                             description: The DHCP server for the network interface.
                         duplex:
                             type: string
                             description: The duplex settings for physical network interfaces on Linux using /sys/class/net.
+                        flags:
+                            type: array
+                            description: The flags of the network interface, as reported by ifconfig.
+                        groups:
+                            type: array
+                            description: The interface groups that the network interface belongs to, as reported by ifconfig.
                         ip:
                             type: ip
                             description: The IPv4 address for the network interface.
@@ -1072,6 +1081,9 @@ networking:
                         physical:
                             type: boolean
                             description: Return whether network interface is a physical device on Linux based systems.
+                        rdomain:
+                            type: integer
+                            description: The routing domain of the network interface, as reported by ifconfig.
                         scope6:
                             type: string
                             description: The IPv6 scope for the network interface.
