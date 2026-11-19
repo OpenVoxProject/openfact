@@ -109,8 +109,11 @@ module Facter
           ip6 = extract_values(raw_data, /inet6 (\S+)/).map { |val| val.gsub(/%.+/, '') }
           mask6 = extract_values(raw_data, /prefixlen (\S+)/)
 
-          parsed_interface_data[:bindings] = create_bindings(ip, mask) unless ip.empty?
-          parsed_interface_data[:bindings6] = create_bindings(ip6, mask6) unless ip6.empty?
+          bindings = create_bindings(ip, mask)
+          bindings6 = create_bindings(ip6, mask6)
+
+          parsed_interface_data[:bindings] = create_bindings(ip, mask) unless bindings.empty?
+          parsed_interface_data[:bindings6] = create_bindings(ip6, mask6) unless bindings6.empty?
         end
 
         def extract_values(data, regex)
@@ -124,7 +127,8 @@ module Facter
         def create_bindings(ips, masks)
           bindings = []
           ips.zip(masks).each do |ip, mask|
-            bindings << Facter::Util::Resolvers::Networking.build_binding(ip, mask)
+            addr_binding = Facter::Util::Resolvers::Networking.build_binding(ip, mask)
+            bindings << addr_binding if addr_binding
           end
           bindings
         end
