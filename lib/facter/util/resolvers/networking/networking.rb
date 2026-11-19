@@ -118,7 +118,6 @@ module Facter
           def expand_binding(values, bindings, ipv4_type: true)
             binding = find_valid_binding(bindings)
             return unless binding.is_a?(Hash) && binding[:address]
-
             ip_protocol_type = ipv4_type ? '' : '6'
 
             values[:"ip#{ip_protocol_type}"] = binding[:address]
