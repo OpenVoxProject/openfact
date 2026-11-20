@@ -154,6 +154,8 @@ describe Facter::Resolvers::Networking do
     end
 
     context 'when interface has tunnel inet endpoint without netmask and only ipv6 bindings' do
+      subject(:gif0) { networking.resolve(:interfaces)['gif0'] }
+
       let(:interfaces) do
         +<<~IFCONFIG
           gif0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1280
@@ -171,10 +173,12 @@ describe Facter::Resolvers::Networking do
           .to receive(:execute).with('ipconfig getoption gif0 server_identifier', logger: an_instance_of(Facter::Log)).and_return('')
       end
 
-      it 'omits bindings when no valid ipv4 bindings exist and resolves ipv6 bindings' do
-        gif0 = networking.resolve(:interfaces)['gif0']
-
+      it 'omits ipv4 bindings and ip' do
         expect(gif0).not_to have_key(:bindings)
+        expect(gif0[:ip]).to be_nil
+      end
+
+      it 'resolves ipv6 bindings and ip6' do
         expect(gif0[:bindings6]).to eq([
                                          { address: 'fe80::427c:14ff:fef0:b32b',
                                            netmask: 'ffff:ffff:ffff:ffff::',
@@ -186,7 +190,6 @@ describe Facter::Resolvers::Networking do
                                            scope6: 'global' }
                                        ])
         expect(gif0[:ip6]).to eq('2001:270:6c:b1d::2')
-        expect(gif0[:ip]).to be_nil
       end
     end
 
