@@ -155,7 +155,7 @@ describe Facter::Resolvers::Networking do
 
     context 'when interface has tunnel inet endpoint without netmask and only ipv6 bindings' do
       let(:interfaces) do
-        <<~IFCONFIG
+        +<<~IFCONFIG
           gif0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1280
           \tindex 6 priority 0 llprio 3
           \tdescription: IPv6-in-IPv4
@@ -185,7 +185,7 @@ describe Facter::Resolvers::Networking do
                                            network: '2001:270:6c:b1d::2',
                                            scope6: 'global' }
                                        ])
-        expect(gif0[:ip6]).to eq('2001:470:6c:b1d::2')
+        expect(gif0[:ip6]).to eq('2001:270:6c:b1d::2')
         expect(gif0[:ip]).to be_nil
       end
     end
