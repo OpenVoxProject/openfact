@@ -153,6 +153,46 @@ describe Facter::Resolvers::Networking do
       expect(networking.resolve(:interfaces)['ib0']).to include(expected)
     end
 
+    context 'when interface has tunnel inet endpoint without netmask and only ipv6 bindings' do
+      subject(:gif0) { networking.resolve(:interfaces)['gif0'] }
+
+      let(:interfaces) do
+        +<<~IFCONFIG
+          gif0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1280
+          \tindex 6 priority 0 llprio 3
+          \tdescription: IPv6-in-IPv4
+          \tgroups: gif egress
+          \ttunnel inet 103.0.113.10 --> 128.51.100.20 ttl 64 nodf ecn
+          \tinet6 fe80::427c:14ff:fef0:b32b%gif0 -> prefixlen 64 scopeid 0x7
+          \tinet6 2001:270:6c:b1d::2 -> 2001:270:6c:b1d::1 prefixlen 128
+        IFCONFIG
+      end
+
+      before do
+        allow(Facter::Core::Execution)
+          .to receive(:execute).with('ipconfig getoption gif0 server_identifier', logger: an_instance_of(Facter::Log)).and_return('')
+      end
+
+      it 'omits ipv4 bindings and ip' do
+        expect(gif0).not_to have_key(:bindings)
+        expect(gif0[:ip]).to be_nil
+      end
+
+      it 'resolves ipv6 bindings and ip6' do
+        expect(gif0[:bindings6]).to eq([
+                                         { address: 'fe80::427c:14ff:fef0:b32b',
+                                           netmask: 'ffff:ffff:ffff:ffff::',
+                                           network: 'fe80::',
+                                           scope6: 'link' },
+                                         { address: '2001:270:6c:b1d::2',
+                                           netmask: 'ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff',
+                                           network: '2001:270:6c:b1d::2',
+                                           scope6: 'global' }
+                                       ])
+        expect(gif0[:ip6]).to eq('2001:270:6c:b1d::2')
+      end
+    end
+
     context 'when primary interface could not be retrieved' do
       let(:primary) { nil }
 
