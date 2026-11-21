@@ -61,9 +61,9 @@ module FFI
   class Pointer
     NULL = nil
 
-    def write_uint32(); end
+    def write_uint32; end
 
-    def read_uint32(); end
+    def read_uint32; end
 
     def get_bytes(*); end
 
@@ -83,7 +83,7 @@ module FFI
 
     def read_int; end
 
-    def read_uint32(); end
+    def read_uint32; end
 
     def self.size; end
   end
