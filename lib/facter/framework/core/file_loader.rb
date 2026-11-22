@@ -728,6 +728,12 @@ os_hierarchy.each do |os|
   when 'openwrt'
     require_relative '../../facts/openwrt/os/release'
 
+  when 'opnsense'
+    require_relative '../../facts/opnsense/os/name'
+    require_relative '../../facts/opnsense/os/release'
+
+    require_relative '../../resolvers/opnsense/opnsense_version'
+
   when 'ovs'
     require_relative '../../facts/ovs/os/release'
 

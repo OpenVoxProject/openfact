@@ -25,7 +25,7 @@ class OsDetector
                  when /linux/
                    detect_distro
                  when /freebsd/
-                   :freebsd
+                   detect_freebsd_variant
                  when /openbsd/i
                    :openbsd
                  when /bsd/
@@ -69,6 +69,13 @@ class OsDetector
   def detect_based_on_release_file
     @identifier = :devuan if File.readable?('/etc/devuan_version')
     @identifier = :archlinux if File.readable?('/etc/arch-release')
+  end
+
+  # OPNsense is identified by its version file or its configuration file
+  def detect_freebsd_variant
+    return :opnsense if File.exist?('/usr/local/opnsense/version/core') || File.exist?('/conf/config.xml')
+
+    :freebsd
   end
 
   def detect_distro
