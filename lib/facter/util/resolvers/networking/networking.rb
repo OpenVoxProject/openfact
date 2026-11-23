@@ -60,16 +60,21 @@ module Facter
             scope6.join
           end
 
+          # Picks the binding that represents the interface: the first one whose address is not ignored and that is
+          # usable for new communications. A binding flagged deprecated, tentative or dadfailed (IPv6 flags, only
+          # known on some platforms) is picked only when no other one has a valid address.
           def find_valid_binding(bindings)
-            bindings.each do |binding|
-              return binding unless ignored_ip_address(binding[:address])
-            end
-            bindings.empty? ? nil : bindings.first
+            valid_bindings = bindings.reject { |binding| ignored_ip_address(binding[:address]) }
+
+            valid_bindings.find { |binding| usable_binding?(binding) } || valid_bindings.first || bindings.first
           end
 
           IPV4_LINK_LOCAL_ADDR = IPAddr.new('169.254.0.0/16').freeze # RFC5735
           IPV6_LINK_LOCAL_ADDR = IPAddr.new('fe80::/10').freeze # RFC4291
           IPV6_UNIQUE_LOCAL_ADDR = IPAddr.new('fc00::/7').freeze # RFC4193
+
+          # IPv6 address flags of an address that must not be used for new communications (RFC 4862)
+          UNUSABLE_IPV6_FLAGS = %w[deprecated tentative dadfailed].freeze
 
           def ignored_ip_address(addr)
             return true if addr.empty?
@@ -99,6 +104,10 @@ module Facter
           end
 
           private
+
+          def usable_binding?(binding)
+            (Array(binding[:flags]) & UNUSABLE_IPV6_FLAGS).empty?
+          end
 
           def expand_interfaces(interfaces)
             interfaces.each_value do |values|

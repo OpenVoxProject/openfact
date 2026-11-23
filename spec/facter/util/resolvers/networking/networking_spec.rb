@@ -325,6 +325,86 @@ describe Facter::Util::Resolvers::Networking do
         expect(networking_facts[:interfaces]['lo0']).to include(expected)
       end
     end
+
+    context 'when the first global ip address is deprecated' do
+      let(:networking_facts) do
+        {
+          interfaces:
+            { 'ens18' =>
+              { bindings6:
+                  [{ address: '2001:db8::22',
+                     netmask: 'ffff:ffff:ffff:ffff::',
+                     network: '2001:db8::',
+                     flags: %w[deprecated permanent] },
+                   { address: '2001:db8::1',
+                     netmask: 'ffff:ffff:ffff:ffff::',
+                     network: '2001:db8::',
+                     flags: ['permanent'] },
+                   { address: 'fe80::1',
+                     netmask: 'ffff:ffff:ffff:ffff::',
+                     network: 'fe80::',
+                     flags: ['permanent'] }] } }
+        }
+      end
+
+      it 'expands the first binding that is not deprecated' do
+        networking_helper.expand_main_bindings(networking_facts)
+
+        expect(networking_facts[:interfaces]['ens18']).to include(ip6: '2001:db8::1', scope6: 'global')
+      end
+    end
+
+    context 'when the first global ip address is tentative' do
+      let(:networking_facts) do
+        {
+          interfaces:
+            { 'ens18' =>
+              { bindings6:
+                  [{ address: '2001:db8::22',
+                     netmask: 'ffff:ffff:ffff:ffff::',
+                     network: '2001:db8::',
+                     flags: %w[tentative permanent] },
+                   { address: '2001:db8::1',
+                     netmask: 'ffff:ffff:ffff:ffff::',
+                     network: '2001:db8::',
+                     flags: ['permanent'] }] } }
+        }
+      end
+
+      it 'expands the first binding that is not tentative' do
+        networking_helper.expand_main_bindings(networking_facts)
+
+        expect(networking_facts[:interfaces]['ens18']).to include(ip6: '2001:db8::1')
+      end
+    end
+
+    context 'when every global ip address is deprecated' do
+      let(:networking_facts) do
+        {
+          interfaces:
+            { 'ens18' =>
+              { bindings6:
+                  [{ address: 'fe80::1',
+                     netmask: 'ffff:ffff:ffff:ffff::',
+                     network: 'fe80::',
+                     flags: ['permanent'] },
+                   { address: '2001:db8::22',
+                     netmask: 'ffff:ffff:ffff:ffff::',
+                     network: '2001:db8::',
+                     flags: %w[deprecated permanent] },
+                   { address: '2001:db8::1',
+                     netmask: 'ffff:ffff:ffff:ffff::',
+                     network: '2001:db8::',
+                     flags: %w[deprecated permanent] }] } }
+        }
+      end
+
+      it 'expands the first binding with a valid address' do
+        networking_helper.expand_main_bindings(networking_facts)
+
+        expect(networking_facts[:interfaces]['ens18']).to include(ip6: '2001:db8::22', scope6: 'global')
+      end
+    end
   end
 
   describe '#calculate_mask_length' do

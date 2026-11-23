@@ -119,6 +119,83 @@ describe Facter::Resolvers::Linux::Networking do
       expect(networking_linux.resolve(:primary_interface)).to eq('ens160')
     end
 
+    context 'when the first global ipv6 address is deprecated' do
+      let(:socket_interfaces) do
+        {
+          'ens160' => {
+            bindings6: [
+              { address: '2001:db8::22', netmask: 'ffff:ffff:ffff:ffff::', network: '2001:db8::', scope6: 'global' },
+              { address: '2001:db8::1', netmask: 'ffff:ffff:ffff:ffff::', network: '2001:db8::', scope6: 'global' },
+              { address: 'fe80::250:56ff:fe9a:8481', netmask: 'ffff:ffff:ffff:ffff::',
+                network: 'fe80::', scope6: 'link' }
+            ],
+            mac: '00:50:56:9a:61:46'
+          }
+        }
+      end
+
+      before do
+        allow(Facter::Util::FileHelper).to receive(:safe_read)
+          .with('/proc/net/if_inet6', nil).and_return(load_fixture('proc_net_if_inet6_deprecated').read)
+      end
+
+      it 'flags the deprecated address' do
+        expect(networking_linux.resolve(:interfaces)['ens160'][:bindings6].first)
+          .to include(address: '2001:db8::22', flags: %w[deprecated permanent])
+      end
+
+      it 'returns the first address that is not deprecated' do
+        expect(networking_linux.resolve(:interfaces)['ens160'])
+          .to include(ip6: '2001:db8::1', network6: '2001:db8::', scope6: 'global')
+      end
+    end
+
+    context 'when no ipv6 address is permanent (SLAAC, temporary addresses, DHCPv6)' do
+      # Bindings in the order of the kernel, flags from /proc/net/if_inet6: two temporary addresses deprecated
+      # after their rotation, a preferred temporary one, a DHCPv6 /128 one and the stable SLAAC one, all
+      # dynamic, none flagged permanent
+      let(:temporary) { { netmask: 'ffff:ffff:ffff:ffff::', network: '2001:db8::', scope6: 'global' } }
+      let(:socket_interfaces) do
+        {
+          'ens160' => {
+            bindings6: [
+              temporary.merge(address: '2001:db8::b270:feea:263e:7fe4'),
+              temporary.merge(address: '2001:db8::d62e:d226:4342:29d1'),
+              temporary.merge(address: '2001:db8::e76b:229a:c556:9ba1'),
+              { address: '2001:db8::ff76:a5b1:3655:9e47', netmask: 'ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff',
+                network: '2001:db8::ff76:a5b1:3655:9e47', scope6: 'global' },
+              temporary.merge(address: '2001:db8::e14:d780:143f:fe68'),
+              { address: 'fe80::8978:f100:e42e:e393', netmask: 'ffff:ffff:ffff:ffff::',
+                network: 'fe80::', scope6: 'link' }
+            ],
+            mac: '00:50:56:9a:61:46'
+          }
+        }
+      end
+
+      before do
+        allow(Facter::Util::FileHelper).to receive(:safe_read)
+          .with('/proc/net/if_inet6', nil).and_return(load_fixture('proc_net_if_inet6_dynamic').read)
+      end
+
+      it 'flags the addresses without the permanent flag' do
+        expect(networking_linux.resolve(:interfaces)['ens160'][:bindings6].to_h { |b| [b[:address], b[:flags]] })
+          .to eq(
+            '2001:db8::b270:feea:263e:7fe4' => %w[temporary deprecated],
+            '2001:db8::d62e:d226:4342:29d1' => %w[temporary deprecated],
+            '2001:db8::e76b:229a:c556:9ba1' => ['temporary'],
+            '2001:db8::ff76:a5b1:3655:9e47' => [],
+            '2001:db8::e14:d780:143f:fe68' => [],
+            'fe80::8978:f100:e42e:e393' => ['permanent']
+          )
+      end
+
+      it 'returns the first global address that is not deprecated' do
+        expect(networking_linux.resolve(:interfaces)['ens160'])
+          .to include(ip6: '2001:db8::e76b:229a:c556:9ba1', network6: '2001:db8::', scope6: 'global')
+      end
+    end
+
     context 'when caching' do
       it 'returns from cache' do
         networking_linux.resolve(:interfaces)
