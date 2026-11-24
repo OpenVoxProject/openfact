@@ -103,6 +103,49 @@ describe OsDetector do
       end
     end
 
+    context 'when host_os is freebsd' do
+      before do
+        RbConfig::CONFIG['host_os'] = 'freebsd15.1'
+        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).with('/usr/local/opnsense/version/core').and_return(false)
+        allow(File).to receive(:exist?).with('/conf/config.xml').and_return(false)
+        allow(os_hierarchy).to receive(:construct_hierarchy).with(:freebsd).and_return(%w[Bsd Freebsd])
+        allow(os_hierarchy).to receive(:construct_hierarchy).with(:opnsense).and_return(%w[Bsd Freebsd Opnsense])
+      end
+
+      it 'detects os as freebsd' do
+        expect(OsDetector.instance.identifier).to eq(:freebsd)
+      end
+
+      it 'construct hierarchy with freebsd identifier' do
+        expect(OsDetector.instance.hierarchy).to eq(%w[Bsd Freebsd])
+      end
+
+      context 'when OPNsense version file exists' do
+        before do
+          allow(File).to receive(:exist?).with('/usr/local/opnsense/version/core').and_return(true)
+        end
+
+        it 'detects os as opnsense' do
+          expect(OsDetector.instance.identifier).to eq(:opnsense)
+        end
+
+        it 'construct hierarchy with opnsense identifier' do
+          expect(OsDetector.instance.hierarchy).to eq(%w[Bsd Freebsd Opnsense])
+        end
+      end
+
+      context 'when OPNsense configuration file exists' do
+        before do
+          allow(File).to receive(:exist?).with('/conf/config.xml').and_return(true)
+        end
+
+        it 'detects os as opnsense' do
+          expect(OsDetector.instance.identifier).to eq(:opnsense)
+        end
+      end
+    end
+
     context 'when os cannot be detected' do
       before do
         RbConfig::CONFIG['host_os'] = 'my_custom_os'
