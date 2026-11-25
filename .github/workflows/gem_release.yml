@@ -108,3 +108,49 @@ jobs:
         run: |
           gem install rubygems-await
           gem await *.gem
+
+  promote:
+    name: Promote ${{ matrix.name }}
+    needs: release-verification
+    runs-on: ubuntu-26.04
+    permissions: {}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: into openvox
+            repo: OpenVoxProject/openvox
+            workflow: promote.yml
+            component: openfact
+          - name: into puppet-runtime
+            repo: OpenVoxProject/puppet-runtime
+            workflow: components_update.yml
+    steps:
+      - name: Trigger ${{ matrix.workflow }} in ${{ matrix.repo }}
+        id: dispatch
+        env:
+          GH_TOKEN: ${{ secrets.OPENVOXBOT_TRIGGER_WORKFLOWS }}
+          REPO: ${{ matrix.repo }}
+          WORKFLOW: ${{ matrix.workflow }}
+          COMPONENT: ${{ matrix.component }}
+          VERSION: ${{ github.ref_name }}
+        run: |
+          args=(-f ref=main -F return_run_details=true)
+          if [[ -n "${COMPONENT}" ]]; then
+            # openfact 5.x feeds openvox 8.x, everything else feeds main
+            branch=main
+            [[ "${VERSION}" == 5.* ]] && branch=8.x
+            args+=(-f "inputs[component]=${COMPONENT}" -f "inputs[ref]=${VERSION}" -f "inputs[branch]=${branch}")
+          fi
+          response=$(gh api --method POST "repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches" "${args[@]}")
+          run_url=$(jq -r '.html_url' <<< "${response}")
+          echo "run_id=$(jq -r '.workflow_run_id' <<< "${response}")" >> "$GITHUB_OUTPUT"
+          echo "Triggered ${run_url}"
+          echo "- [${REPO} ${WORKFLOW}](${run_url})" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Wait for ${{ matrix.workflow }} in ${{ matrix.repo }}
+        env:
+          GH_TOKEN: ${{ secrets.OPENVOXBOT_TRIGGER_WORKFLOWS }}
+          REPO: ${{ matrix.repo }}
+          RUN_ID: ${{ steps.dispatch.outputs.run_id }}
+        run: gh run watch "${RUN_ID}" --repo "${REPO}" --exit-status
